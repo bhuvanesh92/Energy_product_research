@@ -1,0 +1,61 @@
+{
+  "last_updated": "2026-03-01T10:00:00.000000",
+  "source": "Manufacturer-Catalog-EESL-Tender-Q1-2026",
+  "source_urls": [
+    "https://eeslindia.org/en/ev-charging/",
+    "https://www.tatapowerev.com/",
+    "https://www.deltaww.com/en-US/products/EV-Charging",
+    "https://www.exiaborivali.com/ev-chargers"
+  ],
+  "equipment_costs": {
+    "dc_chargers": {
+      "30kw": {"min": 550000, "max": 850000, "avg": 700000, "brand_examples": ["Exicom", "Servotech"]},
+      "60kw": {"min": 1100000, "max": 1650000, "avg": 1375000, "brand_examples": ["Delta", "Exicom", "Tata Power"]},
+      "120kw": {"min": 2000000, "max": 2800000, "avg": 2400000, "brand_examples": ["ABB", "Delta", "Tata Power"]},
+      "180kw": {"min": 3200000, "max": 4200000, "avg": 3700000, "brand_examples": ["ABB", "Tritium"]},
+      "240kw": {"min": 4500000, "max": 6000000, "avg": 5250000, "brand_examples": ["ABB", "Tritium", "Electrify"]},
+      "360kw": {"min": 7500000, "max": 9500000, "avg": 8500000, "brand_examples": ["ABB Terra HP", "Tritium PKM"]}
+    },
+    "ac_chargers": {
+      "3.3kw": {"min": 22000, "max": 40000, "avg": 31000, "brand_examples": ["Ather", "Statiq"]},
+      "7.4kw": {"min": 55000, "max": 90000, "avg": 72500, "brand_examples": ["Tata Power", "Exicom", "Okaya"]},
+      "11kw": {"min": 90000, "max": 140000, "avg": 115000, "brand_examples": ["Delta", "Exicom"]},
+      "22kw": {"min": 165000, "max": 235000, "avg": 200000, "brand_examples": ["ABB", "Delta", "Schneider"]}
+    },
+    "infrastructure": {
+      "transformer_100kva": {"min": 140000, "max": 230000, "avg": 185000},
+      "transformer_250kva": {"min": 320000, "max": 475000, "avg": 397500},
+      "transformer_500kva": {"min": 550000, "max": 750000, "avg": 650000},
+      "electrical_panel_lt": {"min": 85000, "max": 175000, "avg": 130000},
+      "electrical_panel_ht": {"min": 250000, "max": 400000, "avg": 325000},
+      "cabling_per_meter_lt": {"min": 400, "max": 1200, "avg": 800},
+      "cabling_per_meter_ht": {"min": 1500, "max": 3000, "avg": 2250},
+      "earthing_system": {"min": 50000, "max": 100000, "avg": 75000}
+    },
+    "civil_work": {
+      "canopy_per_sqft": {"min": 75, "max": 140, "avg": 107.5},
+      "flooring_per_sqft": {"min": 45, "max": 95, "avg": 70},
+      "drainage_system": {"min": 45000, "max": 90000, "avg": 67500},
+      "lighting_per_station": {"min": 25000, "max": 50000, "avg": 37500}
+    },
+    "amenities": {
+      "vending_machine_basic": {"min": 75000, "max": 140000, "avg": 107500},
+      "vending_machine_combo": {"min": 140000, "max": 235000, "avg": 187500},
+      "digital_signage_55inch": {"min": 45000, "max": 125000, "avg": 85000},
+      "cctv_4channel": {"min": 22000, "max": 45000, "avg": 33500},
+      "cctv_8channel": {"min": 40000, "max": 75000, "avg": 57500},
+      "payment_terminal_upi": {"min": 8000, "max": 25000, "avg": 16500},
+      "payment_terminal_card": {"min": 25000, "max": 65000, "avg": 45000},
+      "restroom_prefab": {"min": 150000, "max": 300000, "avg": 225000}
+    },
+    "vendors": {
+      "tata_power": {"premium": 1.18, "warranty_years": 5, "amc_pct": 0.08},
+      "delta": {"premium": 1.12, "warranty_years": 3, "amc_pct": 0.10},
+      "abb": {"premium": 1.25, "warranty_years": 5, "amc_pct": 0.07},
+      "exicom": {"premium": 1.0, "warranty_years": 3, "amc_pct": 0.10},
+      "servotech": {"premium": 0.92, "warranty_years": 2, "amc_pct": 0.12},
+      "okaya": {"premium": 0.95, "warranty_years": 2, "amc_pct": 0.11}
+    }
+  },
+  "notes": "Prices in INR. Includes GST. Installation not included (add 8-12%). Prices may vary by region and order quantity."
+}

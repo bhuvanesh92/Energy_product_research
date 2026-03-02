@@ -1,0 +1,41 @@
+{
+  "last_updated": "2026-03-01T10:00:00.000000",
+  "source": "CERC-SERC-Tariff-Orders-2025-26",
+  "source_urls": [
+    "https://cercind.gov.in/",
+    "https://www.merc.gov.in/",
+    "https://data.gov.in/resource/electricity-tariff"
+  ],
+  "rates": {
+    "Andhra Pradesh": {"rate": 5.10, "discom": "APSPDCL/APEPDCL", "effective_date": "2025-04-01"},
+    "Arunachal Pradesh": {"rate": 4.20, "discom": "DoP Arunachal", "effective_date": "2025-04-01"},
+    "Assam": {"rate": 6.05, "discom": "APDCL", "effective_date": "2025-04-01"},
+    "Bihar": {"rate": 6.25, "discom": "SBPDCL/NBPDCL", "effective_date": "2025-04-01"},
+    "Chhattisgarh": {"rate": 4.15, "discom": "CSPDCL", "effective_date": "2025-04-01"},
+    "Goa": {"rate": 2.65, "discom": "Goa Electricity Dept", "effective_date": "2025-04-01"},
+    "Gujarat": {"rate": 5.65, "discom": "UGVCL/PGVCL/MGVCL/DGVCL", "effective_date": "2025-04-01"},
+    "Haryana": {"rate": 6.10, "discom": "UHBVN/DHBVN", "effective_date": "2025-04-01"},
+    "Himachal Pradesh": {"rate": 4.70, "discom": "HPSEBL", "effective_date": "2025-04-01"},
+    "Jharkhand": {"rate": 5.80, "discom": "JBVNL", "effective_date": "2025-04-01"},
+    "Karnataka": {"rate": 6.05, "discom": "BESCOM/MESCOM/HESCOM", "effective_date": "2025-04-01"},
+    "Kerala": {"rate": 4.85, "discom": "KSEB", "effective_date": "2025-04-01"},
+    "Madhya Pradesh": {"rate": 6.05, "discom": "MPPKVVCL", "effective_date": "2025-04-01"},
+    "Maharashtra": {"rate": 7.75, "discom": "MSEDCL/BEST/Tata Power", "effective_date": "2025-04-01"},
+    "Manipur": {"rate": 5.15, "discom": "MSPDCL", "effective_date": "2025-04-01"},
+    "Meghalaya": {"rate": 4.95, "discom": "MeECL", "effective_date": "2025-04-01"},
+    "Mizoram": {"rate": 5.15, "discom": "P&E Dept Mizoram", "effective_date": "2025-04-01"},
+    "Nagaland": {"rate": 5.65, "discom": "DoP Nagaland", "effective_date": "2025-04-01"},
+    "Odisha": {"rate": 5.95, "discom": "TPCODL/TPNODL/TPSODL/TPWODL", "effective_date": "2025-04-01"},
+    "Punjab": {"rate": 5.80, "discom": "PSPCL", "effective_date": "2025-04-01"},
+    "Rajasthan": {"rate": 6.70, "discom": "JVVNL/AVVNL/JdVVNL", "effective_date": "2025-04-01"},
+    "Sikkim": {"rate": 3.65, "discom": "Energy & Power Dept", "effective_date": "2025-04-01"},
+    "Tamil Nadu": {"rate": 4.65, "discom": "TANGEDCO", "effective_date": "2025-04-01"},
+    "Telangana": {"rate": 5.35, "discom": "TSSPDCL/TSNPDCL", "effective_date": "2025-04-01"},
+    "Tripura": {"rate": 5.65, "discom": "TSECL", "effective_date": "2025-04-01"},
+    "Uttar Pradesh": {"rate": 5.65, "discom": "UPPCL", "effective_date": "2025-04-01"},
+    "Uttarakhand": {"rate": 4.75, "discom": "UPCL", "effective_date": "2025-04-01"},
+    "West Bengal": {"rate": 7.10, "discom": "WBSEDCL/CESC", "effective_date": "2025-04-01"},
+    "Delhi": {"rate": 5.65, "discom": "BSES/Tata Power DDL", "effective_date": "2025-04-01"}
+  },
+  "notes": "Domestic LT tariff rates (0-500 units slab average). Commercial/HT rates are typically 1.2-1.5x higher."
+}

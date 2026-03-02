@@ -1,0 +1,49 @@
+{
+  "last_updated": "2026-03-01T10:00:00.000000",
+  "source": "OpenChargeMap-BEEE-Industry-Survey-2026",
+  "source_urls": [
+    "https://api.openchargemap.io/v3/poi",
+    "https://beeindia.gov.in/",
+    "https://evyatra.beeindia.gov.in/"
+  ],
+  "ev_rates": {
+    "Andhra Pradesh": {"dc_fast_rate": 18.50, "ac_slow_rate": 12.50, "operators": "Tata Power, EESL, ChargeZone", "stations": 68, "growth_ytd": 0.42},
+    "Arunachal Pradesh": {"dc_fast_rate": 20.50, "ac_slow_rate": 14.50, "operators": "EESL", "stations": 8, "growth_ytd": 0.35},
+    "Assam": {"dc_fast_rate": 19.50, "ac_slow_rate": 13.50, "operators": "EESL, Tata Power", "stations": 22, "growth_ytd": 0.38},
+    "Bihar": {"dc_fast_rate": 19.00, "ac_slow_rate": 13.00, "operators": "EESL, ChargeZone", "stations": 32, "growth_ytd": 0.45},
+    "Chhattisgarh": {"dc_fast_rate": 17.50, "ac_slow_rate": 11.50, "operators": "EESL, Tata Power", "stations": 25, "growth_ytd": 0.40},
+    "Goa": {"dc_fast_rate": 16.50, "ac_slow_rate": 10.50, "operators": "Tata Power, Ather", "stations": 38, "growth_ytd": 0.55},
+    "Gujarat": {"dc_fast_rate": 18.00, "ac_slow_rate": 12.00, "operators": "Tata Power, EESL, Statiq, Jio-bp", "stations": 285, "growth_ytd": 0.58},
+    "Haryana": {"dc_fast_rate": 18.50, "ac_slow_rate": 12.50, "operators": "Tata Power, Statiq, Fortum, Jio-bp", "stations": 165, "growth_ytd": 0.52},
+    "Himachal Pradesh": {"dc_fast_rate": 17.00, "ac_slow_rate": 11.00, "operators": "EESL, Tata Power", "stations": 48, "growth_ytd": 0.45},
+    "Jharkhand": {"dc_fast_rate": 18.50, "ac_slow_rate": 12.50, "operators": "EESL, ChargeZone", "stations": 24, "growth_ytd": 0.38},
+    "Karnataka": {"dc_fast_rate": 19.00, "ac_slow_rate": 13.00, "operators": "Tata Power, Ather, BESCOM, Statiq, Jio-bp", "stations": 520, "growth_ytd": 0.62},
+    "Kerala": {"dc_fast_rate": 17.50, "ac_slow_rate": 11.50, "operators": "KSEB, Tata Power, Ather", "stations": 225, "growth_ytd": 0.55},
+    "Madhya Pradesh": {"dc_fast_rate": 18.50, "ac_slow_rate": 12.50, "operators": "EESL, Tata Power, ChargeZone", "stations": 78, "growth_ytd": 0.42},
+    "Maharashtra": {"dc_fast_rate": 19.50, "ac_slow_rate": 13.50, "operators": "Tata Power, MSEDCL, Ather, Statiq, Jio-bp", "stations": 725, "growth_ytd": 0.60},
+    "Manipur": {"dc_fast_rate": 20.50, "ac_slow_rate": 14.50, "operators": "EESL", "stations": 6, "growth_ytd": 0.30},
+    "Meghalaya": {"dc_fast_rate": 20.00, "ac_slow_rate": 14.00, "operators": "EESL", "stations": 8, "growth_ytd": 0.32},
+    "Mizoram": {"dc_fast_rate": 20.50, "ac_slow_rate": 14.50, "operators": "EESL", "stations": 5, "growth_ytd": 0.28},
+    "Nagaland": {"dc_fast_rate": 20.50, "ac_slow_rate": 14.50, "operators": "EESL", "stations": 6, "growth_ytd": 0.30},
+    "Odisha": {"dc_fast_rate": 18.00, "ac_slow_rate": 12.00, "operators": "EESL, Tata Power", "stations": 58, "growth_ytd": 0.45},
+    "Punjab": {"dc_fast_rate": 18.00, "ac_slow_rate": 12.00, "operators": "Tata Power, EESL, Statiq", "stations": 95, "growth_ytd": 0.48},
+    "Rajasthan": {"dc_fast_rate": 19.00, "ac_slow_rate": 13.00, "operators": "Tata Power, EESL, ChargeZone, Jio-bp", "stations": 145, "growth_ytd": 0.52},
+    "Sikkim": {"dc_fast_rate": 18.50, "ac_slow_rate": 12.50, "operators": "EESL", "stations": 10, "growth_ytd": 0.38},
+    "Tamil Nadu": {"dc_fast_rate": 18.00, "ac_slow_rate": 12.00, "operators": "Tata Power, TANGEDCO, Ather, Statiq, Jio-bp", "stations": 445, "growth_ytd": 0.58},
+    "Telangana": {"dc_fast_rate": 18.50, "ac_slow_rate": 12.50, "operators": "Tata Power, TSGENCO, Ather, Statiq, Jio-bp", "stations": 345, "growth_ytd": 0.55},
+    "Tripura": {"dc_fast_rate": 19.50, "ac_slow_rate": 13.50, "operators": "EESL", "stations": 8, "growth_ytd": 0.32},
+    "Uttar Pradesh": {"dc_fast_rate": 18.50, "ac_slow_rate": 12.50, "operators": "Tata Power, EESL, ChargeZone, Statiq, Jio-bp", "stations": 285, "growth_ytd": 0.52},
+    "Uttarakhand": {"dc_fast_rate": 17.50, "ac_slow_rate": 11.50, "operators": "EESL, Tata Power", "stations": 55, "growth_ytd": 0.48},
+    "West Bengal": {"dc_fast_rate": 19.00, "ac_slow_rate": 13.00, "operators": "Tata Power, EESL, ChargeZone", "stations": 135, "growth_ytd": 0.45},
+    "Delhi": {"dc_fast_rate": 18.50, "ac_slow_rate": 12.50, "operators": "Tata Power, EESL, Fortum, Statiq, Ather, Jio-bp", "stations": 625, "growth_ytd": 0.60}
+  },
+  "national_summary": {
+    "total_public_stations": 4396,
+    "total_dc_chargers": 6850,
+    "total_ac_chargers": 12500,
+    "avg_dc_rate": 18.50,
+    "avg_ac_rate": 12.50,
+    "yoy_growth": 0.46
+  },
+  "notes": "Rates are average public charging rates in INR/kWh. Home charging uses domestic electricity rates."
+}
