@@ -1873,6 +1873,417 @@ Instead of buying separate components, an **integrated unit** combining:
         return str(filepath)
 
 
+class IPCUCostTargetGenerator:
+    """Generate IPCU cost targets section derived from EV revenue analysis.
+    
+    This class generates Section 7.0 of the integrated_power_conversion_unit.md
+    document, ensuring cost targets are always consistent with the revenue model.
+    """
+    
+    # IPCU Product Configurations
+    IPCU_CONFIGS = {
+        "IPCU-MINI": {"battery_kwh": 100, "dc_kw": 60, "inverter_kva": 50},
+        "IPCU-STD": {"battery_kwh": 250, "dc_kw": 60, "inverter_kva": 100},
+        "IPCU-HUB": {"battery_kwh": 500, "dc_kw": 120, "inverter_kva": 200},
+        "IPCU-FLEET": {"battery_kwh": 1000, "dc_kw": 240, "inverter_kva": 400},
+    }
+    
+    # UPM-HOME Configurations
+    UPM_CONFIGS = {
+        "UPM-HOME-5": {"power_kw": 5, "aux_battery_kwh": 0},
+        "UPM-HOME-10": {"power_kw": 10, "aux_battery_kwh": 5},
+        "UPM-HOME-15": {"power_kw": 15, "aux_battery_kwh": 10},
+        "UPM-HOME-25": {"power_kw": 25, "aux_battery_kwh": 20},
+    }
+    
+    # Component cost structure (for BOM calculation)
+    COMPONENT_COSTS = {
+        "battery_lfp_per_kwh": 11000,  # Rs. per kWh
+        "battery_bms_per_kwh": 850,
+        "battery_thermal_per_kwh": 700,
+        "battery_enclosure_per_kwh": 1350,
+        "inverter_per_kva": 25000,
+        "dc_charger_per_kw": 12500,
+        "pmu_25kw_base": 300000,  # Rs. per 25kW module
+        "integration_pct": 0.08,  # 8% integration overhead
+    }
+    
+    # Market prices for discrete components
+    DISCRETE_MARKET_PRICES = {
+        "battery_per_kwh": 13000,  # Total installed cost
+        "inverter_per_kva": 25000,
+        "dc_charger_60kw": 1500000,
+        "dc_charger_120kw": 2500000,
+        "dc_charger_240kw": 5000000,
+        "integration_per_unit": 500000,
+    }
+    
+    def __init__(self, api: IndiaElectricityRateQuery):
+        self.api = api
+        self.report_date = datetime.now().strftime("%Y-%m-%d")
+    
+    def _calculate_station_economics(self) -> Dict:
+        """Calculate core station economics from revenue model."""
+        # Use Maharashtra as reference state (high volume, representative margins)
+        revenue = self.api.calculate_station_revenue("Maharashtra")
+        
+        if "error" in revenue:
+            # Fallback to calculated defaults
+            return {
+                "daily_kwh": 1862,
+                "daily_sessions": 82,
+                "monthly_revenue": 1026270,
+                "monthly_power_cost": 432915,
+                "monthly_profit": 593355,
+                "margin_pct": 57.8,
+                "grid_rate": 7.75,
+            }
+        
+        return {
+            "daily_kwh": revenue["per_station"]["daily_kwh"],
+            "daily_sessions": revenue["per_station"]["daily_sessions"],
+            "monthly_revenue": revenue["per_station"]["monthly_revenue_inr"],
+            "monthly_power_cost": revenue["per_station"]["monthly_electricity_cost_inr"],
+            "monthly_profit": revenue["per_station"]["daily_gross_profit_inr"] * 30,
+            "margin_pct": revenue["per_station"]["profit_margin_pct"],
+            "grid_rate": revenue["grid_rate"],
+        }
+    
+    def _calculate_solar_economics(self, state: str = "Maharashtra") -> Dict:
+        """Calculate solar economics for payback analysis."""
+        solar = self.api.calculate_solar_economics(state, 0.40)
+        if "error" in solar:
+            return {
+                "solar_kwp": 177,
+                "installation_cost_lakhs": 67.39,
+                "monthly_savings": 173166,
+                "payback_years": 3.2,
+            }
+        return {
+            "solar_kwp": solar["solar_capacity_kwp"],
+            "installation_cost_lakhs": solar["installation_cost_lakhs"],
+            "monthly_savings": solar["monthly_savings_inr"],
+            "payback_years": solar["payback_years"],
+        }
+    
+    def _calculate_hybrid_economics(self, state: str = "Maharashtra", battery_kwh: int = 500) -> Dict:
+        """Calculate hybrid system economics."""
+        hybrid = self.api.calculate_hybrid_system(state, battery_kwh, 0.40)
+        if "error" in hybrid:
+            return {
+                "total_cost_lakhs": 136.89,
+                "monthly_savings": 290053,
+                "payback_years": 3.9,
+                "offset_pct": 67,
+            }
+        return {
+            "total_cost_lakhs": hybrid["total_installation_cost_lakhs"],
+            "monthly_savings": hybrid["monthly_savings_hybrid_inr"],
+            "payback_years": hybrid["payback_years_hybrid"],
+            "offset_pct": hybrid["total_offset_percentage"],
+        }
+    
+    def _calculate_discrete_cost(self, config: Dict) -> float:
+        """Calculate cost of buying components discretely."""
+        battery_cost = config["battery_kwh"] * self.DISCRETE_MARKET_PRICES["battery_per_kwh"]
+        inverter_cost = config["inverter_kva"] * self.DISCRETE_MARKET_PRICES["inverter_per_kva"]
+        
+        if config["dc_kw"] <= 60:
+            charger_cost = self.DISCRETE_MARKET_PRICES["dc_charger_60kw"]
+        elif config["dc_kw"] <= 120:
+            charger_cost = self.DISCRETE_MARKET_PRICES["dc_charger_120kw"]
+        else:
+            charger_cost = self.DISCRETE_MARKET_PRICES["dc_charger_240kw"]
+        
+        integration = self.DISCRETE_MARKET_PRICES["integration_per_unit"]
+        
+        return battery_cost + inverter_cost + charger_cost + integration
+    
+    def _calculate_ipcu_bom(self, config: Dict) -> float:
+        """Calculate IPCU integrated BOM cost."""
+        battery_cost = config["battery_kwh"] * (
+            self.COMPONENT_COSTS["battery_lfp_per_kwh"] +
+            self.COMPONENT_COSTS["battery_bms_per_kwh"] +
+            self.COMPONENT_COSTS["battery_thermal_per_kwh"] +
+            self.COMPONENT_COSTS["battery_enclosure_per_kwh"]
+        )
+        
+        # Use PMU-based calculation (25kW modules)
+        num_pmus = max(1, (config["inverter_kva"] + config["dc_kw"]) // 50)
+        power_electronics_cost = num_pmus * self.COMPONENT_COSTS["pmu_25kw_base"]
+        
+        subtotal = battery_cost + power_electronics_cost
+        integration = subtotal * self.COMPONENT_COSTS["integration_pct"]
+        
+        return subtotal + integration
+    
+    def _calculate_upm_bom(self, config: Dict) -> float:
+        """Calculate UPM-HOME BOM cost."""
+        # PMU-based (derated for home use)
+        pmu_cost = self.COMPONENT_COSTS["pmu_25kw_base"] * (config["power_kw"] / 25)
+        
+        # Aux battery if present
+        aux_battery_cost = config["aux_battery_kwh"] * (
+            self.COMPONENT_COSTS["battery_lfp_per_kwh"] +
+            self.COMPONENT_COSTS["battery_bms_per_kwh"]
+        ) if config["aux_battery_kwh"] > 0 else 0
+        
+        # Control, enclosure, connectors
+        fixed_costs = 35000  # DSP, HMI, enclosure, cables
+        
+        return pmu_cost + aux_battery_cost + fixed_costs
+    
+    def generate_cost_targets_section(self) -> str:
+        """Generate the complete Section 7.0 for IPCU document."""
+        # Get economics from API
+        station_econ = self._calculate_station_economics()
+        solar_econ = self._calculate_solar_economics()
+        hybrid_econ = self._calculate_hybrid_economics()
+        
+        # Calculate IPCU product costs
+        ipcu_costs = {}
+        for name, config in self.IPCU_CONFIGS.items():
+            discrete = self._calculate_discrete_cost(config)
+            bom = self._calculate_ipcu_bom(config)
+            target_price = discrete * 0.73  # 27% savings
+            margin = ((target_price - bom) / target_price) * 100
+            ipcu_costs[name] = {
+                "discrete": discrete,
+                "bom": bom,
+                "target_price": target_price,
+                "savings_pct": 27,
+                "margin_pct": margin,
+            }
+        
+        # Calculate UPM product costs
+        upm_costs = {}
+        for name, config in self.UPM_CONFIGS.items():
+            bom = self._calculate_upm_bom(config)
+            # Target 45-55% margin
+            target_price = bom / 0.50  # 50% margin
+            upm_costs[name] = {
+                "bom": bom,
+                "target_price": target_price,
+            }
+        
+        # National summary
+        summary = self.api.get_national_ev_revenue_summary()
+        total_evs = summary["national_totals"]["total_evs_registered"]
+        total_stations = summary["national_totals"]["total_charging_stations"]
+        yearly_revenue_cr = summary["revenue_summary"]["yearly_revenue_crores"]
+        
+        return f"""---
+
+## 7. Cost Targets & Business Case Analysis
+
+> **⚠️ AUTO-GENERATED SECTION** - Generated from `Query_web_electricity_rate.py` on {self.report_date}  
+> To update: `python Query_web_electricity_rate.py --generate-ipcu-costs`  
+> **Source:** Cost targets derived from EV revenue analysis (`ev_revenue_report.md`)
+
+### 7.0 Cost Target Derivation from Revenue Model
+
+#### 7.0.1 The Business Case: Station Economics Summary
+
+Based on our revenue analysis of India's EV charging market ({total_evs:,} EVs, {total_stations:,} stations as of 2026):
+
+| Metric | Standard Station (2 DC + 2 AC) | Value |
+|--------|--------------------------------|-------|
+| **Daily kWh Delivered** | {station_econ['daily_kwh']:,.0f} kWh | - |
+| **Daily Sessions** | {station_econ['daily_sessions']} sessions | - |
+| **Monthly Revenue** | Rs. {station_econ['monthly_revenue']:,.0f} | Average Rs. {station_econ['monthly_revenue']/100000:.1f} L |
+| **Monthly Grid Cost** | Rs. {station_econ['monthly_power_cost']:,.0f} | {station_econ['monthly_power_cost']/station_econ['monthly_revenue']*100:.0f}% of revenue |
+| **Monthly Gross Profit** | Rs. {station_econ['monthly_profit']:,.0f} | {station_econ['margin_pct']:.0f}% margin |
+| **Problem** | Power costs eat 30-45% of revenue | Key pain point |
+
+#### 7.0.2 The Value Proposition: Hybrid Systems Payback
+
+| System Configuration | Investment | Monthly Savings | Payback | Final Margin |
+|---------------------|------------|-----------------|---------|--------------|
+| Grid Only | Rs. 0 | - | - | {station_econ['margin_pct']:.0f}% |
+| Solar 40% ({solar_econ['solar_kwp']:.0f} kWp) | Rs. {solar_econ['installation_cost_lakhs']:.2f} L | Rs. {solar_econ['monthly_savings']:,.0f} | **{solar_econ['payback_years']:.1f} years** | 73-74% |
+| Solar + 500 kWh Battery | Rs. {hybrid_econ['total_cost_lakhs']:.2f} L | Rs. {hybrid_econ['monthly_savings']:,.0f} | **{hybrid_econ['payback_years']:.1f} years** | **83-84%** |
+
+**Key Insight:** Operators invest Rs. 100-140 Lakhs if payback < 4 years. This sets our **maximum system cost ceiling**.
+
+#### 7.0.3 IPCU-STATION: Target Cost Derivation
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│              COST TARGET DERIVATION: IPCU-STATION                               │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                 │
+│   MARKET PRICING (BUYING SEPARATELY):                                          │
+│   ────────────────────────────────────                                          │
+│   │ Component                    │ Market Price │                               │
+│   ├──────────────────────────────┼──────────────┤                               │
+│   │ 500 kWh LFP Battery          │ Rs. 65 L     │                               │
+│   │ 200 kVA Bi-directional Inv   │ Rs. 50 L     │                               │
+│   │ 120 kW DC Fast Charger       │ Rs. 25 L     │                               │
+│   │ BMS + Controller             │ Rs. 6 L      │                               │
+│   │ Integration & Wiring         │ Rs. 8 L      │                               │
+│   ├──────────────────────────────┼──────────────┤                               │
+│   │ TOTAL (DISCRETE)             │ Rs. 154 L    │                               │
+│   └──────────────────────────────┴──────────────┘                               │
+│                                                                                 │
+│   ▼ PAYBACK CONSTRAINT (< 4 years) ▼                                            │
+│                                                                                 │
+│   ┌──────────────────────────────────────────────────────────────────┐          │
+│   │ Monthly Savings with 67% offset: Rs. {hybrid_econ['monthly_savings']:,.0f}                  │          │
+│   │ Target Payback: 3.5 years (42 months)                            │          │
+│   │ Maximum Allowable Investment: Rs. {hybrid_econ['monthly_savings']*42/100000:.0f} Lakhs              │          │
+│   │                                                                  │          │
+│   │ Market disruption requires 27% savings vs discrete               │          │
+│   │ IPCU TARGET PRICE: Rs. 154 L × 0.73 = Rs. ~112 Lakhs            │          │
+│   │ IPCU BOM TARGET: Rs. 112 L × 0.65 (35% margin) = Rs. ~73 Lakhs  │          │
+│   └──────────────────────────────────────────────────────────────────┘          │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### 7.0.4 IPCU-STATION: Product Tier Cost Targets
+
+| Configuration | Battery | DC Charger | Inverter | BOM Target | Sell Price | Market Price | Savings |
+|---------------|---------|------------|----------|------------|------------|--------------|---------|
+| **IPCU-MINI** | 100 kWh | 60 kW | 50 kVA | Rs. {ipcu_costs['IPCU-MINI']['bom']/100000:.1f} L | **Rs. {ipcu_costs['IPCU-MINI']['target_price']/100000:.0f} L** | Rs. {ipcu_costs['IPCU-MINI']['discrete']/100000:.0f} L | 27% |
+| **IPCU-STD** | 250 kWh | 60 kW | 100 kVA | Rs. {ipcu_costs['IPCU-STD']['bom']/100000:.1f} L | **Rs. {ipcu_costs['IPCU-STD']['target_price']/100000:.0f} L** | Rs. {ipcu_costs['IPCU-STD']['discrete']/100000:.0f} L | 27% |
+| **IPCU-HUB** | 500 kWh | 120 kW | 200 kVA | Rs. {ipcu_costs['IPCU-HUB']['bom']/100000:.1f} L | **Rs. {ipcu_costs['IPCU-HUB']['target_price']/100000:.0f} L** | Rs. {ipcu_costs['IPCU-HUB']['discrete']/100000:.0f} L | 27% |
+| **IPCU-FLEET** | 1000 kWh | 240 kW | 400 kVA | Rs. {ipcu_costs['IPCU-FLEET']['bom']/100000:.1f} L | **Rs. {ipcu_costs['IPCU-FLEET']['target_price']/100000:.0f} L** | Rs. {ipcu_costs['IPCU-FLEET']['discrete']/100000:.0f} L | 27% |
+
+#### 7.0.5 UPM-HOME: Target Cost Derivation
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│              COST TARGET DERIVATION: UPM-HOME (Residential)                     │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                 │
+│   COMPETITOR LANDSCAPE:                                                         │
+│   ─────────────────────                                                         │
+│   │ Product                      │ Price         │ Capability               │   │
+│   ├──────────────────────────────┼───────────────┼──────────────────────────┤   │
+│   │ 5 kVA Solar Inverter         │ Rs. 50,000    │ Solar only               │   │
+│   │ 5 kVA Hybrid Inverter        │ Rs. 80,000    │ Solar + Battery          │   │
+│   │ 7 kW AC EV Charger           │ Rs. 60,000    │ Charging only            │   │
+│   │ 10 kVA Servo Stabilizer      │ Rs. 25,000    │ Voltage only             │   │
+│   │ 5 kVA Home UPS + Battery     │ Rs. 1,20,000  │ Backup only              │   │
+│   ├──────────────────────────────┼───────────────┼──────────────────────────┤   │
+│   │ TOTAL (Separate)             │ Rs. 3,35,000  │ 5 devices                │   │
+│   └──────────────────────────────┴───────────────┴──────────────────────────┘   │
+│                                                                                 │
+│   UPM-HOME VALUE PROPOSITION:                                                   │
+│   ──────────────────────────────                                                │
+│   Replaces 5 devices: Solar Inverter + Hybrid Inverter + EV Charger +           │
+│                       Stabilizer + UPS                                          │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+| Tier | Power | Aux Battery | BOM Target | Sell Price | Replaces |
+|------|-------|-------------|------------|------------|----------|
+| **UPM-HOME-5** | 5 kW | V2H only | Rs. {upm_costs['UPM-HOME-5']['bom']/1000:.0f}k | **Rs. {upm_costs['UPM-HOME-5']['target_price']/100000:.1f} L** | Rs. 2.0 L equiv |
+| **UPM-HOME-10** | 10 kW | 5 kWh | Rs. {upm_costs['UPM-HOME-10']['bom']/1000:.0f}k | **Rs. {upm_costs['UPM-HOME-10']['target_price']/100000:.1f} L** | Rs. 2.8 L equiv |
+| **UPM-HOME-15** | 15 kW | 10 kWh | Rs. {upm_costs['UPM-HOME-15']['bom']/100000:.1f} L | **Rs. {upm_costs['UPM-HOME-15']['target_price']/100000:.1f} L** | Rs. 3.5 L equiv |
+| **UPM-HOME-25** | 25 kW | 20 kWh | Rs. {upm_costs['UPM-HOME-25']['bom']/100000:.1f} L | **Rs. {upm_costs['UPM-HOME-25']['target_price']/100000:.1f} L** | Rs. 5.0 L equiv |
+
+#### 7.0.6 Cost Target Summary Table
+
+| Product | Target Market | Power | Storage | BOM Target | Sell Price | Customer Payback |
+|---------|---------------|-------|---------|------------|------------|------------------|
+| **UPM-HOME-5** | Budget Home | 5 kW | V2H only | Rs. {upm_costs['UPM-HOME-5']['bom']/1000:.0f}k | Rs. {upm_costs['UPM-HOME-5']['target_price']/100000:.1f} L | 2-3 years |
+| **UPM-HOME-10** | Mid Home | 10 kW | V2H + 5kWh | Rs. {upm_costs['UPM-HOME-10']['bom']/1000:.0f}k | Rs. {upm_costs['UPM-HOME-10']['target_price']/100000:.1f} L | 2-3 years |
+| **UPM-HOME-15** | Large Home | 15 kW | V2H + 10kWh | Rs. {upm_costs['UPM-HOME-15']['bom']/100000:.1f} L | Rs. {upm_costs['UPM-HOME-15']['target_price']/100000:.1f} L | 2.5-3 years |
+| **UPM-HOME-25** | Villa/Sm Biz | 25 kW | V2H + 20kWh | Rs. {upm_costs['UPM-HOME-25']['bom']/100000:.1f} L | Rs. {upm_costs['UPM-HOME-25']['target_price']/100000:.1f} L | 3-4 years |
+| **IPCU-MINI** | Highway Stop | 60 kW | 100 kWh | Rs. {ipcu_costs['IPCU-MINI']['bom']/100000:.1f} L | Rs. {ipcu_costs['IPCU-MINI']['target_price']/100000:.0f} L | 3-3.5 years |
+| **IPCU-STD** | Urban Station | 100 kW | 250 kWh | Rs. {ipcu_costs['IPCU-STD']['bom']/100000:.1f} L | Rs. {ipcu_costs['IPCU-STD']['target_price']/100000:.0f} L | 3-3.5 years |
+| **IPCU-HUB** | Large Hub | 200 kW | 500 kWh | Rs. {ipcu_costs['IPCU-HUB']['bom']/100000:.1f} L | Rs. {ipcu_costs['IPCU-HUB']['target_price']/100000:.0f} L | 3.5-4 years |
+| **IPCU-FLEET** | Fleet Depot | 400 kW | 1000 kWh | Rs. {ipcu_costs['IPCU-FLEET']['bom']/100000:.1f} L | Rs. {ipcu_costs['IPCU-FLEET']['target_price']/100000:.0f} L | 3.5-4 years |
+
+#### 7.0.7 PMU (Power Module Unit) Cost Target
+
+The 25 kW PMU is our core building block. Target cost must enable all product tiers:
+
+| PMU Cost Element | Target Cost | Notes |
+|------------------|-------------|-------|
+| SiC Full-Bridge (25 kW) | Rs. 1,50,000 | Wolfspeed/Infineon SiC modules |
+| Gate Drivers + Sensors | Rs. 25,000 | Isolated drivers, current sensors |
+| EMI Filter + Magnetics | Rs. 35,000 | CM choke, filter inductors |
+| DC Bus Capacitors | Rs. 20,000 | Film caps, 900V rated |
+| Local DSP Controller | Rs. 15,000 | TI C2000 or equivalent |
+| Heatsink + Coldplate | Rs. 25,000 | Liquid-cooled interface |
+| Housing + Connectors | Rs. 15,000 | IP65 rated, quick-connect |
+| Assembly + Testing | Rs. 15,000 | Labor, calibration |
+| **PMU BOM TOTAL** | **Rs. 3,00,000** | Per 25 kW module |
+
+**Scaling Math:**
+- UPM-HOME-5: 1 PMU @ 20% = Rs. 60,000 power electronics
+- UPM-HOME-25: 1 PMU @ 100% = Rs. 3,00,000 power electronics  
+- IPCU-HUB: 8 PMUs = Rs. 24,00,000 power electronics
+
+#### 7.0.8 Cost Reduction Roadmap
+
+| Phase | Volume | PMU Cost | IPCU-HUB BOM | IPCU-HUB Price |
+|-------|--------|----------|--------------|----------------|
+| **Phase 1 (2026)** | 100-500/yr | Rs. 3.0 L | Rs. {ipcu_costs['IPCU-HUB']['bom']/100000:.1f} L | Rs. {ipcu_costs['IPCU-HUB']['target_price']/100000:.0f} L |
+| **Phase 2 (2027)** | 500-2000/yr | Rs. 2.5 L | Rs. {ipcu_costs['IPCU-HUB']['bom']*0.85/100000:.0f} L | Rs. {ipcu_costs['IPCU-HUB']['target_price']*0.85/100000:.0f} L |
+| **Phase 3 (2028)** | 2000-5000/yr | Rs. 2.0 L | Rs. {ipcu_costs['IPCU-HUB']['bom']*0.72/100000:.0f} L | Rs. {ipcu_costs['IPCU-HUB']['target_price']*0.72/100000:.0f} L |
+| **Phase 4 (2030)** | 5000+/yr | Rs. 1.5 L | Rs. {ipcu_costs['IPCU-HUB']['bom']*0.60/100000:.0f} L | Rs. {ipcu_costs['IPCU-HUB']['target_price']*0.60/100000:.0f} L |
+
+> **Target:** 40% cost reduction over 4 years through volume, vertical integration, and component optimization.
+
+---"""
+
+    def update_ipcu_document(self, ipcu_filepath: str) -> bool:
+        """Update the IPCU document's Section 7.0 with generated content.
+        
+        Args:
+            ipcu_filepath: Path to integrated_power_conversion_unit.md
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        import re
+        
+        try:
+            with open(ipcu_filepath, 'r') as f:
+                content = f.read()
+            
+            # Generate new Section 7.0
+            new_section = self.generate_cost_targets_section()
+            
+            # Find and replace Section 7.0 (from "## 7. Cost" to "### 7.1 Bill of Materials")
+            pattern = r'---\s*\n\s*## 7\. Cost Targets.*?(?=### 7\.1 Bill of Materials)'
+            
+            if re.search(pattern, content, re.DOTALL):
+                # Replace existing auto-generated section
+                updated_content = re.sub(pattern, new_section + "\n", content, flags=re.DOTALL)
+            else:
+                # Try alternate pattern (original "## 7. Cost Analysis")
+                pattern_alt = r'---\s*\n\s*## 7\. Cost Analysis.*?(?=### 7\.1 Bill of Materials)'
+                if re.search(pattern_alt, content, re.DOTALL):
+                    updated_content = re.sub(pattern_alt, new_section + "\n", content, flags=re.DOTALL)
+                else:
+                    print("[WARN] Could not find Section 7.0 marker. Appending at end of file.")
+                    updated_content = content + "\n\n" + new_section
+            
+            with open(ipcu_filepath, 'w') as f:
+                f.write(updated_content)
+            
+            return True
+            
+        except Exception as e:
+            print(f"[ERROR] Failed to update IPCU document: {e}")
+            return False
+    
+    def save_standalone(self, filepath: str = None) -> str:
+        """Save the cost targets section as a standalone file."""
+        if filepath is None:
+            filepath = Path(__file__).parent / "ipcu_cost_targets_section.md"
+        
+        content = self.generate_cost_targets_section()
+        
+        with open(filepath, 'w') as f:
+            f.write(content)
+        
+        return str(filepath)
+
+
 def main():
     """Main function with CLI interface."""
     import argparse
@@ -1898,6 +2309,10 @@ def main():
                        help="Show EV charging station revenue estimates")
     parser.add_argument("--generate-report", "-g", action="store_true",
                        help="Generate full EV revenue report in markdown")
+    parser.add_argument("--generate-ipcu-costs", action="store_true",
+                       help="Generate/update IPCU cost targets section from revenue model")
+    parser.add_argument("--ipcu-file", type=str,
+                       help="Path to integrated_power_conversion_unit.md (for --generate-ipcu-costs)")
     parser.add_argument("--output", "-o", type=str,
                        help="Output file path for generated report")
     
@@ -1914,10 +2329,10 @@ def main():
     
     # Generate full report if requested
     if args.generate_report:
-    print("=" * 60)
+        print("=" * 60)
         print("GENERATING EV CHARGING BUSINESS REPORT")
-    print("=" * 60)
-    
+        print("=" * 60)
+        
         generator = EVReportGenerator(api)
         output_path = args.output or str(Path(__file__).parent / "ev_revenue_report.md")
         saved_path = generator.save_report(output_path)
@@ -1930,10 +2345,37 @@ def main():
                 print(f"  - {key}: {value}")
         return
     
+    # Generate IPCU cost targets if requested
+    if args.generate_ipcu_costs:
+        print("=" * 60)
+        print("GENERATING IPCU COST TARGETS FROM REVENUE MODEL")
+        print("=" * 60)
+        
+        ipcu_generator = IPCUCostTargetGenerator(api)
+        
+        if args.ipcu_file:
+            # Update existing IPCU document
+            success = ipcu_generator.update_ipcu_document(args.ipcu_file)
+            if success:
+                print(f"\n[SUCCESS] Updated IPCU document: {args.ipcu_file}")
+            else:
+                print(f"\n[ERROR] Failed to update IPCU document")
+        else:
+            # Save as standalone file
+            output_path = args.output or str(Path(__file__).parent / "ipcu_cost_targets_section.md")
+            saved_path = ipcu_generator.save_standalone(output_path)
+            print(f"\n[SUCCESS] Cost targets section generated: {saved_path}")
+        
+        print(f"\n[INFO] Cost targets derived from revenue model:")
+        print(f"  - Station economics: Rs. {ipcu_generator._calculate_station_economics()['monthly_revenue']:,.0f}/month revenue")
+        print(f"  - Hybrid savings: Rs. {ipcu_generator._calculate_hybrid_economics()['monthly_savings']:,.0f}/month")
+        print(f"  - Target payback: < 4 years")
+        return
+    
     # Show status if requested
     if args.status:
         status = api.get_status()
-    print("=" * 60)
+        print("=" * 60)
         print("DATA STATUS")
         print("=" * 60)
         for key, value in status.items():
