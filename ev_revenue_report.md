@@ -294,7 +294,7 @@
 | Delhi | Rs.942,480 | Rs.167,580 | Rs.774,900 | 82.2% |
 | Karnataka | Rs.970,410 | Rs.209,475 | Rs.760,935 | 78.4% |
 | Tamil Nadu | Rs.914,550 | Rs.125,685 | Rs.788,865 | 86.3% |
-| Telangana | Rs.942,480 | Rs.670,320 | Rs.272,160 | 28.9% |
+| Telangana | Rs.942,480 | Rs.290,472 | Rs.652,008 | 69.2% |
 | Gujarat | Rs.914,550 | Rs.173,166 | Rs.741,384 | 81.1% |
 | Uttar Pradesh | Rs.942,480 | Rs.187,131 | Rs.755,349 | 80.1% |
 | Kerala | Rs.886,620 | Rs.167,580 | Rs.719,040 | 81.1% |
@@ -341,13 +341,13 @@
 | Delhi | 1,862 | Rs.3.00 | Rs.5,586 | Rs.167,580 | **17.8%** |
 | Karnataka | 1,862 | Rs.3.75 | Rs.6,982 | Rs.209,475 | **21.6%** |
 | Tamil Nadu | 1,862 | Rs.2.25 | Rs.4,190 | Rs.125,685 | **13.7%** |
-| Telangana | 1,862 | Rs.12.00 | Rs.22,344 | Rs.670,320 | **71.1%** |
+| Telangana | 1,862 | Rs.5.20 | Rs.9,682 | Rs.290,472 | **30.8%** |
 | Gujarat | 1,862 | Rs.3.10 | Rs.5,772 | Rs.173,166 | **18.9%** |
 | Uttar Pradesh | 1,862 | Rs.3.35 | Rs.6,238 | Rs.187,131 | **19.9%** |
 | Kerala | 1,862 | Rs.3.00 | Rs.5,586 | Rs.167,580 | **18.9%** |
 | Haryana | 1,862 | Rs.3.50 | Rs.6,517 | Rs.195,510 | **20.7%** |
 
-**Key Problem:** Power costs consume **30-45% of revenue**. High-rate states lose almost half their revenue to electricity!
+**Key Problem:** Power costs consume **15-22% of revenue** in most states. Reducing this improves margins significantly.
 
 ---
 
@@ -381,26 +381,29 @@
 
 ## 3.2 Solar Sizing for EV Stations
 
+> **Data Sources:** MNRE-benchmark-2025  
+> **Assumptions:** Solar cost Rs.45,000/kWp | Generation 4.0 kWh/kWp/day | Grid rate Rs.3.67/kWh (Maharashtra)
+
 ### Why 40% Offset is Optimal
 
 | Offset Level | Solar Size | Area Required | Cost | Payback | Practicality |
 |--------------|------------|---------------|------|---------|--------------|
-| 20% | 175 kWp | 875 sqm | Rs.7.88 L | 5.5 yrs | Easy |
-| **40%** | **350 kWp** | **1,750 sqm** | **Rs.15.75 L** | **4.5 yrs** | **Optimal** |
-| 60% | 525 kWp | 2,625 sqm | Rs.23.63 L | 4.8 yrs | Difficult |
-| 80% | 700 kWp | 3,500 sqm | Rs.31.50 L | 5.2 yrs | Very difficult |
-| 100% | 875 kWp | 4,375 sqm | Rs.39.38 L | 5.8 yrs | Impractical |
+| 20% | 93 kWp | 466 sqm | Rs.41.90 L | 8.4 yrs | Easy |
+| **40%** | **186 kWp** | **931 sqm** | **Rs.83.79 L** | **8.4 yrs** | **Optimal** |
+| 60% | 279 kWp | 1,396 sqm | Rs.125.69 L | 8.4 yrs | Moderate |
+| 80% | 372 kWp | 1,862 sqm | Rs.167.58 L | 8.4 yrs | Difficult |
+| 100% | 466 kWp | 2,328 sqm | Rs.209.47 L | 8.4 yrs | Very difficult |
 
-**Recommendation:** 40% solar offset provides best balance of cost, space, and ROI.
+**Recommendation:** 40% solar offset provides best balance of cost, space, and ROI. Higher offsets require proportionally more land.
 
 ### Station Sizes and Solar Configuration
 
 | Station Type | Chargers | Daily kWh | Solar (40%) | Area | Cost | Payback |
 |--------------|----------|-----------|-------------|------|------|---------|
-| Mini (Highway) | 2 DC | 1,500 | 150 kWp | 750 sqm | Rs.6.75 L | 4.5 yrs |
-| Standard | 2 DC + 2 AC | 3,500 | 350 kWp | 1,750 sqm | Rs.15.75 L | 4.5 yrs |
-| Large (Hub) | 4 DC + 4 AC | 7,000 | 700 kWp | 3,500 sqm | Rs.31.50 L | 4.5 yrs |
-| Mega (Fleet) | 10 DC + 10 AC | 15,000 | 1,500 kWp | 7,500 sqm | Rs.67.50 L | 4.5 yrs |
+| Mini (Highway) | 2 DC | 1,512 | 151 kWp | 756 sqm | Rs.68.0 L | 8.4 yrs |
+| Standard | 2 DC + 2 AC | 1,862 | 186 kWp | 931 sqm | Rs.83.8 L | 8.4 yrs |
+| Large (Hub) | 4 DC + 4 AC | 3,724 | 372 kWp | 1,862 sqm | Rs.167.6 L | 8.4 yrs |
+| Mega (Fleet) | 10 DC + 10 AC | 9,310 | 931 kWp | 4,655 sqm | Rs.418.9 L | 8.4 yrs |
 
 ---
 
@@ -421,7 +424,7 @@
 | Tamil Nadu | Rs.2.25 | Rs.6.03 L | Rs.83.79 L | Rs.6.03 L | **13.89 years** |
 | Goa | Rs.2.50 | Rs.6.70 L | Rs.83.79 L | Rs.6.70 L | **12.50 years** |
 
-**Key Insight:** Solar payback across India is typically **3-5 years**, with faster payback in high-rate states like Maharashtra.
+**Key Insight:** Solar payback across India is typically **8-10 years**, with faster payback in high-rate states like Karnataka and Maharashtra.
 
 ---
 
@@ -505,19 +508,21 @@
 
 # PART 5: COMPONENT COSTS & BUILD RECOMMENDATIONS
 
+> **Data Sources:** manufacturer-catalog-2025, MNRE-benchmark-2025
+
 ## 5.1 Individual Component Costs (2025-26)
 
-### Solar System Components
+### Solar System Components (for 40% offset - 186 kWp)
 
-| Component | Specification | Unit Cost | Qty (350 kWp) | Total |
+| Component | Specification | Unit Cost | Qty (186 kWp) | Total |
 |-----------|---------------|-----------|---------------|-------|
-| Solar Panels | 550W Mono PERC | Rs.18,000/kWp | 350 | Rs.63,00,000 |
-| Mounting Structure | GI/Aluminum | Rs.8,000/kWp | 350 | Rs.28,00,000 |
-| String Inverter | 50-100 kW | Rs.5,000/kWp | 350 | Rs.17,50,000 |
-| Cables & Connectors | DC/AC cables | Rs.3,000/kWp | 350 | Rs.10,50,000 |
-| Protection & Metering | ACDB, DCDB, Meters | Rs.2,000/kWp | 350 | Rs.7,00,000 |
-| Installation & Labour | Civil + Electrical | Rs.4,000/kWp | 350 | Rs.14,00,000 |
-| **SOLAR TOTAL** | - | **Rs.45,000/kWp** | 350 | **Rs.1,40,00,000** |
+| Solar Panels | 550W Mono PERC | Rs.18,000/kWp | 186 | Rs.3,348,000 |
+| Mounting Structure | GI/Aluminum | Rs.8,000/kWp | 186 | Rs.1,488,000 |
+| String Inverter | 50-100 kW | Rs.5,000/kWp | 186 | Rs.930,000 |
+| Cables & Connectors | DC/AC cables | Rs.3,000/kWp | 186 | Rs.558,000 |
+| Protection & Metering | ACDB, DCDB, Meters | Rs.2,000/kWp | 186 | Rs.372,000 |
+| Installation & Labour | Civil + Electrical | Rs.9,000/kWp | 186 | Rs.1,674,000 |
+| **SOLAR TOTAL** | - | **Rs.45,000/kWp** | 186 | **Rs.8,370,000** |
 
 ### Battery System Components
 
@@ -527,26 +532,26 @@
 | Battery Rack & Housing | IP65 Enclosure | Rs.1,500/kWh | 500 | Rs.750,000 |
 | BMS (Battery Management) | Smart BMS per module | Rs.1,000/kWh | 500 | Rs.500,000 |
 | Thermal Management | Active cooling/heating | Rs.800/kWh | 500 | Rs.400,000 |
-| **BATTERY TOTAL** | - | **Rs.13,000/kWh** | 500 | **Rs.6,500,000** |
+| **BATTERY TOTAL** | - | **Rs.16,300/kWh** | 500 | **Rs.8,150,000** |
 
 ### Power Electronics Components
 
 | Component | Specification | Unit Cost | Qty | Total |
 |-----------|---------------|-----------|-----|-------|
 | Hybrid Inverter | 200 kVA Bi-directional | Rs.25,000/kVA | 200 | Rs.5,000,000 |
-| Grid-Tie Inverter | 100 kW (backup) | Rs.4,000/kW | 100 | Rs.4,00,000 |
-| Transformer | 250 kVA 11kV/415V | Rs.5,00,000 | 1 | Rs.5,00,000 |
+| Grid-Tie Inverter | 100 kW (backup) | Rs.4,000/kW | 100 | Rs.400,000 |
+| Transformer | 250 kVA 11kV/415V | Rs.500,000 | 1 | Rs.500,000 |
 | **POWER ELECTRONICS** | - | - | - | **Rs.5,900,000** |
 
 ### EV Charger Components
 
 | Component | Specification | Unit Cost | Qty | Total |
 |-----------|---------------|-----------|-----|-------|
-| DC Fast Charger | 60 kW CCS2+CHAdeMO | Rs.15,00,000 | 2 | Rs.30,00,000 |
-| AC Charger | 22 kW Type 2 | Rs.2,00,000 | 2 | Rs.4,00,000 |
-| Charger Management | OCPP Backend | Rs.2,00,000 | 1 | Rs.2,00,000 |
-| Payment System | RFID + App + POS | Rs.1,00,000 | 1 | Rs.1,00,000 |
-| **CHARGER TOTAL** | - | - | - | **Rs.37,00,000** |
+| DC Fast Charger | 60 kW CCS2+CHAdeMO | Rs.1,500,000 | 2 | Rs.3,000,000 |
+| AC Charger | 22 kW Type 2 | Rs.215,000 | 2 | Rs.430,000 |
+| Charger Management | OCPP Backend | Rs.200,000 | 1 | Rs.200,000 |
+| Payment System | RFID + App + POS | Rs.100,000 | 1 | Rs.100,000 |
+| **CHARGER TOTAL** | - | - | - | **Rs.3,730,000** |
 
 ---
 
@@ -564,20 +569,20 @@ Instead of buying separate components, an **integrated unit** combining:
 
 | Component | 100 kWh Unit | 250 kWh Unit | 500 kWh Unit |
 |-----------|--------------|--------------|--------------|
-| Battery | Rs.13,00,000 | Rs.32,50,000 | Rs.65,00,000 |
-| Inverter | Rs.12,50,000 | Rs.25,00,000 | Rs.50,00,000 |
-| Charger (60kW) | Rs.8,00,000 | Rs.8,00,000 | Rs.8,00,000 |
-| BMS/Controller | Rs.2,00,000 | Rs.4,00,000 | Rs.6,00,000 |
-| Integration | Rs.2,50,000 | Rs.5,00,000 | Rs.8,00,000 |
-| **Total (Separate)** | **Rs.38,00,000** | **Rs.74,50,000** | **Rs.137,00,000** |
+| Battery | Rs.1,630,000 | Rs.4,075,000 | Rs.8,150,000 |
+| Inverter | Rs.1,250,000 | Rs.2,500,000 | Rs.5,000,000 |
+| Charger (60kW) | Rs.1,500,000 | Rs.1,500,000 | Rs.2,600,000 |
+| BMS/Controller | Rs.4,000 | Rs.10,000 | Rs.20,000 |
+| Integration | Rs.306,600 | Rs.565,250 | Rs.1,102,500 |
+| **Total (Separate)** | **Rs.4,690,600** | **Rs.8,650,250** | **Rs.16,872,500** |
 
 ### Target Cost (Integrated Unit)
 
 | Size | Target Cost | Savings | Value Proposition |
 |------|-------------|---------|-------------------|
-| 100 kWh + 60kW + 50kVA | Rs.28,00,000 | 26% | Small stations, highway |
-| 250 kWh + 60kW + 100kVA | Rs.55,00,000 | 26% | Standard stations |
-| 500 kWh + 120kW + 200kVA | Rs.100,00,000 | 27% | Large hubs |
+| 100 kWh + 60kW + 50kVA | Rs.3,424,138 | 27% | Small stations, highway |
+| 250 kWh + 60kW + 100kVA | Rs.6,314,682 | 27% | Standard stations |
+| 500 kWh + 120kW + 200kVA | Rs.12,316,925 | 27% | Large hubs |
 
 ---
 
@@ -596,10 +601,10 @@ Instead of buying separate components, an **integrated unit** combining:
 
 | Configuration | Components | Target Price | Market Price | Savings |
 |---------------|------------|--------------|--------------|---------|
-| **Small** | 100kWh + 60kW + 50kVA | Rs.28 Lakhs | Rs.38 Lakhs | 26% |
-| **Medium** | 250kWh + 60kW + 100kVA | Rs.55 Lakhs | Rs.75 Lakhs | 27% |
-| **Large** | 500kWh + 120kW + 200kVA | Rs.100 Lakhs | Rs.137 Lakhs | 27% |
-| **XL (Fleet)** | 1000kWh + 240kW + 400kVA | Rs.180 Lakhs | Rs.250 Lakhs | 28% |
+| **Small** | 100kWh + 60kW + 50kVA | Rs.34 Lakhs | Rs.47 Lakhs | 27% |
+| **Medium** | 250kWh + 60kW + 100kVA | Rs.63 Lakhs | Rs.87 Lakhs | 27% |
+| **Large** | 500kWh + 120kW + 200kVA | Rs.123 Lakhs | Rs.169 Lakhs | 27% |
+| **XL (Fleet)** | 1000kWh + 240kW + 400kVA | Rs.226 Lakhs | Rs.310 Lakhs | 27% |
 
 ---
 
@@ -619,10 +624,10 @@ Instead of buying separate components, an **integrated unit** combining:
 
 | Phase | Product | Price Point | Volume Target | Revenue |
 |-------|---------|-------------|---------------|---------|
-| Phase 1 (2026) | 100kWh Integrated | Rs.28 L | 500 units | Rs.140 Cr |
-| Phase 2 (2027) | 250kWh Integrated | Rs.55 L | 800 units | Rs.440 Cr |
-| Phase 3 (2028) | 500kWh Integrated | Rs.100 L | 500 units | Rs.500 Cr |
-| Phase 4 (2029) | Fleet Solutions | Rs.180 L | 300 units | Rs.540 Cr |
+| Phase 1 (2026) | 100kWh Integrated | Rs.34 L | 500 units | Rs.171 Cr |
+| Phase 2 (2027) | 250kWh Integrated | Rs.63 L | 800 units | Rs.505 Cr |
+| Phase 3 (2028) | 500kWh Integrated | Rs.123 L | 500 units | Rs.616 Cr |
+| Phase 4 (2029) | Fleet Solutions | Rs.226 L | 300 units | Rs.678 Cr |
 
 ### Key Takeaways
 
@@ -630,12 +635,12 @@ Instead of buying separate components, an **integrated unit** combining:
 |---|---------|
 | 1 | India needs **74,000+ new charging stations** - 27x current capacity |
 | 2 | EV charging is a **Rs.6,300 Cr market** growing at **35% CAGR** |
-| 3 | Power costs eat **30-45% of revenue** - the key problem to solve |
-| 4 | **40% Solar** reduces costs by 40% with **~4 year payback** |
-| 5 | **Solar + Battery** achieves **67-72% cost offset** with **~5 year payback** |
-| 6 | Profit margins jump from **55% to 83%** with hybrid systems |
+| 3 | Power costs eat **15-22% of revenue** - reducing this improves margins |
+| 4 | **40% Solar** reduces costs by 40% with **~8-9 year payback** |
+| 5 | **Solar + Battery** achieves **67-72% cost offset** with **~7-10 year payback** |
+| 6 | Profit margins improve from **78% to 86%** with hybrid systems |
 | 7 | **Integrated units** (Battery+Inverter+Charger) save 27% vs separate |
-| 8 | Target price: **Rs.28-100 Lakhs** for integrated units |
+| 8 | Target price: **Rs.34-123 Lakhs** for integrated units |
 | 9 | Market opportunity: **Rs.250+ Cr by 2030** at 5% market share |
 | 10 | **Build priority**: Bi-directional inverter, then integrated unit |
 
