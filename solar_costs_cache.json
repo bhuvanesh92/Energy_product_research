@@ -1,58 +1,19 @@
 {
-  "last_updated": "2026-03-01T10:00:00.000000",
-  "source": "MNRE-Benchmark-SECI-Tender-Q1-2026",
-  "source_urls": [
-    "https://mnre.gov.in/",
-    "https://www.seci.co.in/",
-    "https://www.india-re.com/"
-  ],
+  "last_updated": "2026-03-03T21:08:10.136916",
+  "source": "MNRE-benchmark-2025",
   "solar_costs": {
-    "per_kwp": 38000,
-    "per_kwp_rooftop": 42000,
-    "per_kwp_ground": 35000,
-    "per_kwp_carport": 48000,
+    "per_kwp": 45000,
     "per_sqm": 5,
-    "efficiency": 0.21,
-    "bifacial_premium": 1.15,
-    "system_losses": 0.18,
-    "generation_per_kwp_day": 4.2,
-    "annual_degradation": 0.004,
-    "panel_warranty_years": 25,
-    "inverter_warranty_years": 10,
-    "ppa_rate_range": {"min": 2.50, "max": 3.50, "avg": 3.00}
+    "efficiency": 0.2,
+    "system_losses": 0.2,
+    "generation_per_kwp_day": 4.0,
+    "annual_degradation": 0.005
   },
   "battery_costs": {
-    "lfp_per_kwh": 11000,
-    "nmc_per_kwh": 13500,
-    "sodium_ion_per_kwh": 9500,
-    "bms_per_kwh": 850,
-    "thermal_per_kwh": 700,
-    "enclosure_per_kwh": 1350,
-    "lfp_cycles": 6000,
-    "nmc_cycles": 3000,
-    "warranty_years": 10
-  },
-  "inverter_costs": {
-    "string_per_kw": 4200,
-    "central_per_kw": 3500,
-    "hybrid_per_kva": 22000,
-    "grid_tie_per_kw": 3800,
-    "microinverter_per_kw": 8500
-  },
-  "regional_irradiance": {
-    "northwest": {"states": ["Rajasthan", "Gujarat"], "kwh_per_kwp_day": 5.2},
-    "west": {"states": ["Maharashtra", "Goa"], "kwh_per_kwp_day": 4.5},
-    "south": {"states": ["Tamil Nadu", "Karnataka", "Kerala", "Andhra Pradesh", "Telangana"], "kwh_per_kwp_day": 4.8},
-    "north": {"states": ["Delhi", "Haryana", "Punjab", "Uttar Pradesh"], "kwh_per_kwp_day": 4.3},
-    "central": {"states": ["Madhya Pradesh", "Chhattisgarh"], "kwh_per_kwp_day": 4.6},
-    "east": {"states": ["West Bengal", "Odisha", "Bihar", "Jharkhand"], "kwh_per_kwp_day": 3.8},
-    "northeast": {"states": ["Assam", "Meghalaya", "Tripura", "Others"], "kwh_per_kwp_day": 3.4}
-  },
-  "subsidies": {
-    "pm_kusum": {"component_a": 0.30, "component_b": 0.30, "component_c": 0.30},
-    "state_subsidy_residential": 0.40,
-    "commercial_accelerated_depreciation": 0.40,
-    "gst_rate": 0.05
-  },
-  "notes": "Costs in INR. Solar prices have dropped ~15% YoY. Battery costs down ~20% YoY. Data as of Q1 2026."
+    "lfp_per_kwh": 13000,
+    "nmc_per_kwh": 15600,
+    "bms_per_kwh": 1000,
+    "thermal_per_kwh": 800,
+    "enclosure_per_kwh": 1500
+  }
 }

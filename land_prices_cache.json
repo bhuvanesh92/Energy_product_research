@@ -1,141 +1,52 @@
 {
-  "last_updated": "2026-03-01T10:00:00.000000",
-  "source": "99acres-MagicBricks-Housing-Q1-2026",
-  "source_urls": [
-    "https://www.99acres.com/property-rates-and-price-trends",
-    "https://www.magicbricks.com/property-rates-trends",
-    "https://housing.com/price-trends"
-  ],
+  "last_updated": "2026-03-03T21:08:10.120554",
+  "source": "housing-market-data",
   "land_costs": {
     "Maharashtra": {
-      "Mumbai": 42000,
-      "Pune": 15500,
-      "Nagpur": 6500,
-      "Thane": 22000,
-      "Navi Mumbai": 18000
+      "Mumbai": 38000,
+      "Pune": 13500,
+      "Nagpur": 6000
     },
     "Delhi": {
-      "New Delhi": 32000,
-      "Dwarka": 18000,
-      "Rohini": 15000
+      "New Delhi": 28000
     },
     "Karnataka": {
-      "Bengaluru": 19500,
-      "Mysuru": 7500,
-      "Mangaluru": 9500
+      "Bengaluru": 16500,
+      "Mysuru": 6500
     },
     "Tamil Nadu": {
-      "Chennai": 15500,
-      "Coimbatore": 8500,
-      "Madurai": 6500
+      "Chennai": 13000,
+      "Coimbatore": 7000
     },
     "Telangana": {
-      "Hyderabad": 15000,
-      "Warangal": 5500,
-      "Secunderabad": 13000
+      "Hyderabad": 12500,
+      "Warangal": 4500
     },
     "Gujarat": {
-      "Ahmedabad": 11500,
-      "Surat": 9500,
-      "Vadodara": 7500
+      "Ahmedabad": 9500,
+      "Surat": 8000
     },
     "Haryana": {
-      "Gurugram": 25000,
-      "Faridabad": 12000,
-      "Panipat": 6500
+      "Gurugram": 20000,
+      "Faridabad": 9000
     },
     "Uttar Pradesh": {
-      "Noida": 18500,
-      "Greater Noida": 9500,
-      "Lucknow": 8000,
-      "Kanpur": 6500,
-      "Ghaziabad": 11000
+      "Noida": 15500,
+      "Lucknow": 7000
     },
     "Kerala": {
-      "Kochi": 12500,
-      "Thiruvananthapuram": 10500,
-      "Kozhikode": 8500
+      "Kochi": 10000,
+      "Thiruvananthapuram": 8500
     },
     "West Bengal": {
-      "Kolkata": 13500,
-      "Howrah": 9500,
-      "Salt Lake": 15000
+      "Kolkata": 11500
     },
     "Rajasthan": {
-      "Jaipur": 9500,
-      "Jodhpur": 6500,
-      "Udaipur": 8000
+      "Jaipur": 8000
     },
     "Punjab": {
-      "Chandigarh": 16500,
-      "Ludhiana": 9000,
-      "Amritsar": 7500
-    },
-    "Andhra Pradesh": {
-      "Visakhapatnam": 7500,
-      "Vijayawada": 6500,
-      "Amaravati": 5500
-    },
-    "Madhya Pradesh": {
-      "Bhopal": 7000,
-      "Indore": 8500,
-      "Gwalior": 5000
-    },
-    "Odisha": {
-      "Bhubaneswar": 8500,
-      "Cuttack": 6500
-    },
-    "Bihar": {
-      "Patna": 7500,
-      "Gaya": 4500
-    },
-    "Jharkhand": {
-      "Ranchi": 6500,
-      "Jamshedpur": 7000
-    },
-    "Chhattisgarh": {
-      "Raipur": 6000,
-      "Bhilai": 5000
-    },
-    "Uttarakhand": {
-      "Dehradun": 10500,
-      "Haridwar": 7500
-    },
-    "Himachal Pradesh": {
-      "Shimla": 12000,
-      "Dharamshala": 8000
-    },
-    "Goa": {
-      "Panaji": 18000,
-      "Margao": 14000,
-      "Vasco": 12000
-    },
-    "Assam": {
-      "Guwahati": 7000,
-      "Silchar": 4500
-    },
-    "Tripura": {
-      "Agartala": 5500
-    },
-    "Meghalaya": {
-      "Shillong": 7500
-    },
-    "Manipur": {
-      "Imphal": 6000
-    },
-    "Nagaland": {
-      "Kohima": 6000,
-      "Dimapur": 5500
-    },
-    "Mizoram": {
-      "Aizawl": 6500
-    },
-    "Arunachal Pradesh": {
-      "Itanagar": 5000
-    },
-    "Sikkim": {
-      "Gangtok": 9500
+      "Chandigarh": 13500,
+      "Ludhiana": 7500
     }
-  },
-  "notes": "Commercial land rates in INR per sq ft. Highway-adjacent rates may be 30-50% lower. Rates as of Q1 2026."
+  }
 }

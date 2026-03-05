@@ -159,6 +159,119 @@ class IndiaElectricityRateQuery:
         2025: {"total": 3837500, "two_wheeler": 2450000, "three_wheeler": 825000, "four_wheeler": 552000, "bus": 10500, "stations": 2738},
     }
     
+    # Vehicle Class Specifications for charging analysis
+    VEHICLE_CLASS_SPECS = {
+        "two_wheeler": {
+            "name": "2-Wheelers",
+            "examples": "Ola S1 Pro, Ather 450X, TVS iQube, Bajaj Chetak, Revolt RV400",
+            "segments": {
+                "entry": {"battery_kwh": "2.0-2.5", "range_km": "80-100", "charger_w": "700-900", "charge_hrs": "4-5", "fast_charge_min": "N/A"},
+                "mid": {"battery_kwh": "2.9-3.5", "range_km": "120-150", "charger_w": "900-1500", "charge_hrs": "3-4", "fast_charge_min": "45-60"},
+                "premium": {"battery_kwh": "4.0-5.2", "range_km": "150-200", "charger_w": "1500-3000", "charge_hrs": "2-3", "fast_charge_min": "18-30"},
+            },
+            "connectors": "Portable, AC",
+            "primary_charging": "Home (95%)",
+            "public_infra_need": "Low",
+            "infra_needs": [
+                ("Primary", "Home 5A/15A socket", "95% of charging at home overnight"),
+                ("Secondary", "Workplace AC 3.3kW", "Destination charging"),
+                ("Public", "AC 3.3-7kW", "Minimal need - range anxiety low"),
+            ],
+            "gap_analysis": "Minimal public charging needed. Focus on **battery swap networks** for commercial 2W delivery fleets.",
+        },
+        "three_wheeler": {
+            "name": "3-Wheelers",
+            "examples": "Mahindra Treo, Piaggio Ape E-City, YC Electric, Kinetic Safar",
+            "segments": {
+                "e_rickshaw": {"battery_kwh": "3.5-5.0", "range_km": "80-100", "daily_km": "60-80", "charge_kw": "1.5-3", "charge_hrs": "3-4"},
+                "e_auto": {"battery_kwh": "7.0-10.0", "range_km": "120-150", "daily_km": "100-150", "charge_kw": "3-7", "charge_hrs": "3-5"},
+                "e_cargo": {"battery_kwh": "10-15", "range_km": "100-130", "daily_km": "80-120", "charge_kw": "3-7", "charge_hrs": "4-6"},
+            },
+            "connectors": "AC Type 2, Swap",
+            "primary_charging": "Swap/Public (70%)",
+            "public_infra_need": "High",
+            "infra_needs": [
+                ("Primary", "Dedicated AC 3.3-7kW", "Cluster charging at stands/depots"),
+                ("Location", "Auto stands, market areas", "High visibility, accessible"),
+                ("Frequency", "1-2x daily", "Mid-day and overnight"),
+            ],
+            "gap_analysis": "**High demand** for cluster charging hubs at auto stands. Battery swap gaining traction for commercial operators.",
+        },
+        "four_wheeler": {
+            "name": "4-Wheelers",
+            "examples": "Tata Nexon EV, MG ZS EV, Hyundai Ioniq 5, BYD Atto 3, Mahindra XUV400",
+            "segments": {
+                "entry": {"example": "Tata Tiago EV", "battery_kwh": "24-30", "range_km": "250-315", "ac_kw": "3.3", "dc_kw": "50", "ac_hrs": "8-10", "dc_min": "56"},
+                "mid": {"example": "Tata Nexon EV", "battery_kwh": "40-50", "range_km": "350-450", "ac_kw": "7.2", "dc_kw": "50-120", "ac_hrs": "7-8", "dc_min": "30-45"},
+                "premium": {"example": "Hyundai Ioniq 5", "battery_kwh": "60-80", "range_km": "450-600", "ac_kw": "11", "dc_kw": "150-350", "ac_hrs": "6-8", "dc_min": "18-30"},
+            },
+            "connectors": "CCS2, AC Type 2",
+            "primary_charging": "Home (60%), DC (40%)",
+            "public_infra_need": "Critical",
+            "connector_standards": [
+                ("AC Type 2", "AC", "3.3-22 kW", "Home, destination, public AC"),
+                ("CCS2 (Combo 2)", "DC", "50-350 kW", "Public DC fast charging"),
+                ("CHAdeMO", "DC", "50-100 kW", "Legacy (Nissan Leaf) - declining"),
+                ("GB/T", "DC", "50-250 kW", "Chinese vehicles (BYD)"),
+            ],
+            "infra_needs": [
+                ("Home", "AC Type 2 Wall Box", "3.3-7.2 kW", "Overnight (primary - 60%)"),
+                ("Workplace", "AC Type 2", "7.2-22 kW", "Daytime destination"),
+                ("Mall/Retail", "AC 22kW + DC 60kW", "Mixed", "Shopping duration"),
+                ("Highway", "DC 60-150 kW", "High power", "Long distance travel"),
+                ("Fuel Station", "DC 120-350 kW", "Ultra-fast", "Quick turnaround"),
+            ],
+            "gap_analysis": "**Critical shortage** of highway DC fast chargers. Need 60kW+ DC chargers every 50-100 km on national highways.",
+        },
+        "e_bus": {
+            "name": "E-Buses",
+            "examples": "Tata Starbus EV, Olectra, BYD K9, Ashok Leyland Circuit-S",
+            "segments": {
+                "city_9m": {"battery_kwh": "150-200", "range_km": "150-200", "daily_km": "150-200", "dc_kw": "60-120", "panto_kw": "300-450", "depot_hrs": "2-3", "opp_min": "10-15"},
+                "city_12m": {"battery_kwh": "250-350", "range_km": "200-280", "daily_km": "180-250", "dc_kw": "120-240", "panto_kw": "450-600", "depot_hrs": "2-4", "opp_min": "10-20"},
+                "intercity": {"battery_kwh": "350-450", "range_km": "300-400", "daily_km": "400-600", "dc_kw": "150-350", "panto_kw": "N/A", "depot_hrs": "3-5", "opp_min": "20-30"},
+            },
+            "connectors": "CCS2, Pantograph",
+            "primary_charging": "Depot DC (100%)",
+            "public_infra_need": "Medium",
+            "charging_strategies": [
+                ("Depot Charging", "Overnight slow charge", "60-120 kW DC", "Bus depot"),
+                ("Opportunity Charging", "Mid-route top-up", "150-350 kW DC", "Terminus/stops"),
+                ("Pantograph", "Ultra-fast overhead", "450-600 kW", "Designated stops"),
+            ],
+            "gap_analysis": "Requires dedicated **depot infrastructure** with high-power DC. Fleet operators need 100+ kW chargers per 10 buses.",
+        },
+        "e_truck": {
+            "name": "E-Trucks",
+            "examples": "Tata Ace EV, Mahindra Treo Zor, BYD T3, Euler HiLoad",
+            "segments": {
+                "light": {"weight": "< 2T", "battery_kwh": "20-40", "range_km": "100-150", "daily_km": "80-120", "dc_kw": "30-60", "charge_hrs": "1-2"},
+                "medium": {"weight": "2-7T", "battery_kwh": "60-150", "range_km": "150-250", "daily_km": "150-300", "dc_kw": "60-150", "charge_hrs": "2-3"},
+                "heavy": {"weight": "> 7T", "battery_kwh": "200-400", "range_km": "200-400", "daily_km": "300-500", "dc_kw": "150-350", "charge_hrs": "2-4"},
+            },
+            "connectors": "CCS2",
+            "primary_charging": "Depot/Highway DC",
+            "public_infra_need": "Growing",
+            "infra_needs": [
+                ("Last Mile Delivery", "Warehouse/Hub", "AC 7-22 kW", "Overnight at logistics hub"),
+                ("Urban Distribution", "Depot", "DC 60 kW", "Mid-day rapid charge"),
+                ("Regional Haul", "Highway", "DC 150 kW", "En-route charging"),
+                ("Long Haul", "Truck stops", "DC 350 kW", "Megawatt Charging System (future)"),
+            ],
+            "gap_analysis": "**Underserved market**. Logistics hubs need dedicated charging. Highway truck stops need 150kW+ chargers.",
+        },
+    }
+    
+    # Charger Mix Recommendations by Station Type
+    STATION_TYPE_CONFIGS = {
+        "urban_hub": {"name": "Urban Hub", "target": "4W + 3W + 2W", "config": "2× DC 60kW + 4× AC 22kW + 4× AC 7kW", "daily_sessions": "150-200"},
+        "highway": {"name": "Highway", "target": "4W + Trucks", "config": "4× DC 120kW + 2× DC 60kW", "daily_sessions": "100-150"},
+        "auto_stand": {"name": "Auto Stand", "target": "3W focused", "config": "1× DC 30kW + 6× AC 7kW", "daily_sessions": "80-120"},
+        "mall_retail": {"name": "Mall/Retail", "target": "4W focused", "config": "2× DC 60kW + 6× AC 22kW", "daily_sessions": "60-100"},
+        "bus_depot": {"name": "Bus Depot", "target": "Buses only", "config": "4× DC 150kW + 2× Pantograph", "daily_sessions": "40-60"},
+        "logistics_hub": {"name": "Logistics Hub", "target": "Trucks + LCVs", "config": "2× DC 150kW + 4× DC 60kW", "daily_sessions": "50-80"},
+    }
+    
     # Land Setup Costs (Rs per sq ft)
     LAND_SETUP_COSTS = {
         "Andhra Pradesh": {"cities": {"Visakhapatnam": 5500, "Vijayawada": 4800, "Guntur": 3800}, "avg_land_rate_sqft": 4700},
@@ -395,17 +508,130 @@ class IndiaElectricityRateQuery:
     
     def _fetch_latest_rates(self) -> bool:
         """Fetch latest electricity rates from web sources."""
+        # Try public websites first (no API key required)
         try:
-            success = self._fetch_from_government_api()
+            success = self._fetch_from_public_websites()
             if success:
-                self.data_source = "data.gov.in"
+                self.data_source = "public-web-sources"
                 self.last_updated = datetime.now()
                 return True
         except Exception as e:
-            print(f"  [FAIL] Government API: {e}")
+            print(f"  [INFO] Public web scrape: {e}")
+        
+        # Fall back to government API (requires API key)
+        if self.api_key:
+            try:
+                success = self._fetch_from_government_api()
+                if success:
+                    self.data_source = "data.gov.in"
+                    self.last_updated = datetime.now()
+                    return True
+            except Exception as e:
+                print(f"  [FAIL] Government API: {e}")
+        else:
+            print("  [INFO] No API key set - skipping data.gov.in")
+        
         self.data_source = "default (fallback)"
         self.last_updated = datetime.now()
         return False
+    
+    def _fetch_from_public_websites(self) -> bool:
+        """Fetch electricity rates from public websites (no API key needed)."""
+        sources = [
+            ("https://acbillcalculator.in/electricity-rates", self._parse_acbillcalculator),
+            ("https://www.nobroker.in/blog/electricity-rate-per-unit-in-india/", self._parse_nobroker),
+        ]
+        
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        }
+        
+        for url, parser in sources:
+            try:
+                response = requests.get(url, headers=headers, timeout=15)
+                if response.status_code == 200:
+                    if parser(response.text):
+                        print(f"  [OK] Fetched from {url.split('/')[2]}")
+                        return True
+                else:
+                    print(f"  [HTTP {response.status_code}] {url.split('/')[2]}")
+            except requests.RequestException as e:
+                print(f"  [SKIP] {url.split('/')[2]}: {e}")
+                continue
+        return False
+    
+    def _parse_acbillcalculator(self, html: str) -> bool:
+        """Parse electricity rates from acbillcalculator.in HTML."""
+        import re
+        updated_count = 0
+        
+        # State name patterns and their rate extraction
+        state_patterns = {
+            "Maharashtra": r"Maharashtra[^₹]*₹\s*([\d.]+)",
+            "Delhi": r"Delhi[^₹]*₹\s*([\d.]+)",
+            "Karnataka": r"Karnataka[^₹]*₹\s*([\d.]+)",
+            "Tamil Nadu": r"Tamil\s*Nadu[^₹]*₹\s*([\d.]+)",
+            "Gujarat": r"Gujarat[^₹]*₹\s*([\d.]+)",
+            "Telangana": r"Telangana[^₹]*₹\s*([\d.]+)",
+            "Andhra Pradesh": r"Andhra\s*Pradesh[^₹]*₹\s*([\d.]+)",
+            "Kerala": r"Kerala[^₹]*₹\s*([\d.]+)",
+            "Uttar Pradesh": r"Uttar\s*Pradesh[^₹]*₹\s*([\d.]+)",
+            "West Bengal": r"West\s*Bengal[^₹]*₹\s*([\d.]+)",
+            "Rajasthan": r"Rajasthan[^₹]*₹\s*([\d.]+)",
+            "Punjab": r"Punjab[^₹]*₹\s*([\d.]+)",
+            "Haryana": r"Haryana[^₹]*₹\s*([\d.]+)",
+            "Bihar": r"Bihar[^₹]*₹\s*([\d.]+)",
+            "Odisha": r"Odisha[^₹]*₹\s*([\d.]+)",
+        }
+        
+        for state, pattern in state_patterns.items():
+            match = re.search(pattern, html, re.IGNORECASE)
+            if match and state in self.electricity_rates:
+                try:
+                    rate = float(match.group(1))
+                    if 1.0 <= rate <= 15.0:  # Sanity check
+                        self.electricity_rates[state]["rate"] = rate
+                        updated_count += 1
+                except ValueError:
+                    continue
+        
+        return updated_count >= 5  # Need at least 5 states updated
+    
+    def _parse_nobroker(self, html: str) -> bool:
+        """Parse electricity rates from nobroker.in HTML."""
+        import re
+        updated_count = 0
+        
+        # Look for table rows with state names and rates
+        # Pattern: State name followed by rate like "₹X.XX" or "Rs.X.XX"
+        state_rate_pattern = r'<td[^>]*>([A-Za-z\s]+)</td>\s*<td[^>]*>[^<]*(?:₹|Rs\.?)\s*([\d.]+)'
+        
+        matches = re.findall(state_rate_pattern, html, re.IGNORECASE)
+        for state_raw, rate_str in matches:
+            state = state_raw.strip()
+            # Normalize state names
+            state_map = {
+                "Andhra": "Andhra Pradesh",
+                "AP": "Andhra Pradesh",
+                "UP": "Uttar Pradesh",
+                "MP": "Madhya Pradesh",
+                "WB": "West Bengal",
+                "TN": "Tamil Nadu",
+                "HP": "Himachal Pradesh",
+            }
+            state = state_map.get(state, state)
+            
+            if state in self.electricity_rates:
+                try:
+                    rate = float(rate_str)
+                    if 1.0 <= rate <= 15.0:
+                        self.electricity_rates[state]["rate"] = rate
+                        updated_count += 1
+                except ValueError:
+                    continue
+        
+        return updated_count >= 5
     
     def _fetch_from_government_api(self) -> bool:
         """Fetch rates from India Government Open Data API."""
@@ -499,18 +725,124 @@ class IndiaElectricityRateQuery:
             pass
     
     def _fetch_ev_rates_from_cloud(self) -> bool:
-        """Fetch EV charging rates from cloud APIs."""
+        """Fetch EV charging rates from cloud/web sources."""
+        # Try public websites first (no API key required)
         try:
-            success = self._fetch_from_openchargemap()
+            success = self._fetch_ev_from_public_websites()
             if success:
-                self.ev_data_source = "OpenChargeMap API"
+                self.ev_data_source = "public-ev-sources"
                 self.ev_last_updated = datetime.now()
                 return True
         except Exception as e:
-            print(f"  [EV FAIL] OpenChargeMap: {e}")
+            print(f"  [EV INFO] Public web: {e}")
+        
+        # Fall back to OpenChargeMap (works better with API key)
+        if self.ocm_api_key:
+            try:
+                success = self._fetch_from_openchargemap()
+                if success:
+                    self.ev_data_source = "OpenChargeMap API"
+                    self.ev_last_updated = datetime.now()
+                    return True
+            except Exception as e:
+                print(f"  [EV FAIL] OpenChargeMap: {e}")
+        
         self.ev_data_source = "default (fallback)"
         self.ev_last_updated = datetime.now()
         return False
+    
+    def _fetch_ev_from_public_websites(self) -> bool:
+        """Fetch EV charging rates from public websites (no API key needed)."""
+        sources = [
+            ("https://bharatrevolt.com/cost-of-ev-charging-india/", self._parse_bharatrevolt),
+            ("https://www.chargezone.co.in/media/ev-charging-costs-in-india-units-time-tariffs-made-simple", self._parse_chargezone),
+        ]
+        
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        }
+        
+        for url, parser in sources:
+            try:
+                response = requests.get(url, headers=headers, timeout=15)
+                if response.status_code == 200:
+                    if parser(response.text):
+                        print(f"  [EV OK] Fetched from {url.split('/')[2]}")
+                        return True
+                else:
+                    print(f"  [EV HTTP {response.status_code}] {url.split('/')[2]}")
+            except requests.RequestException as e:
+                print(f"  [EV SKIP] {url.split('/')[2]}: {e}")
+                continue
+        return False
+    
+    def _parse_bharatrevolt(self, html: str) -> bool:
+        """Parse EV charging rates from bharatrevolt.com HTML."""
+        import re
+        updated_count = 0
+        
+        # Extract DC fast charging rates (typically ₹16-22/kWh)
+        dc_pattern = r'DC\s*(?:fast|Fast)\s*[^₹]*₹\s*([\d]+)\s*[-–]\s*₹?\s*([\d]+)'
+        dc_match = re.search(dc_pattern, html, re.IGNORECASE)
+        
+        if dc_match:
+            try:
+                dc_low = float(dc_match.group(1))
+                dc_high = float(dc_match.group(2))
+                dc_avg = (dc_low + dc_high) / 2
+                
+                # Update all states with the national average DC rate
+                for state in self.ev_dc_rates:
+                    if 15.0 <= dc_avg <= 30.0:
+                        self.ev_dc_rates[state]["dc_rate"] = round(dc_avg, 2)
+                        updated_count += 1
+            except (ValueError, IndexError):
+                pass
+        
+        # Extract AC charging rates (typically ₹15-18/kWh)
+        ac_pattern = r'AC\s*(?:charger|Charger|slow|Slow)?\s*[^₹]*₹\s*([\d]+)\s*[-–]\s*₹?\s*([\d]+)'
+        ac_match = re.search(ac_pattern, html, re.IGNORECASE)
+        
+        if ac_match:
+            try:
+                ac_low = float(ac_match.group(1))
+                ac_high = float(ac_match.group(2))
+                ac_avg = (ac_low + ac_high) / 2
+                
+                for state in self.ev_dc_rates:
+                    if 10.0 <= ac_avg <= 25.0:
+                        self.ev_dc_rates[state]["ac_rate"] = round(ac_avg, 2)
+                        updated_count += 1
+            except (ValueError, IndexError):
+                pass
+        
+        return updated_count >= 10  # At least 10 updates
+    
+    def _parse_chargezone(self, html: str) -> bool:
+        """Parse EV charging rates from chargezone.co.in HTML."""
+        import re
+        updated_count = 0
+        
+        # ChargeZone typically shows ₹18-25/kWh for public chargers
+        rate_pattern = r'₹\s*([\d]+)\s*[-–]\s*₹?\s*([\d]+)\s*(?:per\s*)?(?:unit|kWh)'
+        matches = re.findall(rate_pattern, html, re.IGNORECASE)
+        
+        if matches:
+            try:
+                # Use the first reasonable match for DC rates
+                for low, high in matches:
+                    low_f, high_f = float(low), float(high)
+                    if 15.0 <= low_f <= 30.0 and 15.0 <= high_f <= 35.0:
+                        dc_avg = (low_f + high_f) / 2
+                        for state in self.ev_dc_rates:
+                            self.ev_dc_rates[state]["dc_rate"] = round(dc_avg, 2)
+                            updated_count += 1
+                        break
+            except (ValueError, IndexError):
+                pass
+        
+        return updated_count >= 10
     
     def _fetch_from_openchargemap(self) -> bool:
         """Fetch EV station data from OpenChargeMap API."""
@@ -1239,6 +1571,7 @@ class EVReportGenerator:
         sections = [
             self._generate_header(),
             self._generate_part1_demand(),
+            self._generate_part1_vehicle_classes(),
             self._generate_part2_revenue(),
             self._generate_part3_solar(),
             self._generate_part4_hybrid(),
@@ -1346,6 +1679,225 @@ class EVReportGenerator:
 
 ---"""
 
+    def _generate_part1_vehicle_classes(self) -> str:
+        """Generate Part 1.3: Vehicle Class Breakdown with charging specs."""
+        specs = self.api.VEHICLE_CLASS_SPECS
+        historical = self.api.ev_historical_data
+        years = sorted([int(y) for y in historical.keys()])
+        latest_year = max(years)
+        latest_data = historical.get(latest_year) or historical.get(str(latest_year))
+        
+        total_evs = latest_data["total"]
+        two_w = latest_data["two_wheeler"]
+        three_w = latest_data["three_wheeler"]
+        four_w = latest_data["four_wheeler"]
+        buses = latest_data["bus"]
+        trucks = int(total_evs * 0.003)  # Estimate ~0.3% are trucks
+        
+        # Overview table
+        overview_rows = [
+            f"| **2-Wheelers** | {two_w:,} | {two_w/total_evs*100:.1f}% | 2-5 kWh | {specs['two_wheeler']['connectors']} | {specs['two_wheeler']['primary_charging']} |",
+            f"| **3-Wheelers** | {three_w:,} | {three_w/total_evs*100:.1f}% | 5-15 kWh | {specs['three_wheeler']['connectors']} | {specs['three_wheeler']['primary_charging']} |",
+            f"| **4-Wheelers** | {four_w:,} | {four_w/total_evs*100:.1f}% | 30-80 kWh | {specs['four_wheeler']['connectors']} | {specs['four_wheeler']['primary_charging']} |",
+            f"| **E-Buses** | {buses:,} | {buses/total_evs*100:.1f}% | 150-400 kWh | {specs['e_bus']['connectors']} | {specs['e_bus']['primary_charging']} |",
+            f"| **E-Trucks** | {trucks:,} | {trucks/total_evs*100:.1f}% | 100-300 kWh | {specs['e_truck']['connectors']} | {specs['e_truck']['primary_charging']} |",
+        ]
+        
+        # 2-Wheeler specs
+        tw = specs["two_wheeler"]
+        tw_spec_rows = [
+            f"| **Battery Capacity** | {tw['segments']['entry']['battery_kwh']} kWh | {tw['segments']['mid']['battery_kwh']} kWh | {tw['segments']['premium']['battery_kwh']} kWh |",
+            f"| **Range** | {tw['segments']['entry']['range_km']} km | {tw['segments']['mid']['range_km']} km | {tw['segments']['premium']['range_km']} km |",
+            f"| **Onboard Charger** | {tw['segments']['entry']['charger_w']}W | {tw['segments']['mid']['charger_w']}W | {tw['segments']['premium']['charger_w']}W |",
+            f"| **Charge Time (0-100%)** | {tw['segments']['entry']['charge_hrs']} hrs | {tw['segments']['mid']['charge_hrs']} hrs | {tw['segments']['premium']['charge_hrs']} hrs |",
+            f"| **Fast Charge (0-80%)** | {tw['segments']['entry']['fast_charge_min']} | {tw['segments']['mid']['fast_charge_min']} min | {tw['segments']['premium']['fast_charge_min']} min |",
+        ]
+        tw_infra_rows = [f"| **{n}** | {r} | {note} |" for n, r, note in tw["infra_needs"]]
+        
+        # 3-Wheeler specs
+        thw = specs["three_wheeler"]
+        thw_spec_rows = [
+            f"| **Battery Capacity** | {thw['segments']['e_rickshaw']['battery_kwh']} kWh | {thw['segments']['e_auto']['battery_kwh']} kWh | {thw['segments']['e_cargo']['battery_kwh']} kWh |",
+            f"| **Range** | {thw['segments']['e_rickshaw']['range_km']} km | {thw['segments']['e_auto']['range_km']} km | {thw['segments']['e_cargo']['range_km']} km |",
+            f"| **Daily Usage** | {thw['segments']['e_rickshaw']['daily_km']} km | {thw['segments']['e_auto']['daily_km']} km | {thw['segments']['e_cargo']['daily_km']} km |",
+            f"| **Charging Power** | {thw['segments']['e_rickshaw']['charge_kw']} kW AC | {thw['segments']['e_auto']['charge_kw']} kW AC | {thw['segments']['e_cargo']['charge_kw']} kW AC |",
+            f"| **Charge Time** | {thw['segments']['e_rickshaw']['charge_hrs']} hrs | {thw['segments']['e_auto']['charge_hrs']} hrs | {thw['segments']['e_cargo']['charge_hrs']} hrs |",
+        ]
+        thw_infra_rows = [f"| **{n}** | {r} | {note} |" for n, r, note in thw["infra_needs"]]
+        
+        # 4-Wheeler specs
+        fw = specs["four_wheeler"]
+        fw_spec_rows = [
+            f"| **Examples** | {fw['segments']['entry']['example']} | {fw['segments']['mid']['example']} | {fw['segments']['premium']['example']} |",
+            f"| **Battery Capacity** | {fw['segments']['entry']['battery_kwh']} kWh | {fw['segments']['mid']['battery_kwh']} kWh | {fw['segments']['premium']['battery_kwh']} kWh |",
+            f"| **Range (ARAI)** | {fw['segments']['entry']['range_km']} km | {fw['segments']['mid']['range_km']} km | {fw['segments']['premium']['range_km']} km |",
+            f"| **Onboard AC Charger** | {fw['segments']['entry']['ac_kw']} kW | {fw['segments']['mid']['ac_kw']} kW | {fw['segments']['premium']['ac_kw']} kW |",
+            f"| **DC Fast Charge** | {fw['segments']['entry']['dc_kw']} kW | {fw['segments']['mid']['dc_kw']} kW | {fw['segments']['premium']['dc_kw']} kW |",
+            f"| **AC Charge Time (0-100%)** | {fw['segments']['entry']['ac_hrs']} hrs | {fw['segments']['mid']['ac_hrs']} hrs | {fw['segments']['premium']['ac_hrs']} hrs |",
+            f"| **DC Charge Time (10-80%)** | {fw['segments']['entry']['dc_min']} min | {fw['segments']['mid']['dc_min']} min | {fw['segments']['premium']['dc_min']} min |",
+        ]
+        fw_conn_rows = [f"| **{name}** | {typ} | {pwr} | {use} |" for name, typ, pwr, use in fw["connector_standards"]]
+        fw_infra_rows = [f"| **{loc}** | {charger} | {pwr} | {use} |" for loc, charger, pwr, use in fw["infra_needs"]]
+        
+        # E-Bus specs
+        eb = specs["e_bus"]
+        eb_spec_rows = [
+            f"| **Battery Capacity** | {eb['segments']['city_9m']['battery_kwh']} kWh | {eb['segments']['city_12m']['battery_kwh']} kWh | {eb['segments']['intercity']['battery_kwh']} kWh |",
+            f"| **Range** | {eb['segments']['city_9m']['range_km']} km | {eb['segments']['city_12m']['range_km']} km | {eb['segments']['intercity']['range_km']} km |",
+            f"| **Daily Route** | {eb['segments']['city_9m']['daily_km']} km | {eb['segments']['city_12m']['daily_km']} km | {eb['segments']['intercity']['daily_km']} km |",
+            f"| **DC Charge Power** | {eb['segments']['city_9m']['dc_kw']} kW | {eb['segments']['city_12m']['dc_kw']} kW | {eb['segments']['intercity']['dc_kw']} kW |",
+            f"| **Pantograph** | {eb['segments']['city_9m']['panto_kw']} kW | {eb['segments']['city_12m']['panto_kw']} kW | {eb['segments']['intercity']['panto_kw']} |",
+            f"| **Charge Time (Depot)** | {eb['segments']['city_9m']['depot_hrs']} hrs | {eb['segments']['city_12m']['depot_hrs']} hrs | {eb['segments']['intercity']['depot_hrs']} hrs |",
+            f"| **Opportunity Charge** | {eb['segments']['city_9m']['opp_min']} min | {eb['segments']['city_12m']['opp_min']} min | {eb['segments']['intercity']['opp_min']} min |",
+        ]
+        eb_strat_rows = [f"| **{name}** | {desc} | {pwr} | {loc} |" for name, desc, pwr, loc in eb["charging_strategies"]]
+        
+        # E-Truck specs
+        et = specs["e_truck"]
+        et_spec_rows = [
+            f"| **Weight Class** | {et['segments']['light']['weight']} | {et['segments']['medium']['weight']} | {et['segments']['heavy']['weight']} |",
+            f"| **Battery Capacity** | {et['segments']['light']['battery_kwh']} kWh | {et['segments']['medium']['battery_kwh']} kWh | {et['segments']['heavy']['battery_kwh']} kWh |",
+            f"| **Range** | {et['segments']['light']['range_km']} km | {et['segments']['medium']['range_km']} km | {et['segments']['heavy']['range_km']} km |",
+            f"| **Daily Usage** | {et['segments']['light']['daily_km']} km | {et['segments']['medium']['daily_km']} km | {et['segments']['heavy']['daily_km']} km |",
+            f"| **DC Charge Power** | {et['segments']['light']['dc_kw']} kW | {et['segments']['medium']['dc_kw']} kW | {et['segments']['heavy']['dc_kw']} kW |",
+            f"| **Charge Time** | {et['segments']['light']['charge_hrs']} hrs | {et['segments']['medium']['charge_hrs']} hrs | {et['segments']['heavy']['charge_hrs']} hrs |",
+        ]
+        et_infra_rows = [f"| **{seg}** | {loc} | {charger} | {note} |" for seg, loc, charger, note in et["infra_needs"]]
+        
+        # Summary table
+        summary_rows = [
+            f"| **2-Wheelers** | {two_w:,} | {specs['two_wheeler']['public_infra_need']} | AC 3.3kW / Swap | 0.7-3 kW | Home, Swap points |",
+            f"| **3-Wheelers** | {three_w:,} | **{specs['three_wheeler']['public_infra_need']}** | AC 7kW / Swap | 3-7 kW | Auto stands, Markets |",
+            f"| **4-Wheelers** | {four_w:,} | **{specs['four_wheeler']['public_infra_need']}** | DC 60-150 kW | 50-350 kW | Highways, Malls, Fuel stations |",
+            f"| **E-Buses** | {buses:,} | {specs['e_bus']['public_infra_need']} | DC 120-350 kW | 120-600 kW | Depots, Terminus |",
+            f"| **E-Trucks** | {trucks:,} | {specs['e_truck']['public_infra_need']} | DC 60-350 kW | 60-350 kW | Warehouses, Highways |",
+        ]
+        
+        # Station type recommendations
+        stype = self.api.STATION_TYPE_CONFIGS
+        station_rows = [f"| **{v['name']}** | {v['target']} | {v['config']} | {v['daily_sessions']} |" for v in stype.values()]
+        
+        return f"""
+## 1.3 Vehicle Class Breakdown: Charging Capability & Needs
+
+### Overview by Vehicle Category
+
+| Category | Population ({latest_year}) | % of EVs | Battery Range | Connector Types | Primary Charging |
+|----------|-------------------|----------|---------------|-----------------|------------------|
+{chr(10).join(overview_rows)}
+
+---
+
+### 2-Wheelers (E-Scooters & E-Motorcycles)
+
+**Vehicle Examples:** {tw['examples']}
+
+| Specification | Entry Level | Mid Range | Premium |
+|---------------|-------------|-----------|---------|
+{chr(10).join(tw_spec_rows)}
+
+**Charging Infrastructure Needs:**
+
+| Need | Requirement | Notes |
+|------|-------------|-------|
+{chr(10).join(tw_infra_rows)}
+
+**Infrastructure Gap:** {tw['gap_analysis']}
+
+---
+
+### 3-Wheelers (E-Rickshaws & E-Autos)
+
+**Vehicle Examples:** {thw['examples']}
+
+| Specification | E-Rickshaw (Passenger) | E-Auto (Passenger) | E-Cargo |
+|---------------|------------------------|--------------------| --------|
+{chr(10).join(thw_spec_rows)}
+
+**Charging Infrastructure Needs:**
+
+| Need | Requirement | Notes |
+|------|-------------|-------|
+{chr(10).join(thw_infra_rows)}
+
+**Infrastructure Gap:** {thw['gap_analysis']}
+
+---
+
+### 4-Wheelers (Passenger Cars & SUVs)
+
+**Vehicle Examples:** {fw['examples']}
+
+| Specification | Entry Segment | Mid Segment | Premium Segment |
+|---------------|---------------|-------------|-----------------|
+{chr(10).join(fw_spec_rows)}
+
+**Connector Standards in India:**
+
+| Connector | Type | Power Range | Usage |
+|-----------|------|-------------|-------|
+{chr(10).join(fw_conn_rows)}
+
+**Charging Infrastructure Needs:**
+
+| Location | Charger Type | Power | Use Case |
+|----------|--------------|-------|----------|
+{chr(10).join(fw_infra_rows)}
+
+**Infrastructure Gap:** {fw['gap_analysis']}
+
+---
+
+### E-Buses (City & Intercity)
+
+**Vehicle Examples:** {eb['examples']}
+
+| Specification | City Bus (9m) | City Bus (12m) | Intercity Coach |
+|---------------|---------------|----------------|-----------------|
+{chr(10).join(eb_spec_rows)}
+
+**Charging Strategies:**
+
+| Strategy | Description | Power | Location |
+|----------|-------------|-------|----------|
+{chr(10).join(eb_strat_rows)}
+
+**Infrastructure Gap:** {eb['gap_analysis']}
+
+---
+
+### E-Trucks & Commercial Vehicles
+
+**Vehicle Examples:** {et['examples']}
+
+| Specification | Light (< 2T) | Medium (2-7T) | Heavy (> 7T) |
+|---------------|--------------|---------------|--------------|
+{chr(10).join(et_spec_rows)}
+
+**Charging Infrastructure Needs:**
+
+| Segment | Primary Location | Charger Type | Notes |
+|---------|------------------|--------------|-------|
+{chr(10).join(et_infra_rows)}
+
+**Infrastructure Gap:** {et['gap_analysis']}
+
+---
+
+### Summary: Charging Infrastructure Requirements by Vehicle Class
+
+| Vehicle Class | Population | Public Infra Need | Priority Charger | Power Range | Key Locations |
+|---------------|------------|-------------------|------------------|-------------|---------------|
+{chr(10).join(summary_rows)}
+
+### Charger Mix Recommendation for Public Stations
+
+| Station Type | Target Vehicles | Charger Configuration | Daily Sessions |
+|--------------|-----------------|----------------------|----------------|
+{chr(10).join(station_rows)}
+
+---"""
+
     def _generate_part2_revenue(self) -> str:
         """Generate Part 2: The Revenue Model."""
         # Charging rates table
@@ -1414,11 +1966,8 @@ class EVReportGenerator:
 
 | Revenue Stream | Description | Contribution | Monthly (Per Station) |
 |----------------|-------------|--------------|----------------------|
-| **DC Fast Charging** | Rs.17-20/kWh | 70-75% | Rs.12-15 Lakhs |
+| **DC Fast Charging** | Rs.17-20/kWh | 80-85% | Rs.12-15 Lakhs |
 | **AC Slow Charging** | Rs.10-14/kWh | 15-20% | Rs.2-3 Lakhs |
-| **Parking Fees** | Rs.20-50/session | 5-8% | Rs.50,000-1 Lakh |
-| **Amenities (Vending)** | Snacks, drinks | 3-5% | Rs.30,000-50,000 |
-| **Advertising** | Digital displays | 2-3% | Rs.20,000-30,000 |
 
 ### Charging Rate Structure by State
 
