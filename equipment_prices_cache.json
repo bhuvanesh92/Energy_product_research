@@ -1,0 +1,88 @@
+{
+  "last_updated": "2026-03-03T21:08:10.127580",
+  "source": "manufacturer-catalog-2025",
+  "equipment_costs": {
+    "dc_chargers": {
+      "30kw": {
+        "min": 600000,
+        "max": 900000,
+        "avg": 750000
+      },
+      "60kw": {
+        "min": 1200000,
+        "max": 1800000,
+        "avg": 1500000
+      },
+      "120kw": {
+        "min": 2200000,
+        "max": 3000000,
+        "avg": 2600000
+      },
+      "180kw": {
+        "min": 3500000,
+        "max": 4500000,
+        "avg": 4000000
+      }
+    },
+    "ac_chargers": {
+      "7.4kw": {
+        "min": 60000,
+        "max": 100000,
+        "avg": 80000
+      },
+      "22kw": {
+        "min": 180000,
+        "max": 250000,
+        "avg": 215000
+      }
+    },
+    "batteries": {
+      "lfp_per_kwh": {
+        "min": 10000,
+        "max": 16000,
+        "avg": 13000
+      },
+      "nmc_per_kwh": {
+        "min": 12000,
+        "max": 19200,
+        "avg": 15600
+      }
+    },
+    "inverters": {
+      "hybrid_per_kva": {
+        "min": 20000,
+        "max": 30000,
+        "avg": 25000
+      },
+      "string_per_kw": {
+        "min": 4000,
+        "max": 6000,
+        "avg": 5000
+      }
+    },
+    "solar": {
+      "per_kwp": {
+        "min": 40000,
+        "max": 50000,
+        "avg": 45000
+      }
+    },
+    "vendors": {
+      "tata_power": {
+        "premium": 1.15
+      },
+      "delta": {
+        "premium": 1.1
+      },
+      "abb": {
+        "premium": 1.2
+      },
+      "exicom": {
+        "premium": 1.0
+      },
+      "servotech": {
+        "premium": 0.95
+      }
+    }
+  }
+}
