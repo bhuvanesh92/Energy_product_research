@@ -1,6 +1,6 @@
 # India EV Charging Infrastructure: Market Analysis & Business Case
 
-**Generated:** 2026-03-04  
+**Generated:** 2026-03-07  
 **Data Sources:** public-web-sources, public-ev-sources, VAHAN-FADA-estimates, MNRE-benchmark-2025
 
 ---
@@ -384,17 +384,19 @@
 > **Data Sources:** MNRE-benchmark-2025  
 > **Assumptions:** Solar cost Rs.45,000/kWp | Generation 4.0 kWh/kWp/day | Grid rate Rs.3.67/kWh (Maharashtra)
 
+**Standard Station Daily Consumption: 1,862 kWh/day** (2 DC 60kW + 2 AC 22kW chargers at 75% utilization)
+
 ### Why 40% Offset is Optimal
 
-| Offset Level | Solar Size | Area Required | Cost | Payback | Practicality |
-|--------------|------------|---------------|------|---------|--------------|
-| 20% | 93 kWp | 466 sqm | Rs.41.90 L | 8.4 yrs | Easy |
-| **40%** | **186 kWp** | **931 sqm** | **Rs.83.79 L** | **8.4 yrs** | **Optimal** |
-| 60% | 279 kWp | 1,396 sqm | Rs.125.69 L | 8.4 yrs | Moderate |
-| 80% | 372 kWp | 1,862 sqm | Rs.167.58 L | 8.4 yrs | Difficult |
-| 100% | 466 kWp | 2,328 sqm | Rs.209.47 L | 8.4 yrs | Very difficult |
+| Offset | Energy/Day | Solar Size | Area | Cost | Monthly Savings | Payback | Practicality |
+|--------|------------|------------|------|------|-----------------|---------|--------------|
+| 20% | 372 kWh | 93 kWp | 466 sqm | Rs.41.90 L | Rs.41.0K/mo | 8.4 yrs | Easy |
+| **40%** | **745 kWh** | **186 kWp** | **931 sqm** | **Rs.83.79 L** | **Rs.82.0K/mo** | **8.4 yrs** | **Optimal** |
+| 60% | 1,117 kWh | 279 kWp | 1,396 sqm | Rs.125.69 L | Rs.123.0K/mo | 8.4 yrs | Moderate |
+| 80% | 1,490 kWh | 372 kWp | 1,862 sqm | Rs.167.58 L | Rs.164.0K/mo | 8.4 yrs | Difficult |
+| 100% | 1,862 kWh | 466 kWp | 2,328 sqm | Rs.209.47 L | Rs.205.0K/mo | 8.4 yrs | Very difficult |
 
-**Recommendation:** 40% solar offset provides best balance of cost, space, and ROI. Higher offsets require proportionally more land.
+**Recommendation:** 40% solar offset provides best balance of cost, space, and ROI. Higher offsets require proportionally more land but same payback period.
 
 ### Station Sizes and Solar Configuration
 
@@ -646,5 +648,5 @@ Instead of buying separate components, an **integrated unit** combining:
 
 ---
 
-*Report generated: 2026-03-04 | Data freshness: 2026-03-03*
+*Report generated: 2026-03-07 | Data freshness: 2026-03-03*
 *Sources: VAHAN, FADA, Ministry of Power, CEEW, CEA, MNRE, public-web-sources, public-ev-sources*

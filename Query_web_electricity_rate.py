@@ -1595,11 +1595,16 @@ class IndiaElectricityRateQuery:
             annual_savings = target_kwh * 365 * grid_rate
             payback_years = cost_inr / annual_savings if annual_savings > 0 else float('inf')
             
+            # Monthly cost savings
+            monthly_savings = target_kwh * 30 * grid_rate
+            
             sizing_data.append({
                 "offset_pct": int(offset * 100),
+                "target_kwh_day": round(target_kwh, 0),  # Daily kWh being offset
                 "solar_kwp": round(solar_kwp, 0),
                 "area_sqm": round(area_sqm, 0),
                 "cost_lakhs": round(cost_inr / 100000, 2),
+                "monthly_savings_inr": round(monthly_savings, 0),
                 "payback_years": round(payback_years, 1),
                 "practicality": practicality[i],
                 "is_optimal": offset == 0.40,
@@ -2204,13 +2209,15 @@ class EVReportGenerator:
         for opt in sizing_data["sizing_options"]:
             if opt["is_optimal"]:
                 offset_rows.append(
-                    f"| **{opt['offset_pct']}%** | **{opt['solar_kwp']:.0f} kWp** | **{opt['area_sqm']:,.0f} sqm** | "
-                    f"**Rs.{opt['cost_lakhs']:.2f} L** | **{opt['payback_years']:.1f} yrs** | **{opt['practicality']}** |"
+                    f"| **{opt['offset_pct']}%** | **{opt['target_kwh_day']:,.0f} kWh** | **{opt['solar_kwp']:.0f} kWp** | "
+                    f"**{opt['area_sqm']:,.0f} sqm** | **Rs.{opt['cost_lakhs']:.2f} L** | "
+                    f"**Rs.{opt['monthly_savings_inr']/1000:.1f}K/mo** | **{opt['payback_years']:.1f} yrs** | **{opt['practicality']}** |"
                 )
             else:
                 offset_rows.append(
-                    f"| {opt['offset_pct']}% | {opt['solar_kwp']:.0f} kWp | {opt['area_sqm']:,.0f} sqm | "
-                    f"Rs.{opt['cost_lakhs']:.2f} L | {opt['payback_years']:.1f} yrs | {opt['practicality']} |"
+                    f"| {opt['offset_pct']}% | {opt['target_kwh_day']:,.0f} kWh | {opt['solar_kwp']:.0f} kWp | "
+                    f"{opt['area_sqm']:,.0f} sqm | Rs.{opt['cost_lakhs']:.2f} L | "
+                    f"Rs.{opt['monthly_savings_inr']/1000:.1f}K/mo | {opt['payback_years']:.1f} yrs | {opt['practicality']} |"
                 )
         
         # Generate station type table rows dynamically
@@ -2274,13 +2281,15 @@ class EVReportGenerator:
 > **Data Sources:** {sources_text}  
 > **Assumptions:** Solar cost Rs.{self.api.solar_costs['per_kwp']:,}/kWp | Generation {self.api.solar_costs['generation_per_kwp_day']} kWh/kWp/day | Grid rate Rs.{sizing_data['grid_rate']:.2f}/kWh ({sizing_data['reference_state']})
 
+**Standard Station Daily Consumption: {sizing_data['daily_kwh']:,.0f} kWh/day** (2 DC 60kW + 2 AC 22kW chargers at 75% utilization)
+
 ### Why 40% Offset is Optimal
 
-| Offset Level | Solar Size | Area Required | Cost | Payback | Practicality |
-|--------------|------------|---------------|------|---------|--------------|
+| Offset | Energy/Day | Solar Size | Area | Cost | Monthly Savings | Payback | Practicality |
+|--------|------------|------------|------|------|-----------------|---------|--------------|
 {chr(10).join(offset_rows)}
 
-**Recommendation:** 40% solar offset provides best balance of cost, space, and ROI. Higher offsets require proportionally more land.
+**Recommendation:** 40% solar offset provides best balance of cost, space, and ROI. Higher offsets require proportionally more land but same payback period.
 
 ### Station Sizes and Solar Configuration
 
