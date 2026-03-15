@@ -1,0 +1,238 @@
+{
+  "last_updated": "2026-03-03T21:08:10.113108",
+  "source": "VAHAN-FADA-estimates",
+  "traffic_data": {
+    "Andhra Pradesh": {
+      "ev_registered": 92650,
+      "daily_charging_sessions": 12000,
+      "avg_kwh_per_session": 18,
+      "growth_rate": 0.45
+    },
+    "Arunachal Pradesh": {
+      "ev_registered": 2120,
+      "daily_charging_sessions": 200,
+      "avg_kwh_per_session": 15,
+      "growth_rate": 0.3
+    },
+    "Assam": {
+      "ev_registered": 16050,
+      "daily_charging_sessions": 1800,
+      "avg_kwh_per_session": 16,
+      "growth_rate": 0.35
+    },
+    "Bihar": {
+      "ev_registered": 48600,
+      "daily_charging_sessions": 5500,
+      "avg_kwh_per_session": 17,
+      "growth_rate": 0.4
+    },
+    "Chhattisgarh": {
+      "ev_registered": 26900,
+      "daily_charging_sessions": 3000,
+      "avg_kwh_per_session": 16,
+      "growth_rate": 0.38
+    },
+    "Goa": {
+      "ev_registered": 19800,
+      "daily_charging_sessions": 2500,
+      "avg_kwh_per_session": 20,
+      "growth_rate": 0.5
+    },
+    "Gujarat": {
+      "ev_registered": 310800,
+      "daily_charging_sessions": 42000,
+      "avg_kwh_per_session": 19,
+      "growth_rate": 0.55
+    },
+    "Haryana": {
+      "ev_registered": 131520,
+      "daily_charging_sessions": 18000,
+      "avg_kwh_per_session": 18,
+      "growth_rate": 0.48
+    },
+    "Himachal Pradesh": {
+      "ev_registered": 23848,
+      "daily_charging_sessions": 3200,
+      "avg_kwh_per_session": 20,
+      "growth_rate": 0.42
+    },
+    "Jharkhand": {
+      "ev_registered": 19260,
+      "daily_charging_sessions": 2200,
+      "avg_kwh_per_session": 16,
+      "growth_rate": 0.35
+    },
+    "Karnataka": {
+      "ev_registered": 504000,
+      "daily_charging_sessions": 72000,
+      "avg_kwh_per_session": 20,
+      "growth_rate": 0.6
+    },
+    "Kerala": {
+      "ev_registered": 198720,
+      "daily_charging_sessions": 28000,
+      "avg_kwh_per_session": 19,
+      "growth_rate": 0.52
+    },
+    "Madhya Pradesh": {
+      "ev_registered": 70200,
+      "daily_charging_sessions": 8500,
+      "avg_kwh_per_session": 17,
+      "growth_rate": 0.4
+    },
+    "Maharashtra": {
+      "ev_registered": 580320,
+      "daily_charging_sessions": 85000,
+      "avg_kwh_per_session": 21,
+      "growth_rate": 0.58
+    },
+    "Manipur": {
+      "ev_registered": 3696,
+      "daily_charging_sessions": 350,
+      "avg_kwh_per_session": 14,
+      "growth_rate": 0.28
+    },
+    "Meghalaya": {
+      "ev_registered": 4240,
+      "daily_charging_sessions": 400,
+      "avg_kwh_per_session": 15,
+      "growth_rate": 0.3
+    },
+    "Mizoram": {
+      "ev_registered": 2625,
+      "daily_charging_sessions": 250,
+      "avg_kwh_per_session": 14,
+      "growth_rate": 0.25
+    },
+    "Nagaland": {
+      "ev_registered": 3168,
+      "daily_charging_sessions": 300,
+      "avg_kwh_per_session": 14,
+      "growth_rate": 0.28
+    },
+    "Odisha": {
+      "ev_registered": 59620,
+      "daily_charging_sessions": 7000,
+      "avg_kwh_per_session": 17,
+      "growth_rate": 0.42
+    },
+    "Punjab": {
+      "ev_registered": 81750,
+      "daily_charging_sessions": 10000,
+      "avg_kwh_per_session": 18,
+      "growth_rate": 0.45
+    },
+    "Rajasthan": {
+      "ev_registered": 165000,
+      "daily_charging_sessions": 22000,
+      "avg_kwh_per_session": 18,
+      "growth_rate": 0.5
+    },
+    "Sikkim": {
+      "ev_registered": 5350,
+      "daily_charging_sessions": 600,
+      "avg_kwh_per_session": 16,
+      "growth_rate": 0.35
+    },
+    "Tamil Nadu": {
+      "ev_registered": 421800,
+      "daily_charging_sessions": 58000,
+      "avg_kwh_per_session": 19,
+      "growth_rate": 0.55
+    },
+    "Telangana": {
+      "ev_registered": 353280,
+      "daily_charging_sessions": 48000,
+      "avg_kwh_per_session": 19,
+      "growth_rate": 0.52
+    },
+    "Tripura": {
+      "ev_registered": 4770,
+      "daily_charging_sessions": 450,
+      "avg_kwh_per_session": 15,
+      "growth_rate": 0.3
+    },
+    "Uttar Pradesh": {
+      "ev_registered": 528000,
+      "daily_charging_sessions": 65000,
+      "avg_kwh_per_session": 18,
+      "growth_rate": 0.5
+    },
+    "Uttarakhand": {
+      "ev_registered": 38150,
+      "daily_charging_sessions": 5000,
+      "avg_kwh_per_session": 18,
+      "growth_rate": 0.45
+    },
+    "West Bengal": {
+      "ev_registered": 102980,
+      "daily_charging_sessions": 12500,
+      "avg_kwh_per_session": 17,
+      "growth_rate": 0.42
+    },
+    "Delhi": {
+      "ev_registered": 424080,
+      "daily_charging_sessions": 62000,
+      "avg_kwh_per_session": 20,
+      "growth_rate": 0.58
+    }
+  },
+  "historical_data": {
+    "2020": {
+      "total": 236802,
+      "two_wheeler": 152000,
+      "three_wheeler": 59000,
+      "four_wheeler": 25000,
+      "bus": 802,
+      "stations": 1200
+    },
+    "2021": {
+      "total": 430121,
+      "two_wheeler": 287000,
+      "three_wheeler": 98000,
+      "four_wheeler": 44000,
+      "bus": 1121,
+      "stations": 1500
+    },
+    "2022": {
+      "total": 1001987,
+      "two_wheeler": 683000,
+      "three_wheeler": 214000,
+      "four_wheeler": 103000,
+      "bus": 1987,
+      "stations": 1800
+    },
+    "2023": {
+      "total": 1834623,
+      "two_wheeler": 1214000,
+      "three_wheeler": 398000,
+      "four_wheeler": 219000,
+      "bus": 3623,
+      "stations": 2100
+    },
+    "2024": {
+      "total": 2847500,
+      "two_wheeler": 1847000,
+      "three_wheeler": 612000,
+      "four_wheeler": 382000,
+      "bus": 6500,
+      "stations": 2450
+    },
+    "2025": {
+      "total": 3837500,
+      "two_wheeler": 2450000,
+      "three_wheeler": 825000,
+      "four_wheeler": 552000,
+      "bus": 10500,
+      "stations": 2738
+    },
+    "2026": {
+      "total": 5219000,
+      "two_wheeler": 3258500,
+      "three_wheeler": 1097250,
+      "four_wheeler": 828000,
+      "bus": 19950,
+      "stations": 4000
+    }
+  }
+}

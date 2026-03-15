@@ -1,0 +1,209 @@
+{
+  "last_updated": "2026-03-03T21:08:10.111860",
+  "source": "public-ev-sources",
+  "ev_rates": {
+    "Andhra Pradesh": {
+      "dc_fast_rate": 18.0,
+      "ac_slow_rate": 12.0,
+      "operators": "Tata Power, EESL, ChargeZone",
+      "stations": 45,
+      "dc_rate": 25.0
+    },
+    "Arunachal Pradesh": {
+      "dc_fast_rate": 20.0,
+      "ac_slow_rate": 14.0,
+      "operators": "EESL",
+      "stations": 5,
+      "dc_rate": 25.0
+    },
+    "Assam": {
+      "dc_fast_rate": 19.0,
+      "ac_slow_rate": 13.0,
+      "operators": "EESL, Tata Power",
+      "stations": 12,
+      "dc_rate": 25.0
+    },
+    "Bihar": {
+      "dc_fast_rate": 18.5,
+      "ac_slow_rate": 12.5,
+      "operators": "EESL, ChargeZone",
+      "stations": 18,
+      "dc_rate": 25.0
+    },
+    "Chhattisgarh": {
+      "dc_fast_rate": 17.0,
+      "ac_slow_rate": 11.0,
+      "operators": "EESL, Tata Power",
+      "stations": 15,
+      "dc_rate": 25.0
+    },
+    "Goa": {
+      "dc_fast_rate": 16.0,
+      "ac_slow_rate": 10.0,
+      "operators": "Tata Power, Ather",
+      "stations": 22,
+      "dc_rate": 25.0
+    },
+    "Gujarat": {
+      "dc_fast_rate": 17.5,
+      "ac_slow_rate": 11.5,
+      "operators": "Tata Power, EESL, Statiq",
+      "stations": 180,
+      "dc_rate": 25.0
+    },
+    "Haryana": {
+      "dc_fast_rate": 18.0,
+      "ac_slow_rate": 12.0,
+      "operators": "Tata Power, Statiq, Fortum",
+      "stations": 95,
+      "dc_rate": 25.0
+    },
+    "Himachal Pradesh": {
+      "dc_fast_rate": 16.5,
+      "ac_slow_rate": 10.5,
+      "operators": "EESL, Tata Power",
+      "stations": 28,
+      "dc_rate": 25.0
+    },
+    "Jharkhand": {
+      "dc_fast_rate": 18.0,
+      "ac_slow_rate": 12.0,
+      "operators": "EESL, ChargeZone",
+      "stations": 14,
+      "dc_rate": 25.0
+    },
+    "Karnataka": {
+      "dc_fast_rate": 18.5,
+      "ac_slow_rate": 12.5,
+      "operators": "Tata Power, Ather, BESCOM, Statiq",
+      "stations": 320,
+      "dc_rate": 25.0
+    },
+    "Kerala": {
+      "dc_fast_rate": 17.0,
+      "ac_slow_rate": 11.0,
+      "operators": "KSEB, Tata Power, Ather",
+      "stations": 145,
+      "dc_rate": 25.0
+    },
+    "Madhya Pradesh": {
+      "dc_fast_rate": 18.0,
+      "ac_slow_rate": 12.0,
+      "operators": "EESL, Tata Power, ChargeZone",
+      "stations": 48,
+      "dc_rate": 25.0
+    },
+    "Maharashtra": {
+      "dc_fast_rate": 19.0,
+      "ac_slow_rate": 13.0,
+      "operators": "Tata Power, MSEDCL, Ather, Statiq",
+      "stations": 450,
+      "dc_rate": 25.0
+    },
+    "Manipur": {
+      "dc_fast_rate": 20.0,
+      "ac_slow_rate": 14.0,
+      "operators": "EESL",
+      "stations": 3,
+      "dc_rate": 25.0
+    },
+    "Meghalaya": {
+      "dc_fast_rate": 19.5,
+      "ac_slow_rate": 13.5,
+      "operators": "EESL",
+      "stations": 4,
+      "dc_rate": 25.0
+    },
+    "Mizoram": {
+      "dc_fast_rate": 20.0,
+      "ac_slow_rate": 14.0,
+      "operators": "EESL",
+      "stations": 2,
+      "dc_rate": 25.0
+    },
+    "Nagaland": {
+      "dc_fast_rate": 20.0,
+      "ac_slow_rate": 14.0,
+      "operators": "EESL",
+      "stations": 3,
+      "dc_rate": 25.0
+    },
+    "Odisha": {
+      "dc_fast_rate": 17.5,
+      "ac_slow_rate": 11.5,
+      "operators": "EESL, Tata Power",
+      "stations": 35,
+      "dc_rate": 25.0
+    },
+    "Punjab": {
+      "dc_fast_rate": 17.5,
+      "ac_slow_rate": 11.5,
+      "operators": "Tata Power, EESL, Statiq",
+      "stations": 55,
+      "dc_rate": 25.0
+    },
+    "Rajasthan": {
+      "dc_fast_rate": 18.5,
+      "ac_slow_rate": 12.5,
+      "operators": "Tata Power, EESL, ChargeZone",
+      "stations": 85,
+      "dc_rate": 25.0
+    },
+    "Sikkim": {
+      "dc_fast_rate": 18.0,
+      "ac_slow_rate": 12.0,
+      "operators": "EESL",
+      "stations": 5,
+      "dc_rate": 25.0
+    },
+    "Tamil Nadu": {
+      "dc_fast_rate": 17.5,
+      "ac_slow_rate": 11.5,
+      "operators": "Tata Power, TANGEDCO, Ather, Statiq",
+      "stations": 280,
+      "dc_rate": 25.0
+    },
+    "Telangana": {
+      "dc_fast_rate": 18.0,
+      "ac_slow_rate": 12.0,
+      "operators": "Tata Power, TSGENCO, Ather, Statiq",
+      "stations": 210,
+      "dc_rate": 25.0
+    },
+    "Tripura": {
+      "dc_fast_rate": 19.0,
+      "ac_slow_rate": 13.0,
+      "operators": "EESL",
+      "stations": 4,
+      "dc_rate": 25.0
+    },
+    "Uttar Pradesh": {
+      "dc_fast_rate": 18.0,
+      "ac_slow_rate": 12.0,
+      "operators": "Tata Power, EESL, ChargeZone, Statiq",
+      "stations": 165,
+      "dc_rate": 25.0
+    },
+    "Uttarakhand": {
+      "dc_fast_rate": 17.0,
+      "ac_slow_rate": 11.0,
+      "operators": "EESL, Tata Power",
+      "stations": 32,
+      "dc_rate": 25.0
+    },
+    "West Bengal": {
+      "dc_fast_rate": 18.5,
+      "ac_slow_rate": 12.5,
+      "operators": "Tata Power, EESL, ChargeZone",
+      "stations": 78,
+      "dc_rate": 25.0
+    },
+    "Delhi": {
+      "dc_fast_rate": 18.0,
+      "ac_slow_rate": 12.0,
+      "operators": "Tata Power, EESL, Fortum, Statiq, Ather",
+      "stations": 380,
+      "dc_rate": 25.0
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "last_updated": "2026-03-03T21:08:10.120554",
+  "source": "housing-market-data",
+  "land_costs": {
+    "Maharashtra": {
+      "Mumbai": 38000,
+      "Pune": 13500,
+      "Nagpur": 6000
+    },
+    "Delhi": {
+      "New Delhi": 28000
+    },
+    "Karnataka": {
+      "Bengaluru": 16500,
+      "Mysuru": 6500
+    },
+    "Tamil Nadu": {
+      "Chennai": 13000,
+      "Coimbatore": 7000
+    },
+    "Telangana": {
+      "Hyderabad": 12500,
+      "Warangal": 4500
+    },
+    "Gujarat": {
+      "Ahmedabad": 9500,
+      "Surat": 8000
+    },
+    "Haryana": {
+      "Gurugram": 20000,
+      "Faridabad": 9000
+    },
+    "Uttar Pradesh": {
+      "Noida": 15500,
+      "Lucknow": 7000
+    },
+    "Kerala": {
+      "Kochi": 10000,
+      "Thiruvananthapuram": 8500
+    },
+    "West Bengal": {
+      "Kolkata": 11500
+    },
+    "Rajasthan": {
+      "Jaipur": 8000
+    },
+    "Punjab": {
+      "Chandigarh": 13500,
+      "Ludhiana": 7500
+    }
+  }
+}

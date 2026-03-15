@@ -1,0 +1,19 @@
+{
+  "last_updated": "2026-03-03T21:08:10.136916",
+  "source": "MNRE-benchmark-2025",
+  "solar_costs": {
+    "per_kwp": 45000,
+    "per_sqm": 5,
+    "efficiency": 0.2,
+    "system_losses": 0.2,
+    "generation_per_kwp_day": 4.0,
+    "annual_degradation": 0.005
+  },
+  "battery_costs": {
+    "lfp_per_kwh": 13000,
+    "nmc_per_kwh": 15600,
+    "bms_per_kwh": 1000,
+    "thermal_per_kwh": 800,
+    "enclosure_per_kwh": 1500
+  }
+}
