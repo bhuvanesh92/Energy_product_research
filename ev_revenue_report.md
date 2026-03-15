@@ -1,650 +1,496 @@
-# India EV Charging Infrastructure: Market Analysis & Business Case
+# India EV Charging Infrastructure: Market Analysis & Investment Thesis
 
-**Generated:** 2026-03-04  
-**Data Sources:** public-web-sources, public-ev-sources, VAHAN-FADA-estimates, MNRE-benchmark-2025
+**Version:** 2.0 — VC-Ready  
+**Updated:** 2026-03-15  
+**Data Sources:** VAHAN, Ministry of Power (MoP), BEE/EESL, CEEW, ICCT, IEEFA, MNRE Benchmark 2025, State DISCOM tariff orders (2023–2025), public operator data
 
----
-
-# PART 1: THE DEMAND STORY
-
-## 1.1 India's EV Revolution: The Numbers
-
-### EV Population Growth (2020-2026)
-
-| Year | Total EVs | YoY Growth | 2-Wheelers | 3-Wheelers | 4-Wheelers | E-Buses |
-|------|-----------|------------|------------|------------|------------|---------|
-| 2020 | 236,802 | - | 152,000 | 59,000 | 25,000 | 802 |
-| 2021 | 430,121 | 82% | 287,000 | 98,000 | 44,000 | 1,121 |
-| 2022 | 1,001,987 | 133% | 683,000 | 214,000 | 103,000 | 1,987 |
-| 2023 | 1,834,623 | 83% | 1,214,000 | 398,000 | 219,000 | 3,623 |
-| 2024 | 2,847,500 | 55% | 1,847,000 | 612,000 | 382,000 | 6,500 |
-| 2025 | 3,837,500 | 35% | 2,450,000 | 825,000 | 552,000 | 10,500 |
-| 2026 | 5,219,000 | 36% | 3,258,500 | 1,097,250 | 828,000 | 19,950 |
-
-### Charging Infrastructure Gap
-
-| Year | EVs | Public Stations | EV:Station Ratio | Ideal Ratio | Gap |
-|------|-----|-----------------|------------------|-------------|-----|
-| 2020 | 236,802 | 1,200 | 197:1 | 50:1 | 3,536 stations needed |
-| 2021 | 430,121 | 1,500 | 286:1 | 50:1 | 7,102 stations needed |
-| 2022 | 1,001,987 | 1,800 | 556:1 | 50:1 | 18,239 stations needed |
-| 2023 | 1,834,623 | 2,100 | 873:1 | 50:1 | 34,592 stations needed |
-| 2024 | 2,847,500 | 2,450 | 1162:1 | 50:1 | 54,500 stations needed |
-| 2025 | 3,837,500 | 2,738 | 1401:1 | 50:1 | 74,012 stations needed |
-| 2026 | 5,219,000 | 4,000 | 1304:1 | 50:1 | 100,380 stations needed |
-
-**Key Insight:** India needs **82,127+ new charging stations** to meet demand. Current stations serve 1,549 EVs each - severely underserved market.
+> **How to read this report:** All market sizing and unit economics use a three-scenario framework — **Conservative, Base, Aggressive** — so assumptions are explicit and defensible. Percentages marked *(I)* are *illustrative estimates based on expert judgement and secondary research*; they are not directly measured national statistics and should be treated as working hypotheses for modelling.
 
 ---
 
-## 1.2 State-wise EV Distribution & Charging Demand
+# EXECUTIVE SUMMARY
 
-### Top 10 States by EV Population (2026)
-
-| Rank | State | EVs Registered | % of India | Charging Stations | Gap (Stations Needed) |
-|------|-------|----------------|------------|-------------------|----------------------|
-| 1 | Maharashtra | 580,320 | 13.7% | 450 | 11,156 |
-| 2 | Uttar Pradesh | 528,000 | 12.4% | 165 | 10,395 |
-| 3 | Karnataka | 504,000 | 11.9% | 320 | 9,760 |
-| 4 | Delhi | 424,080 | 10.0% | 380 | 8,101 |
-| 5 | Tamil Nadu | 421,800 | 9.9% | 280 | 8,156 |
-| 6 | Telangana | 353,280 | 8.3% | 210 | 6,855 |
-| 7 | Gujarat | 310,800 | 7.3% | 180 | 6,036 |
-| 8 | Kerala | 198,720 | 4.7% | 145 | 3,829 |
-| 9 | Rajasthan | 165,000 | 3.9% | 85 | 3,215 |
-| 10 | Haryana | 131,520 | 3.1% | 95 | 2,535 |
-| - | **Others** | **625,777** | **14.7%** | **428** | **12,087** |
-| - | **TOTAL** | **4,243,297** | **100%** | **2738** | **82,127** |
-
-**Key Insight:** Stations are running at **150-400% capacity** - massive underserved demand.
+| # | Headline Finding |
+|---|------------------|
+| 1 | India's EV fleet has grown from **237K (2020) to ~4.5–5.5M (2025)** — a 20–25x expansion in five years *(VAHAN/FADA)* |
+| 2 | Public charging infrastructure lags badly: **~25,000 installed / ~12,000+ operational stations** as of 2025 against a structural need of **60,000–80,000** |
+| 3 | The infra gap is **not uniform** — 2-wheelers (62% of fleet) mostly charge at home; the real crunch is for **3W commercial, fleet 4W, and commercial trucks** |
+| 4 | A fully-ramped public station (2×DC 60kW + 2×AC 22kW) generates **Rs. 3.5–10 L/month gross revenue** (Conservative–Aggressive) at gross margins of **50–65%** before rent and O&M |
+| 5 | Adding solar (40% offset) improves net margin by ~7pp; solar + battery by ~11pp — with payback of **7.6–10 years** depending on state tariff |
+| 6 | **No domestic integrated product** (battery + bi-directional inverter + DC charger, 100–500 kWh) exists at scale; buying components separately costs **Rs. 47–169 L** per unit |
+| 7 | An integrated unit priced at a **27% discount to bill-of-materials** targets a **Rs. 250+ Cr revenue opportunity at 5% market share by 2030** |
 
 ---
 
-## 1.3 Vehicle Class Breakdown: Charging Capability & Needs
+# PART 1: DEMAND STORY
 
-### Overview by Vehicle Category
+## 1.1 India's EV Fleet — What the Numbers Actually Show
 
-| Category | Population (2026) | % of EVs | Battery Range | Connector Types | Primary Charging |
-|----------|-------------------|----------|---------------|-----------------|------------------|
-| **2-Wheelers** | 3,258,500 | 62.4% | 2-5 kWh | Portable, AC | Home (95%) |
-| **3-Wheelers** | 1,097,250 | 21.0% | 5-15 kWh | AC Type 2, Swap | Swap/Public (70%) |
-| **4-Wheelers** | 828,000 | 15.9% | 30-80 kWh | CCS2, AC Type 2 | Home (60%), DC (40%) |
-| **E-Buses** | 19,950 | 0.4% | 150-400 kWh | CCS2, Pantograph | Depot DC (100%) |
-| **E-Trucks** | 15,657 | 0.3% | 100-300 kWh | CCS2 | Depot/Highway DC |
+### EV Registrations 2020–2026 *(VAHAN/FADA)*
 
----
+| Year | Total EVs | YoY Growth | 2W | 3W | 4W | E-Buses | E-Trucks |
+|------|-----------|------------|-----|-----|-----|---------|----------|
+| 2020 | 237K | — | 152K | 59K | 25K | 802 | ~500 |
+| 2021 | 430K | +82% | 287K | 98K | 44K | 1,121 | ~900 |
+| 2022 | 1.00M | +133% | 683K | 214K | 103K | 1,987 | ~1,500 |
+| 2023 | 1.83M | +83% | 1,214K | 398K | 219K | 3,623 | ~3,000 |
+| 2024 | 2.85M | +55% | 1,847K | 612K | 382K | 6,500 | ~7,000 |
+| 2025 | ~4.57M* | ~60% | ~2,900K | ~920K | ~680K | ~15K | ~13K |
+| 2026E | ~5.5M | ~20% | ~3,400K | ~1,100K | ~850K | ~25K | ~20K |
 
-### 2-Wheelers (E-Scooters & E-Motorcycles)
+*2025 total is VAHAN-based mid-year figure extrapolated; treat as Base estimate. 2026E is a forward projection.*
 
-**Vehicle Examples:** Ola S1 Pro, Ather 450X, TVS iQube, Bajaj Chetak, Revolt RV400
-
-| Specification | Entry Level | Mid Range | Premium |
-|---------------|-------------|-----------|---------|
-| **Battery Capacity** | 2.0-2.5 kWh | 2.9-3.5 kWh | 4.0-5.2 kWh |
-| **Range** | 80-100 km | 120-150 km | 150-200 km |
-| **Onboard Charger** | 700-900W | 900-1500W | 1500-3000W |
-| **Charge Time (0-100%)** | 4-5 hrs | 3-4 hrs | 2-3 hrs |
-| **Fast Charge (0-80%)** | N/A | 45-60 min | 18-30 min |
-
-**Charging Infrastructure Needs:**
-
-| Need | Requirement | Notes |
-|------|-------------|-------|
-| **Primary** | Home 5A/15A socket | 95% of charging at home overnight |
-| **Secondary** | Workplace AC 3.3kW | Destination charging |
-| **Public** | AC 3.3-7kW | Minimal need - range anxiety low |
-
-**Infrastructure Gap:** Minimal public charging needed. Focus on **battery swap networks** for commercial 2W delivery fleets.
+**Growth reality check:** EV sales hit **~1.9M units in 2024** and **~2.3M in 2025** *(ICCT/FADA)*. Cumulative stock above is directionally correct, though precise annualised stock depends on scrapping rates which are currently near zero for EVs.
 
 ---
 
-### 3-Wheelers (E-Rickshaws & E-Autos)
+## 1.2 Charging Infrastructure: The Real Gap
 
-**Vehicle Examples:** Mahindra Treo, Piaggio Ape E-City, YC Electric, Kinetic Safar
+### What the Data Actually Shows *(MoP/BEE/EESL releases 2024–2025)*
 
-| Specification | E-Rickshaw (Passenger) | E-Auto (Passenger) | E-Cargo |
-|---------------|------------------------|--------------------| --------|
-| **Battery Capacity** | 3.5-5.0 kWh | 7.0-10.0 kWh | 10-15 kWh |
-| **Range** | 80-100 km | 120-150 km | 100-130 km |
-| **Daily Usage** | 60-80 km | 100-150 km | 80-120 km |
-| **Charging Power** | 1.5-3 kW AC | 3-7 kW AC | 3-7 kW AC |
-| **Charge Time** | 3-4 hrs | 3-5 hrs | 4-6 hrs |
+| Metric | Original Report | Vetted (2025) | Source |
+|--------|----------------|---------------|--------|
+| Public stations (2025) | 2,738 | **~25,000 installed; ~12,000–15,000 operational** | MoP Feb 2024 press release; EESL data |
+| EV:charger ratio (2025) | 1,401:1 | **~180:1–380:1** depending on metric | Calculated from above |
+| DC charger share | Not stated | **~30–35% of public chargers are DC** | Industry reports |
+| Stations needed (2025) | 74,012 | **~45,000–80,000** (conservative–aggressive) | Scenario-modelled |
 
-**Charging Infrastructure Needs:**
+**Key nuance:** Even at 25,000 stations, India is at **3–6x the 'comfort' EV:charger ratio of ~50:1** — the infra gap thesis is real, but the starting point is materially higher than the original report assumed.
 
-| Need | Requirement | Notes |
-|------|-------------|-------|
-| **Primary** | Dedicated AC 3.3-7kW | Cluster charging at stands/depots |
-| **Location** | Auto stands, market areas | High visibility, accessible |
-| **Frequency** | 1-2x daily | Mid-day and overnight |
+### Infrastructure Gap: Scenario View
 
-**Infrastructure Gap:** **High demand** for cluster charging hubs at auto stands. Battery swap gaining traction for commercial operators.
-
----
-
-### 4-Wheelers (Passenger Cars & SUVs)
-
-**Vehicle Examples:** Tata Nexon EV, MG ZS EV, Hyundai Ioniq 5, BYD Atto 3, Mahindra XUV400
-
-| Specification | Entry Segment | Mid Segment | Premium Segment |
-|---------------|---------------|-------------|-----------------|
-| **Examples** | Tata Tiago EV | Tata Nexon EV | Hyundai Ioniq 5 |
-| **Battery Capacity** | 24-30 kWh | 40-50 kWh | 60-80 kWh |
-| **Range (ARAI)** | 250-315 km | 350-450 km | 450-600 km |
-| **Onboard AC Charger** | 3.3 kW | 7.2 kW | 11 kW |
-| **DC Fast Charge** | 50 kW | 50-120 kW | 150-350 kW |
-| **AC Charge Time (0-100%)** | 8-10 hrs | 7-8 hrs | 6-8 hrs |
-| **DC Charge Time (10-80%)** | 56 min | 30-45 min | 18-30 min |
-
-**Connector Standards in India:**
-
-| Connector | Type | Power Range | Usage |
-|-----------|------|-------------|-------|
-| **AC Type 2** | AC | 3.3-22 kW | Home, destination, public AC |
-| **CCS2 (Combo 2)** | DC | 50-350 kW | Public DC fast charging |
-| **CHAdeMO** | DC | 50-100 kW | Legacy (Nissan Leaf) - declining |
-| **GB/T** | DC | 50-250 kW | Chinese vehicles (BYD) |
-
-**Charging Infrastructure Needs:**
-
-| Location | Charger Type | Power | Use Case |
-|----------|--------------|-------|----------|
-| **Home** | AC Type 2 Wall Box | 3.3-7.2 kW | Overnight (primary - 60%) |
-| **Workplace** | AC Type 2 | 7.2-22 kW | Daytime destination |
-| **Mall/Retail** | AC 22kW + DC 60kW | Mixed | Shopping duration |
-| **Highway** | DC 60-150 kW | High power | Long distance travel |
-| **Fuel Station** | DC 120-350 kW | Ultra-fast | Quick turnaround |
-
-**Infrastructure Gap:** **Critical shortage** of highway DC fast chargers. Need 60kW+ DC chargers every 50-100 km on national highways.
+| Metric (End-2025) | Conservative | Base | Aggressive |
+|-------------------|-------------|------|------------|
+| EVs in fleet | 4.5M | 5.0M | 5.5M |
+| Operational public stations | 12,000 | 15,000 | 20,000 |
+| EV : charger ratio | 375:1 | 333:1 | 275:1 |
+| "Comfort" target ratio | 80:1 | 60:1 | 50:1 |
+| Additional stations needed | ~44,000 | ~68,000 | ~90,000 |
 
 ---
 
-### E-Buses (City & Intercity)
+## 1.3 State-wise Distribution *(VAHAN estimates; charger counts are approximate)*
 
-**Vehicle Examples:** Tata Starbus EV, Olectra, BYD K9, Ashok Leyland Circuit-S
+| Rank | State | EVs (2025E) | % of India | Est. Public Stations | Indicative Gap |
+|------|-------|-------------|------------|---------------------|----------------|
+| 1 | Maharashtra | ~570K | ~12.5% | ~2,000–2,500 | ~9,000–11,000 |
+| 2 | Uttar Pradesh | ~520K | ~11.4% | ~600–900 | ~9,000–10,000 |
+| 3 | Karnataka | ~500K | ~11.0% | ~1,200–1,600 | ~8,000–9,000 |
+| 4 | Delhi | ~420K | ~9.2% | ~1,400–1,800 | ~7,000–8,000 |
+| 5 | Tamil Nadu | ~415K | ~9.1% | ~1,000–1,300 | ~7,000–8,000 |
+| 6 | Telangana | ~350K | ~7.7% | ~700–1,000 | ~6,000–7,000 |
+| 7 | Gujarat | ~310K | ~6.8% | ~700–1,000 | ~5,000–6,000 |
+| 8 | Kerala | ~195K | ~4.3% | ~600–800 | ~3,000–4,000 |
+| 9 | Rajasthan | ~165K | ~3.6% | ~300–450 | ~3,000–3,500 |
+| 10 | Haryana | ~130K | ~2.9% | ~350–500 | ~2,000–2,500 |
 
-| Specification | City Bus (9m) | City Bus (12m) | Intercity Coach |
-|---------------|---------------|----------------|-----------------|
-| **Battery Capacity** | 150-200 kWh | 250-350 kWh | 350-450 kWh |
-| **Range** | 150-200 km | 200-280 km | 300-400 km |
-| **Daily Route** | 150-200 km | 180-250 km | 400-600 km |
-| **DC Charge Power** | 60-120 kW | 120-240 kW | 150-350 kW |
-| **Pantograph** | 300-450 kW | 450-600 kW | N/A |
-| **Charge Time (Depot)** | 2-3 hrs | 2-4 hrs | 3-5 hrs |
-| **Opportunity Charge** | 10-15 min | 10-20 min | 20-30 min |
-
-**Charging Strategies:**
-
-| Strategy | Description | Power | Location |
-|----------|-------------|-------|----------|
-| **Depot Charging** | Overnight slow charge | 60-120 kW DC | Bus depot |
-| **Opportunity Charging** | Mid-route top-up | 150-350 kW DC | Terminus/stops |
-| **Pantograph** | Ultra-fast overhead | 450-600 kW | Designated stops |
-
-**Infrastructure Gap:** Requires dedicated **depot infrastructure** with high-power DC. Fleet operators need 100+ kW chargers per 10 buses.
+*State-level charger counts are approximate; official BEE/EESL data does not publish real-time state breakdowns consistently.*
 
 ---
 
-### E-Trucks & Commercial Vehicles
+## 1.4 Segment-by-Segment: Who Actually Needs Public Charging?
 
-**Vehicle Examples:** Tata Ace EV, Mahindra Treo Zor, BYD T3, Euler HiLoad
+This is the most important analytical lens for the investment thesis. **Not all EVs create equal public-charging demand.** The segment hierarchy below determines where infra investment is most constrained — and therefore where revenue is most defensible.
 
-| Specification | Light (< 2T) | Medium (2-7T) | Heavy (> 7T) |
-|---------------|--------------|---------------|--------------|
-| **Weight Class** | < 2T | 2-7T | > 7T |
-| **Battery Capacity** | 20-40 kWh | 60-150 kWh | 200-400 kWh |
-| **Range** | 100-150 km | 150-250 km | 200-400 km |
-| **Daily Usage** | 80-120 km | 150-300 km | 300-500 km |
-| **DC Charge Power** | 30-60 kW | 60-150 kW | 150-350 kW |
-| **Charge Time** | 1-2 hrs | 2-3 hrs | 2-4 hrs |
+### Charging Dependency Framework
 
-**Charging Infrastructure Needs:**
+> Segments are classified by: (a) share of energy from public/semi-public infra, (b) whether missing public infra causes income loss (commercial) or inconvenience (private), and (c) whether the constraint is public chargers, depot capacity, or home/residential access.
 
-| Segment | Primary Location | Charger Type | Notes |
-|---------|------------------|--------------|-------|
-| **Last Mile Delivery** | Warehouse/Hub | AC 7-22 kW | Overnight at logistics hub |
-| **Urban Distribution** | Depot | DC 60 kW | Mid-day rapid charge |
-| **Regional Haul** | Highway | DC 150 kW | En-route charging |
-| **Long Haul** | Truck stops | DC 350 kW | Megawatt Charging System (future) |
+| Segment | Fleet (2025E) | Home / Depot share *(I)* | Public AC share *(I)* | Public DC share *(I)* | Underserved by public infra? | Primary constraint |
+|---------|---------------|--------------------------|----------------------|----------------------|------------------------------|--------------------|
+| **2W – private** | ~2,600K | 75–85% | 5–10% | <5% | **No** — home-charging dominant | Residential wiring, RWA access |
+| **2W – commercial delivery** | ~300K | 40–55% | 5% | 5% | **Swap-network gaps** | Swap station density on delivery routes |
+| **3W – commercial (e-rick/auto)** | ~920K | 10–30% | 50–65% (AC cluster) | 5–10% | **Yes — structurally** | AC cluster hubs at stands/markets |
+| **4W – private (with parking)** | ~450K | 60–75% | 10–15% | 15–25% | **Partially** — highway DC gaps | Highway DC corridors |
+| **4W – private (apartment/no parking)** | ~180K | 10–25% | 30–40% | 30–40% | **Yes** | Urban public AC + DC density |
+| **4W – fleet / ride-hailing** | ~50K | 20–35% | 20–25% | 40–55% | **Yes** | Depot DC + urban hub availability |
+| **E-buses** | ~15K | 90–100% (depot) | ~0% | <5% (opportunity) | **No (public); Yes (depot grid)** | Depot MW-scale grid infra |
+| **E-trucks / LCVs** | ~13K | 50–65% (depot/hub) | 5% | 30–45% | **Yes — highway/hub DC** | 150–350kW highway & logistics hub DC |
 
-**Infrastructure Gap:** **Underserved market**. Logistics hubs need dedicated charging. Highway truck stops need 150kW+ chargers.
+*(I) = Illustrative shares based on secondary research (CEEW 3W studies, TERI/IEEFA bus reports, operator data), expert judgement. Not directly measured national statistics.*
 
----
+### Segment Detail
 
-### Summary: Charging Infrastructure Requirements by Vehicle Class
+#### 2-Wheelers
 
-| Vehicle Class | Population | Public Infra Need | Priority Charger | Power Range | Key Locations |
-|---------------|------------|-------------------|------------------|-------------|---------------|
-| **2-Wheelers** | 3,258,500 | Low | AC 3.3kW / Swap | 0.7-3 kW | Home, Swap points |
-| **3-Wheelers** | 1,097,250 | **High** | AC 7kW / Swap | 3-7 kW | Auto stands, Markets |
-| **4-Wheelers** | 828,000 | **Critical** | DC 60-150 kW | 50-350 kW | Highways, Malls, Fuel stations |
-| **E-Buses** | 19,950 | Medium | DC 120-350 kW | 120-600 kW | Depots, Terminus |
-| **E-Trucks** | 15,657 | Growing | DC 60-350 kW | 60-350 kW | Warehouses, Highways |
+| Spec | Entry | Mid | Premium |
+|------|-------|-----|---------|
+| Battery | 2.0–2.5 kWh | 2.9–3.5 kWh | 4.0–5.2 kWh |
+| Range | 80–100 km | 120–150 km | 150–200 km |
+| Charge time | 4–5 hrs (5A) | 3–4 hrs | 2–3 hrs |
 
-### Charger Mix Recommendation for Public Stations
+**Investment implication:** Public charging capex for 2W is low-priority. The real gap is **battery swap network density** for commercial fleets (Zomato/Swiggy/Amazon Last Mile), and **RWA/housing board regulations** for home charging access.
 
-| Station Type | Target Vehicles | Charger Configuration | Daily Sessions |
-|--------------|-----------------|----------------------|----------------|
-| **Urban Hub** | 4W + 3W + 2W | 2× DC 60kW + 4× AC 22kW + 4× AC 7kW | 150-200 |
-| **Highway** | 4W + Trucks | 4× DC 120kW + 2× DC 60kW | 100-150 |
-| **Auto Stand** | 3W focused | 1× DC 30kW + 6× AC 7kW | 80-120 |
-| **Mall/Retail** | 4W focused | 2× DC 60kW + 6× AC 22kW | 60-100 |
-| **Bus Depot** | Buses only | 4× DC 150kW + 2× Pantograph | 40-60 |
-| **Logistics Hub** | Trucks + LCVs | 2× DC 150kW + 4× DC 60kW | 50-80 |
+#### 3-Wheelers (e-Rickshaws and e-Autos)
 
----
+| Spec | E-Rickshaw | E-Auto | E-Cargo 3W |
+|------|-----------|--------|------------|
+| Battery | 3.5–5 kWh | 7–10 kWh | 10–15 kWh |
+| Daily km | 60–80 | 100–150 | 80–120 |
+| Charge pattern | 1–2x/day at stand | 1x overnight + 1 midday | 1x overnight |
+| Primary infra need | AC 3.3–7 kW cluster | AC 7 kW cluster | AC 7–22 kW depot |
 
-# PART 2: THE REVENUE MODEL
+**Investment implication:** The binding constraint is **cluster AC hubs at auto stands and market clusters** — not highway DC. This is a **high-density, low-power** infra play, most relevant in UP, Bihar, West Bengal, Delhi where e-rick density is highest.
 
-## 2.1 How Charging Stations Make Money
+#### 4-Wheelers (Private + Fleet)
 
-### Revenue Streams
+| Spec | Entry (Tiago EV) | Mid (Nexon EV) | Premium (Ioniq 5) |
+|------|-----------------|----------------|-------------------|
+| Battery | 24–30 kWh | 40–50 kWh | 60–80 kWh |
+| Range | 250–315 km | 350–450 km | 450–600 km |
+| DC fast charge (10–80%) | ~56 min @ 50kW | 30–45 min @ 50–120kW | 18–30 min @ 150–350kW |
 
-| Revenue Stream | Description | Contribution | Monthly (Per Station) |
-|----------------|-------------|--------------|----------------------|
-| **DC Fast Charging** | Rs.17-20/kWh | 80-85% | Rs.12-15 Lakhs |
-| **AC Slow Charging** | Rs.10-14/kWh | 15-20% | Rs.2-3 Lakhs |
+**Investment implication — split by user type:**
+- **Private with home parking:** public charging is supplemental; **highway DC corridors** (every 50–100 km on NH) are the critical gap.
+- **Apartment dwellers + fleet operators:** public charging is primary; need **urban DC hubs** in high-density residential zones and fleet depots.
 
-### Charging Rate Structure by State
+#### E-Buses
 
-| State | Home Rate | EV DC Fast | EV AC Slow | Margin (DC) | DISCOM |
-|-------|-----------|------------|------------|-------------|--------|
-| Tamil Nadu | Rs.2.25 | Rs.17.50 | Rs.11.50 | 87% | TANGEDCO |
-| Goa | Rs.2.50 | Rs.16.00 | Rs.10.00 | 84% | Goa Electricity Dept |
-| Andhra Pradesh | Rs.2.90 | Rs.18.00 | Rs.12.00 | 84% | APSPDCL/APEPDCL |
-| Bihar | Rs.3.00 | Rs.18.50 | Rs.12.50 | 84% | SBPDCL/NBPDCL |
-| Kerala | Rs.3.00 | Rs.17.00 | Rs.11.00 | 82% | KSEB |
-| Delhi | Rs.3.00 | Rs.18.00 | Rs.12.00 | 83% | BSES/Tata Power DDL |
-| Gujarat | Rs.3.10 | Rs.17.50 | Rs.11.50 | 82% | UGVCL/PGVCL/MGVCL/DGVCL |
-| Odisha | Rs.3.20 | Rs.17.50 | Rs.11.50 | 82% | TPCODL/TPNODL/TPSODL/TPWODL |
-| Uttar Pradesh | Rs.3.35 | Rs.18.00 | Rs.12.00 | 81% | UPPCL |
-| Rajasthan | Rs.3.40 | Rs.18.50 | Rs.12.50 | 82% | JVVNL/AVVNL/JdVVNL |
-| Haryana | Rs.3.50 | Rs.18.00 | Rs.12.00 | 81% | UHBVN/DHBVN |
+| Spec | City 9m | City 12m | Intercity |
+|------|---------|----------|-----------|
+| Battery | 150–200 kWh | 250–350 kWh | 350–450 kWh |
+| Daily route | 150–200 km | 180–250 km | 400–600 km |
+| Depot charge power | 60–120 kW DC | 120–240 kW DC | 150–350 kW DC |
 
----
+**Investment implication:** The market here is **depot-scale energy infrastructure** (MW-level grid connections, solar + storage at depots), not retail public chargers. Underserved by commercial public charging networks but addressable via B2B depot packages.
 
-## 2.2 Station Economics: The Unit Economics (REALISTIC)
+#### E-Trucks and LCVs
 
-### Charger Capacity Calculation
+| Spec | Light (<2T) | Medium (2–7T) | Heavy (>7T) |
+|------|------------|--------------|-------------|
+| Battery | 20–40 kWh | 60–150 kWh | 200–400 kWh |
+| Daily km | 80–120 | 150–300 | 300–500 |
+| Primary infra | Warehouse AC | Depot DC 60kW | Highway DC 150kW+ |
 
-| Charger Type | Avg Session | Max Sessions/Day | Utilization | Realistic Sessions | kWh/Session |
-|--------------|-------------|------------------|-------------|-------------------|-------------|
-| DC 60kW | 30 min | 48 | 75% | **36/charger** | 21 kWh |
-| DC 120kW | 20 min | 72 | 70% | **50/charger** | 28 kWh |
-| AC 22kW | 3 hrs | 8 | 60% | **5/charger** | 35 kWh |
-| AC 7kW | 6 hrs | 4 | 50% | **2/charger** | 30 kWh |
+**Investment implication:** The commercial vehicle segment is **chronically underserved** on highway corridors and logistics hubs — and it is a high-willingness-to-pay segment because charging downtime = direct revenue loss. Priority: **150–350 kW DC at highway truck stops and logistics parks**.
 
-### Standard Station Profile (2 DC 60kW + 2 AC 22kW)
+### Recommended Station Configurations by Use Case
 
-| Metric | Value | Calculation |
-|--------|-------|-------------|
-| **DC Sessions/Day** | 72 | 2 chargers × 36 sessions |
-| **AC Sessions/Day** | 10 | 2 chargers × 5 sessions |
-| **Total Sessions/Day** | **82** | DC + AC |
-| **DC kWh/Day** | 1512 | 72 × 21 kWh |
-| **AC kWh/Day** | 175 | 10 × 35 kWh (avg) |
-| **Total kWh/Day** | **1862** | 1512 + 175 kWh |
-| **Operating Hours** | 18-24 hrs | Most run 24x7 |
-
-### Revenue & Profit by State (Per Station/Month)
-
-| State | Monthly Revenue | Power Cost | Gross Profit | Margin |
-|-------|-----------------|------------|--------------|--------|
-| Maharashtra | Rs.998,340 | Rs.205,006 | Rs.793,334 | 79.5% |
-| Delhi | Rs.942,480 | Rs.167,580 | Rs.774,900 | 82.2% |
-| Karnataka | Rs.970,410 | Rs.209,475 | Rs.760,935 | 78.4% |
-| Tamil Nadu | Rs.914,550 | Rs.125,685 | Rs.788,865 | 86.3% |
-| Telangana | Rs.942,480 | Rs.290,472 | Rs.652,008 | 69.2% |
-| Gujarat | Rs.914,550 | Rs.173,166 | Rs.741,384 | 81.1% |
-| Uttar Pradesh | Rs.942,480 | Rs.187,131 | Rs.755,349 | 80.1% |
-| Kerala | Rs.886,620 | Rs.167,580 | Rs.719,040 | 81.1% |
-| Haryana | Rs.942,480 | Rs.195,510 | Rs.746,970 | 79.3% |
-| Rajasthan | Rs.970,410 | Rs.189,924 | Rs.780,486 | 80.4% |
-| West Bengal | Rs.970,410 | Rs.196,069 | Rs.774,341 | 79.8% |
-| Punjab | Rs.914,550 | Rs.211,151 | Rs.703,399 | 76.9% |
+| Station Type | Target Segments | Configuration | Daily Sessions (Base) |
+|--------------|-----------------|---------------|-----------------------|
+| Urban Hub | 4W + 3W | 2× DC 60kW + 4× AC 22kW + 4× AC 7kW | 120–180 |
+| Highway Corridor | 4W + Trucks | 4× DC 120kW + 2× DC 60kW | 80–140 |
+| Auto Stand Cluster | 3W focused | 1× DC 30kW + 6× AC 7kW | 70–110 |
+| Mall / Destination | Private 4W | 2× DC 60kW + 6× AC 22kW | 50–90 |
+| Bus Depot | E-buses | 4× DC 150kW + 2× Pantograph | 30–50 |
+| Logistics Hub | Trucks + LCVs | 2× DC 150kW + 4× DC 60kW | 40–70 |
 
 ---
 
-## 2.3 National Revenue Summary
+# PART 2: REVENUE MODEL
 
-### India Charging Market (2026)
+## 2.1 Tariff Reality Check
 
-| Metric | Value |
-|--------|-------|
-| **Total EVs Registered** | 4,243,297 |
-| **Total Charging Stations** | 2,738 |
-| **Daily Charging Sessions** | 224,516 |
-| **Daily Power Consumed** | 5,098 MWh |
-| **Daily Revenue** | Rs.8.64 Crores |
-| **Monthly Revenue** | Rs.259.14 Crores |
-| **Yearly Revenue** | **Rs.3,153 Crores** |
+> The original report used DC selling prices of Rs. 17–20/kWh and grid buy rates of Rs. 2.25–3.5/kWh. Vetted state tariff orders (2023–2025) show a different picture.
 
-### Top 5 States by Revenue
+### Actual EV Tariff Ranges by State *(State ERC orders, DISCOM EV categories, 2023–2025)*
 
-| Rank | State | Yearly Revenue | % of National |
-|------|-------|----------------|---------------|
-| 1 | Maharashtra | Rs.546.59 Cr | 17.3% |
-| 2 | Delhi | Rs.435.74 Cr | 13.8% |
-| 3 | Karnataka | Rs.377.81 Cr | 12.0% |
-| 4 | Tamil Nadu | Rs.311.56 Cr | 9.9% |
-| 5 | Telangana | Rs.240.80 Cr | 7.6% |
+| State | C&I / Dedicated EV buy rate (Rs/kWh) | Typical public DC sell price (Rs/kWh) | Typical public AC sell price (Rs/kWh) | Gross spread (mid DC) |
+|-------|--------------------------------------|---------------------------------------|---------------------------------------|-----------------------|
+| Karnataka | 5.0–7.0 | 10–18 | 7–14 | ~8–10 |
+| Maharashtra | 5.0–7.5 | 10–17 | 7–13 | ~7–9 |
+| Delhi | 4.5–6.5 | 9–16 | 6–12 | ~6–8 |
+| Gujarat | 4.5–6.5 | 9–16 | 6–12 | ~6–8 |
+| Tamil Nadu | 4.0–6.0 | 8–14 | 6–11 | ~5–7 |
+| Telangana | 6.0–8.0 | 10–16 | 7–12 | ~5–7 |
+| Uttar Pradesh | 4.5–6.5 | 9–15 | 6–11 | ~5–8 |
+| Kerala | 4.5–6.5 | 9–15 | 7–12 | ~5–7 |
 
----
+**Why this matters for the model:** The original report's gross margins of 80–87% assumed DC sell prices of Rs. 17–20 and buy rates of Rs. 2.25–3.5 — an implied spread of Rs. 14–18/kWh. The realistic mid-case spread is **Rs. 6–9/kWh**, producing gross margins closer to **50–65%** rather than 80–87%.
 
-## 2.4 The Problem: Power Cost Eats Into Margins
+### Scenario Price Assumptions (used in all P&L models below)
 
-### Power Cost Analysis by State
+| Scenario | Blended DC sell price | Blended AC sell price | Effective grid buy rate |
+|----------|-----------------------|-----------------------|-------------------------|
+| Conservative | Rs. 11.5/kWh | Rs. 8.0/kWh | Rs. 6.0/kWh equiv. |
+| Base | Rs. 13.5/kWh | Rs. 9.5/kWh | Rs. 6.0/kWh equiv. |
+| Aggressive | Rs. 15.5/kWh | Rs. 11.0/kWh | Rs. 5.5/kWh equiv. |
 
-| State | Daily kWh | Grid Rate | Daily Power Cost | Monthly Cost | % of Revenue |
-|-------|-----------|-----------|------------------|--------------|--------------|
-| Maharashtra | 1,862 | Rs.3.67 | Rs.6,834 | Rs.205,006 | **20.5%** |
-| Delhi | 1,862 | Rs.3.00 | Rs.5,586 | Rs.167,580 | **17.8%** |
-| Karnataka | 1,862 | Rs.3.75 | Rs.6,982 | Rs.209,475 | **21.6%** |
-| Tamil Nadu | 1,862 | Rs.2.25 | Rs.4,190 | Rs.125,685 | **13.7%** |
-| Telangana | 1,862 | Rs.5.20 | Rs.9,682 | Rs.290,472 | **30.8%** |
-| Gujarat | 1,862 | Rs.3.10 | Rs.5,772 | Rs.173,166 | **18.9%** |
-| Uttar Pradesh | 1,862 | Rs.3.35 | Rs.6,238 | Rs.187,131 | **19.9%** |
-| Kerala | 1,862 | Rs.3.00 | Rs.5,586 | Rs.167,580 | **18.9%** |
-| Haryana | 1,862 | Rs.3.50 | Rs.6,517 | Rs.195,510 | **20.7%** |
-
-**Key Problem:** Power costs consume **15-22% of revenue** in most states. Reducing this improves margins significantly.
+*Aggressive aligns with the original report's assumptions and is only realistic for select hub locations with volume contracts and dynamic pricing.*
 
 ---
 
-# PART 3: SOLAR-BASED COST OFFSET
+## 2.2 Station Unit Economics
 
-## 3.1 Why Solar for EV Charging?
+### Charger Throughput Assumptions
 
-### The Solar Advantage
+| Charger | Session length | Realistic sessions/day | kWh/session |
+|---------|---------------|----------------------|-------------|
+| DC 60kW | 30 min | 30–40 | 20–24 kWh |
+| DC 120kW | 20 min | 40–55 | 28–35 kWh |
+| AC 22kW | 3 hrs | 4–6 | 30–40 kWh |
+| AC 7kW | 5–6 hrs | 2–3 | 28–35 kWh |
 
-| Factor | Benefit | Impact |
-|--------|---------|--------|
-| **Declining Costs** | Rs.45,000/kWp (2025) vs Rs.80,000 (2020) | 44% cost reduction |
-| **High Irradiance** | 4-6 kWh/m²/day in India | Among best globally |
-| **Grid Parity** | Solar < Grid in most states | Immediate savings |
-| **Green Premium** | ESG, carbon credits | Brand value |
-| **Energy Security** | Less grid dependency | Reliability |
+### Standard Station: Daily Throughput Scenarios
 
-### Solar Generation Potential by Region
+**Configuration: 2× DC 60kW + 2× AC 22kW**
 
-| Region | States | Peak Sun Hours | kWh/kWp/day | Best Months |
-|--------|--------|----------------|-------------|-------------|
-| Northwest | Rajasthan, Gujarat | 5.5-6.0 | 4.5-5.0 | Mar-Jun |
-| West | Maharashtra, Goa | 4.5-5.5 | 4.0-4.5 | Feb-May |
-| South | TN, Karnataka, Kerala, AP | 5.0-5.5 | 4.5-5.0 | Feb-May |
-| North | Delhi, Haryana, Punjab, UP | 4.5-5.5 | 4.0-4.5 | Mar-Jun |
-| Central | MP, Chhattisgarh | 5.0-5.5 | 4.5-5.0 | Mar-May |
-| East | WB, Odisha, Bihar | 4.0-5.0 | 3.5-4.0 | Mar-May |
-| Northeast | Assam, NE States | 3.5-4.5 | 3.0-3.5 | Mar-May |
+| Metric | Conservative | Base | Aggressive |
+|--------|-------------|------|------------|
+| DC sessions/day | 40 | 60 | 80 |
+| AC sessions/day | 6 | 10 | 14 |
+| kWh/day (DC) | 840 | 1,320 | 1,800 |
+| kWh/day (AC) | 180 | 330 | 490 |
+| **Total kWh/day** | **1,020** | **1,650** | **2,290** |
 
----
+### Monthly P&L: Three Scenarios (Blended Cross-State)
 
-## 3.2 Solar Sizing for EV Stations
+| Line Item | Conservative | Base | Aggressive |
+|-----------|-------------|------|------------|
+| Energy sold (kWh/month) | 30,600 | 49,500 | 68,700 |
+| DC revenue | Rs. 2.76 L | Rs. 5.34 L | Rs. 8.37 L |
+| AC revenue | Rs. 0.72 L | Rs. 1.26 L | Rs. 1.93 L |
+| **Total Revenue** | **Rs. 3.48 L** | **Rs. 6.60 L** | **Rs. 10.30 L** |
+| Grid power cost | Rs. 1.84 L | Rs. 2.97 L | Rs. 3.78 L |
+| **Gross Profit** | **Rs. 1.64 L** | **Rs. 3.63 L** | **Rs. 6.52 L** |
+| **Gross Margin** | **~47%** | **~55%** | **~63%** |
 
-> **Data Sources:** MNRE-benchmark-2025  
-> **Assumptions:** Solar cost Rs.45,000/kWp | Generation 4.0 kWh/kWp/day | Grid rate Rs.3.67/kWh (Maharashtra)
+> **Note:** Gross profit is before rent, O&M (~Rs. 0.5–1.0 L/month), depreciation, and working capital. The original report's Rs. 9–10 L/month at 80%+ gross margin is re-classified as **Aggressive + low-tariff state benchmark** — achievable at fully ramped highway hubs in Tamil Nadu or Goa, not a typical current-market figure.
 
-### Why 40% Offset is Optimal
+### State-wise Revenue Variance (Base Scenario)
 
-| Offset Level | Solar Size | Area Required | Cost | Payback | Practicality |
-|--------------|------------|---------------|------|---------|--------------|
-| 20% | 93 kWp | 466 sqm | Rs.41.90 L | 8.4 yrs | Easy |
-| **40%** | **186 kWp** | **931 sqm** | **Rs.83.79 L** | **8.4 yrs** | **Optimal** |
-| 60% | 279 kWp | 1,396 sqm | Rs.125.69 L | 8.4 yrs | Moderate |
-| 80% | 372 kWp | 1,862 sqm | Rs.167.58 L | 8.4 yrs | Difficult |
-| 100% | 466 kWp | 2,328 sqm | Rs.209.47 L | 8.4 yrs | Very difficult |
-
-**Recommendation:** 40% solar offset provides best balance of cost, space, and ROI. Higher offsets require proportionally more land.
-
-### Station Sizes and Solar Configuration
-
-| Station Type | Chargers | Daily kWh | Solar (40%) | Area | Cost | Payback |
-|--------------|----------|-----------|-------------|------|------|---------|
-| Mini (Highway) | 2 DC | 1,512 | 151 kWp | 756 sqm | Rs.68.0 L | 8.4 yrs |
-| Standard | 2 DC + 2 AC | 1,862 | 186 kWp | 931 sqm | Rs.83.8 L | 8.4 yrs |
-| Large (Hub) | 4 DC + 4 AC | 3,724 | 372 kWp | 1,862 sqm | Rs.167.6 L | 8.4 yrs |
-| Mega (Fleet) | 10 DC + 10 AC | 9,310 | 931 kWp | 4,655 sqm | Rs.418.9 L | 8.4 yrs |
+| State | Grid buy rate | Monthly Revenue | Power cost | Gross Margin |
+|-------|--------------|-----------------|------------|---------------|
+| Karnataka | Rs. 6.0/kWh | Rs. 6.60 L | Rs. 2.97 L | ~55% |
+| Maharashtra | Rs. 6.0/kWh | Rs. 6.60 L | Rs. 2.97 L | ~55% |
+| Tamil Nadu | Rs. 5.0/kWh | Rs. 6.00 L | Rs. 2.48 L | ~59% |
+| Delhi | Rs. 5.5/kWh | Rs. 6.30 L | Rs. 2.72 L | ~57% |
+| Telangana | Rs. 7.0/kWh | Rs. 6.60 L | Rs. 3.47 L | ~47% |
+| Gujarat | Rs. 5.5/kWh | Rs. 6.30 L | Rs. 2.72 L | ~57% |
 
 ---
 
-## 3.3 Solar Economics by State
+## 2.3 National Market Size: Scenario View
 
-### Solar ROI Comparison (40% Offset)
+> The original report cited Rs. 3,153 Cr as current market size. This figure used both understated charger counts and overstated per-kWh revenues. A scenario-based rebuild gives:
 
-| State | Grid Rate | Annual Power Cost | Solar Cost | Annual Savings | Payback |
-|-------|-----------|-------------------|------------|----------------|---------|
-| Maharashtra | Rs.3.67 | Rs.9.84 L | Rs.83.79 L | Rs.9.84 L | **8.51 years** |
-| Rajasthan | Rs.3.40 | Rs.9.12 L | Rs.83.79 L | Rs.9.12 L | **9.19 years** |
-| West Bengal | Rs.3.51 | Rs.9.41 L | Rs.83.79 L | Rs.9.41 L | **8.90 years** |
-| Bihar | Rs.3.00 | Rs.8.04 L | Rs.83.79 L | Rs.8.04 L | **10.42 years** |
-| Karnataka | Rs.3.75 | Rs.10.05 L | Rs.83.79 L | Rs.10.05 L | **8.33 years** |
-| Gujarat | Rs.3.10 | Rs.8.31 L | Rs.83.79 L | Rs.8.31 L | **10.08 years** |
-| Uttar Pradesh | Rs.3.35 | Rs.8.98 L | Rs.83.79 L | Rs.8.98 L | **9.33 years** |
-| Delhi | Rs.3.00 | Rs.8.04 L | Rs.83.79 L | Rs.8.04 L | **10.42 years** |
-| Tamil Nadu | Rs.2.25 | Rs.6.03 L | Rs.83.79 L | Rs.6.03 L | **13.89 years** |
-| Goa | Rs.2.50 | Rs.6.70 L | Rs.83.79 L | Rs.6.70 L | **12.50 years** |
+| Metric | Conservative | Base | Aggressive |
+|--------|-------------|------|------------|
+| Operational public stations | 12,000 | 15,000 | 20,000 |
+| Avg energy sold/station/day | 500 kWh | 900 kWh | 1,300 kWh |
+| Total daily MWh (public) | 6,000 | 13,500 | 26,000 |
+| Avg realised revenue (Rs/kWh) | Rs. 11.5 | Rs. 13.0 | Rs. 14.5 |
+| **Yearly public charging revenue** | **~Rs. 252 Cr** | **~Rs. 641 Cr** | **~Rs. 1,376 Cr** |
 
-**Key Insight:** Solar payback across India is typically **8-10 years**, with faster payback in high-rate states like Karnataka and Maharashtra.
+**Scope note:** These figures cover **public charging only**. Including semi-public (workplace, fleet depot), captive (private home), and private fleet charging, the **extended TAM is Rs. 2,000–6,000+ Cr** in 2025 — consistent with the original report's Rs. 3,153–6,300 Cr range when all segments are included.
 
 ---
 
-# PART 4: HYBRID SYSTEMS FOR MAXIMUM MARGINS
+# PART 3: SOLAR COST OFFSET
 
-## 4.1 The Hybrid Solution: Solar + Battery Storage
+## 3.1 Why Solar Makes Sense for EV Stations
 
-### Why Hybrid?
+| Factor | Data point | Source |
+|--------|------------|--------|
+| Solar capex (2025) | Rs. 42,000–48,000/kWp (C&I rooftop) | MNRE Benchmark 2025 |
+| Generation (pan-India average) | 3.5–5.0 kWh/kWp/day | MNRE/NIWE |
+| Grid parity | Solar LCOE < grid tariff in all major states | IEEFA 2024 |
+| C&I rooftop payback | 5–10 years depending on state tariff | CEEW, IEEFA |
 
-| Challenge | Solution | Benefit |
-|-----------|----------|---------|
-| Solar only works during day | Battery stores solar | 24/7 solar usage |
-| Peak demand = Peak prices | Battery supplies peak | Avoid peak rates |
-| Grid instability | Battery backup | Reliability |
-| Excess solar wasted | Battery captures excess | Zero waste |
+### Regional Solar Generation *(MNRE/NIWE)*
 
-### System Configuration Options
-
-| Config | Solar | Battery | Total Cost | Grid Offset | Payback |
-|--------|-------|---------|------------|-------------|---------|
-| **Basic** | 186 kWp | - | Rs.83.79 L | 40% | 8.5 yrs |
-| **Standard** | 186 kWp | 250 kWh | Rs.124.54 L | 67% | 7.6 yrs |
-| **Premium** | 186 kWp | 500 kWh | Rs.165.29 L | 67% | 10.0 yrs |
-| **Premium + ToD** | 186 kWp | 500 kWh + ToD | Rs.165.29 L | 72% | 8.5 yrs |
-
----
-
-## 4.2 How Each Hybrid Option Works
-
-### Option 1: Solar Only (40% Offset)
-
-| Metric | Value |
-|--------|-------|
-| Monthly Grid Cost (with solar) | Rs.123,004 |
-| Savings vs Grid-Only | Rs.82,002 (40%) |
-| Investment | Rs.83.79 L |
-| Payback | **8.5 years** (102.2 months) |
-
-### Option 2: Solar + Battery (67% Offset)
-
-| Metric | Value |
-|--------|-------|
-| Monthly Grid Cost (with hybrid) | Rs.67,652 |
-| Savings vs Grid-Only | Rs.137,354 (67%) |
-| Investment | Rs.165.29 L |
-| Payback | **10.0 years** (120.3 months) |
+| Region | States | kWh/kWp/day (avg) | Best Months |
+|--------|--------|-------------------|-------------|
+| Northwest | Rajasthan, Gujarat | 4.5–5.0 | Mar–Jun |
+| West | Maharashtra, Goa | 4.0–4.5 | Feb–May |
+| South | TN, Karnataka, Kerala, AP | 4.5–5.0 | Feb–May |
+| North | Delhi, Haryana, Punjab, UP | 4.0–4.5 | Mar–Jun |
+| East | WB, Odisha, Bihar | 3.5–4.0 | Mar–May |
 
 ---
 
-## 4.3 Complete Financial Comparison
+## 3.2 Solar Sizing: The 40% Offset Logic
 
-### Monthly P&L: Grid vs Hybrid Systems (Per Station, Maharashtra)
+> **Assumptions:** Rs. 45,000/kWp capex | 4.0 kWh/kWp/day | Standard station: 1,650 kWh/day (Base)
 
-| Line Item | Grid Only | Solar 40% | Solar + Battery |
-|-----------|-----------|-----------|-----------------|
-| **REVENUE** | | | |
-| EV Charging | Rs.998,340 | Rs.998,340 | Rs.998,340 |
-| Solar Export | - | - | Rs.10,000 |
-| **Total Revenue** | **Rs.998,340** | **Rs.998,340** | **Rs.1,008,340** |
-| | | | |
-| **COSTS** | | | |
-| Grid Power | Rs.205,006 | Rs.123,004 | Rs.67,652 |
-| Battery Degradation | - | - | Rs.20,000 |
-| O&M | - | Rs.10,000 | Rs.15,000 |
-| **Total Costs** | **Rs.205,006** | **Rs.133,004** | **Rs.102,652** |
-| | | | |
-| **NET PROFIT** | **Rs.793,334** | **Rs.865,336** | **Rs.905,688** |
-| **Margin** | **79.5%** | **86.7%** | **90.7%** |
+| Offset Level | Solar Size | Area | Capex | Annual Savings (Base) | Payback |
+|--------------|------------|------|-------|-----------------------|---------|
+| 20% | 93 kWp | 466 sqm | Rs. 41.9 L | Rs. 5.9 L | ~7.1 yrs |
+| **40%** | **186 kWp** | **931 sqm** | **Rs. 83.8 L** | **Rs. 11.9 L** | **~7.0 yrs** |
+| 60% | 279 kWp | 1,396 sqm | Rs. 125.7 L | Rs. 17.8 L | ~7.1 yrs |
+| 80% | 372 kWp | 1,862 sqm | Rs. 167.6 L | Rs. 23.7 L | ~7.1 yrs |
 
-### Investment Payback Analysis
+**40% is operationally optimal** — higher offsets need proportionally more roof/land area with no change in payback ratio, but land scarcity makes >40% impractical at most urban/highway locations.
 
-| System | Investment | Monthly Savings | Payback (Months) | Payback (Years) |
-|--------|------------|-----------------|------------------|-----------------|
-| Solar 40% | Rs.83.79 L | Rs.82,002 | 102.2 | **8.5 yrs** |
-| Solar + 250 kWh Battery | Rs.124.54 L | Rs.137,354 | 90.7 | **7.6 yrs** |
-| Solar + 500 kWh Battery | Rs.165.29 L | Rs.137,354 | 120.3 | **10.0 yrs** |
+### Solar Payback by State (Base tariffs, 40% offset)
 
-**Key Insight:** Solar-only systems pay back fastest (~8.5 years). Hybrid systems take longer (~10.0 years) due to battery costs, but provide higher margins and grid independence.
+| State | Grid buy rate | Annual solar savings | Solar capex | Payback |
+|-------|--------------|---------------------|-------------|----------|
+| Karnataka | Rs. 6.0/kWh | Rs. 12.9 L | Rs. 83.8 L | **6.5 yrs** |
+| Maharashtra | Rs. 6.0/kWh | Rs. 12.9 L | Rs. 83.8 L | **6.5 yrs** |
+| Tamil Nadu | Rs. 5.0/kWh | Rs. 10.7 L | Rs. 83.8 L | **7.8 yrs** |
+| Delhi | Rs. 5.5/kWh | Rs. 11.8 L | Rs. 83.8 L | **7.1 yrs** |
+| Telangana | Rs. 7.0/kWh | Rs. 15.1 L | Rs. 83.8 L | **5.6 yrs** |
+| Gujarat | Rs. 5.5/kWh | Rs. 11.8 L | Rs. 83.8 L | **7.1 yrs** |
+
+*Payback uses Base-scenario throughput and updated tariff ranges; figures will vary with actual utilisation.*
 
 ---
 
-# PART 5: COMPONENT COSTS & BUILD RECOMMENDATIONS
+# PART 4: HYBRID SYSTEMS (SOLAR + BATTERY)
 
-> **Data Sources:** manufacturer-catalog-2025, MNRE-benchmark-2025
+## 4.1 Why Add Battery Storage?
 
-## 5.1 Individual Component Costs (2025-26)
+| Challenge | Battery Solution | Operational Benefit |
+|-----------|-----------------|--------------------|
+| Solar only generates during day | Store solar, dispatch at peak | 24/7 solar utilisation |
+| Peak-hour tariffs (Time-of-Day) | Discharge battery at peak, charge at off-peak | Reduce effective buy rate |
+| Grid instability / outages | Battery backup | Revenue continuity |
+| Excess daytime solar | Store instead of export at low rates | Capture full solar value |
 
-### Solar System Components (for 40% offset - 186 kWp)
+## 4.2 Hybrid Configurations
 
-| Component | Specification | Unit Cost | Qty (186 kWp) | Total |
-|-----------|---------------|-----------|---------------|-------|
-| Solar Panels | 550W Mono PERC | Rs.18,000/kWp | 186 | Rs.3,348,000 |
-| Mounting Structure | GI/Aluminum | Rs.8,000/kWp | 186 | Rs.1,488,000 |
-| String Inverter | 50-100 kW | Rs.5,000/kWp | 186 | Rs.930,000 |
-| Cables & Connectors | DC/AC cables | Rs.3,000/kWp | 186 | Rs.558,000 |
-| Protection & Metering | ACDB, DCDB, Meters | Rs.2,000/kWp | 186 | Rs.372,000 |
-| Installation & Labour | Civil + Electrical | Rs.9,000/kWp | 186 | Rs.1,674,000 |
-| **SOLAR TOTAL** | - | **Rs.45,000/kWp** | 186 | **Rs.8,370,000** |
+| Config | Solar | Battery | Total Capex | Grid Offset *(I)* | Payback (Base) |
+|--------|-------|---------|-------------|-------------------|----------------|
+| Solar only | 186 kWp | — | Rs. 83.8 L | ~40% | ~7.0 yrs |
+| Solar + 250 kWh LFP | 186 kWp | 250 kWh | Rs. 124.5 L | ~60–65% | ~7.6 yrs |
+| Solar + 500 kWh LFP | 186 kWp | 500 kWh | Rs. 165.3 L | ~65–72% | ~8.5–10 yrs |
 
-### Battery System Components
+> **Battery cost note:** LFP pack costs have been declining globally. At 2025 Indian C&I pricing (~Rs. 13,000/kWh all-in), these capex figures are reasonable; by 2027–28, costs may improve payback by 1–2 years. Refresh annually.
 
-| Component | Specification | Unit Cost | Qty (500 kWh) | Total |
-|-----------|---------------|-----------|---------------|-------|
-| LFP Battery Cells | CATL/BYD Grade A | Rs.13,000/kWh | 500 | Rs.6,500,000 |
-| Battery Rack & Housing | IP65 Enclosure | Rs.1,500/kWh | 500 | Rs.750,000 |
-| BMS (Battery Management) | Smart BMS per module | Rs.1,000/kWh | 500 | Rs.500,000 |
-| Thermal Management | Active cooling/heating | Rs.800/kWh | 500 | Rs.400,000 |
-| **BATTERY TOTAL** | - | **Rs.16,300/kWh** | 500 | **Rs.8,150,000** |
+## 4.3 P&L Impact: Grid vs Solar vs Hybrid (Base Scenario, Blended State)
 
-### Power Electronics Components
-
-| Component | Specification | Unit Cost | Qty | Total |
-|-----------|---------------|-----------|-----|-------|
-| Hybrid Inverter | 200 kVA Bi-directional | Rs.25,000/kVA | 200 | Rs.5,000,000 |
-| Grid-Tie Inverter | 100 kW (backup) | Rs.4,000/kW | 100 | Rs.400,000 |
-| Transformer | 250 kVA 11kV/415V | Rs.500,000 | 1 | Rs.500,000 |
-| **POWER ELECTRONICS** | - | - | - | **Rs.5,900,000** |
-
-### EV Charger Components
-
-| Component | Specification | Unit Cost | Qty | Total |
-|-----------|---------------|-----------|-----|-------|
-| DC Fast Charger | 60 kW CCS2+CHAdeMO | Rs.1,500,000 | 2 | Rs.3,000,000 |
-| AC Charger | 22 kW Type 2 | Rs.215,000 | 2 | Rs.430,000 |
-| Charger Management | OCPP Backend | Rs.200,000 | 1 | Rs.200,000 |
-| Payment System | RFID + App + POS | Rs.100,000 | 1 | Rs.100,000 |
-| **CHARGER TOTAL** | - | - | - | **Rs.3,730,000** |
+| Line Item | Grid Only | + Solar 40% | + Solar + 500kWh Battery |
+|-----------|-----------|-------------|---------------------------|
+| Monthly Revenue | Rs. 6.60 L | Rs. 6.60 L | Rs. 6.70 L |
+| Grid power cost | Rs. 2.97 L | Rs. 1.78 L | Rs. 0.89 L |
+| Battery degradation | — | — | Rs. 0.20 L |
+| Solar O&M | — | Rs. 0.10 L | Rs. 0.15 L |
+| **Gross Profit** | **Rs. 3.63 L** | **Rs. 4.72 L** | **Rs. 5.46 L** |
+| **Gross Margin** | **~55%** | **~71%** | **~82%** |
 
 ---
 
-## 5.2 Integrated System: All-in-One Unit
+# PART 5: THE PRODUCT OPPORTUNITY
 
-### THE OPPORTUNITY: Integrated Charging + Storage + Inverter Unit
+## 5.1 Component Costs (2025–26)
 
-Instead of buying separate components, an **integrated unit** combining:
-- Battery (100-500 kWh LFP)
-- Bi-directional Inverter (50-200 kVA)
-- DC Fast Charger (60-120 kW)
-- Smart BMS & Controller
+### Solar Components (186 kWp, 40% offset)
 
-### Current Cost (Buying Separately)
+| Component | Unit Cost | Total |
+|-----------|-----------|-------|
+| Solar panels (550W Mono PERC) | Rs. 18,000/kWp | Rs. 33.5 L |
+| Mounting + civil | Rs. 8,000/kWp | Rs. 14.9 L |
+| String inverter | Rs. 5,000/kWp | Rs. 9.3 L |
+| Cables, protection, metering | Rs. 5,000/kWp | Rs. 9.3 L |
+| Installation | Rs. 9,000/kWp | Rs. 16.7 L |
+| **Solar Total** | **Rs. 45,000/kWp** | **Rs. 83.7 L** |
 
-| Component | 100 kWh Unit | 250 kWh Unit | 500 kWh Unit |
-|-----------|--------------|--------------|--------------|
-| Battery | Rs.1,630,000 | Rs.4,075,000 | Rs.8,150,000 |
-| Inverter | Rs.1,250,000 | Rs.2,500,000 | Rs.5,000,000 |
-| Charger (60kW) | Rs.1,500,000 | Rs.1,500,000 | Rs.2,600,000 |
-| BMS/Controller | Rs.4,000 | Rs.10,000 | Rs.20,000 |
-| Integration | Rs.306,600 | Rs.565,250 | Rs.1,102,500 |
-| **Total (Separate)** | **Rs.4,690,600** | **Rs.8,650,250** | **Rs.16,872,500** |
+### Battery Components (500 kWh LFP)
 
-### Target Cost (Integrated Unit)
+| Component | Unit Cost | Total |
+|-----------|-----------|-------|
+| LFP cells (CATL/BYD Grade A) | Rs. 13,000/kWh | Rs. 65.0 L |
+| Rack, housing (IP65) | Rs. 1,500/kWh | Rs. 7.5 L |
+| BMS | Rs. 1,000/kWh | Rs. 5.0 L |
+| Thermal management | Rs. 800/kWh | Rs. 4.0 L |
+| **Battery Total** | **Rs. 16,300/kWh** | **Rs. 81.5 L** |
 
-| Size | Target Cost | Savings | Value Proposition |
-|------|-------------|---------|-------------------|
-| 100 kWh + 60kW + 50kVA | Rs.3,424,138 | 27% | Small stations, highway |
-| 250 kWh + 60kW + 100kVA | Rs.6,314,682 | 27% | Standard stations |
-| 500 kWh + 120kW + 200kVA | Rs.12,316,925 | 27% | Large hubs |
+### Power Electronics
 
----
+| Component | Spec | Cost |
+|-----------|------|------|
+| Bi-directional hybrid inverter | 200 kVA | Rs. 50.0 L |
+| Grid-tie inverter (backup) | 100 kW | Rs. 4.0 L |
+| Transformer | 250 kVA | Rs. 5.0 L |
+| **Power Electronics Total** | | **Rs. 59.0 L** |
 
-## 5.3 Component Cost Summary & Recommendations
+### EV Chargers
 
-### What to Build: Priority Components
-
-| Priority | Component | Market Gap | Estimated Volume | Margin |
-|----------|-----------|------------|------------------|--------|
-| **1** | Integrated Unit | High - no Indian OEM | 10,000 units/yr | 25-30% |
-| **2** | Bi-directional Inverter | High - all imported | 20,000 units/yr | 30-35% |
-| **3** | Smart BMS | Medium - some local | 50,000 units/yr | 20-25% |
-| **4** | Battery Pack | Low - competitive | 100,000+ kWh/yr | 15-20% |
-
-### Target Pricing for Integrated Units
-
-| Configuration | Components | Target Price | Market Price | Savings |
-|---------------|------------|--------------|--------------|---------|
-| **Small** | 100kWh + 60kW + 50kVA | Rs.34 Lakhs | Rs.47 Lakhs | 27% |
-| **Medium** | 250kWh + 60kW + 100kVA | Rs.63 Lakhs | Rs.87 Lakhs | 27% |
-| **Large** | 500kWh + 120kW + 200kVA | Rs.123 Lakhs | Rs.169 Lakhs | 27% |
-| **XL (Fleet)** | 1000kWh + 240kW + 400kVA | Rs.226 Lakhs | Rs.310 Lakhs | 27% |
+| Component | Spec | Cost |
+|-----------|------|------|
+| DC fast charger × 2 | 60 kW CCS2 | Rs. 30.0 L |
+| AC charger × 2 | 22 kW Type 2 | Rs. 4.3 L |
+| OCPP backend + payment | — | Rs. 3.0 L |
+| **Charger Total** | | **Rs. 37.3 L** |
 
 ---
 
-## 5.4 Final Summary: The Business Case
+## 5.2 The Integration Opportunity
 
-### Market Opportunity
+### OEM Landscape Reality Check
 
-| Metric | 2025 | 2030 | Growth |
-|--------|------|------|--------|
-| EVs in India | 3.8 M | 15 M | 4x |
-| Charging Stations Needed | 74,000 | 300,000 | 4x |
-| Annual Station Additions | 15,000 | 50,000 | 3.3x |
-| Integrated Units Market | Rs.750 Cr | Rs.5,000 Cr | 6.7x |
-| Your Target Share (5%) | Rs.37.5 Cr | Rs.250 Cr | 6.7x |
+India has multiple domestic providers of standalone DC fast chargers and a few battery + charger bundles. However, **high-power bi-directional inverters and fully integrated "battery + inverter + DC charger" blocks in the 100–500 kWh / 60–240 kW range** are:
 
-### Product Roadmap
+- Scarce in domestic supply; rely on imported power-electronics sub-systems
+- Bought separately and integrated at site (adding 15–25% integration cost and complexity)
+- Fragmented across 3–4 vendors per station with no single accountability
 
-| Phase | Product | Price Point | Volume Target | Revenue |
-|-------|---------|-------------|---------------|---------|
-| Phase 1 (2026) | 100kWh Integrated | Rs.34 L | 500 units | Rs.171 Cr |
-| Phase 2 (2027) | 250kWh Integrated | Rs.63 L | 800 units | Rs.505 Cr |
-| Phase 3 (2028) | 500kWh Integrated | Rs.123 L | 500 units | Rs.616 Cr |
-| Phase 4 (2029) | Fleet Solutions | Rs.226 L | 300 units | Rs.678 Cr |
+**Opportunity:** A domestically manufactured, modular, integrated unit that combines battery, bi-directional inverter, and DC charger — delivered as a single SKU with a single warranty.
 
-### Key Takeaways
+### Bill of Materials vs Target Integrated Price
 
-| # | Insight |
-|---|---------|
-| 1 | India needs **74,000+ new charging stations** - 27x current capacity |
-| 2 | EV charging is a **Rs.6,300 Cr market** growing at **35% CAGR** |
-| 3 | Power costs eat **15-22% of revenue** - reducing this improves margins |
-| 4 | **40% Solar** reduces costs by 40% with **~8-9 year payback** |
-| 5 | **Solar + Battery** achieves **67-72% cost offset** with **~7-10 year payback** |
-| 6 | Profit margins improve from **78% to 86%** with hybrid systems |
-| 7 | **Integrated units** (Battery+Inverter+Charger) save 27% vs separate |
-| 8 | Target price: **Rs.34-123 Lakhs** for integrated units |
-| 9 | Market opportunity: **Rs.250+ Cr by 2030** at 5% market share |
-| 10 | **Build priority**: Bi-directional inverter, then integrated unit |
+| Unit Size | BOM (separate) | Target integrated price | Saving to buyer | Gross margin target |
+|-----------|---------------|------------------------|-----------------|---------------------|
+| **Small** — 100kWh + 60kW + 50kVA | Rs. 46.9 L | Rs. 34.2 L | 27% | 25–30% |
+| **Medium** — 250kWh + 60kW + 100kVA | Rs. 86.5 L | Rs. 63.1 L | 27% | 25–30% |
+| **Large** — 500kWh + 120kW + 200kVA | Rs. 168.7 L | Rs. 123.2 L | 27% | 25–30% |
+| **XL Fleet** — 1000kWh + 240kW + 400kVA | Rs. 310 L | Rs. 226 L | 27% | 25–30% |
+
+### Build Priority
+
+| Priority | Component | Rationale |
+|----------|-----------|----------|
+| **1** | Bi-directional inverter | All-imported today; highest margin; enables V2G future | 
+| **2** | Full integrated unit | Bundles inverter + battery + charger; single SKU for CPOs |
+| **3** | Smart BMS | Needed for warranty on integrated unit |
+| **4** | Battery pack | Commoditising fast; build only if integration cost justifies |
 
 ---
 
-*Report generated: 2026-03-04 | Data freshness: 2026-03-03*
-*Sources: VAHAN, FADA, Ministry of Power, CEEW, CEA, MNRE, public-web-sources, public-ev-sources*
+## 5.3 Market Sizing & Revenue Roadmap
+
+### Total Addressable Market for Integrated Units
+
+| Metric | 2025 | 2028E | 2030E |
+|--------|------|-------|-------|
+| EVs in India | ~4.6M | ~9M | ~15M |
+| Public + semi-public stations needed | ~45–80K | ~120K | ~300K |
+| New stations/year (Base) | ~15,000 | ~30,000 | ~50,000 |
+| Integrated units market (Rs.) | ~Rs. 750 Cr | ~Rs. 2,500 Cr | ~Rs. 5,000 Cr |
+| **5% share target** | **Rs. 37.5 Cr** | **Rs. 125 Cr** | **Rs. 250 Cr** |
+
+### Product Roadmap & Revenue Plan
+
+| Phase | Year | Product | Unit Price | Volume Target | Revenue |
+|-------|------|---------|------------|---------------|---------|
+| 1 | 2026 | 100 kWh integrated | Rs. 34 L | 500 units | Rs. 171 Cr |
+| 2 | 2027 | 250 kWh integrated | Rs. 63 L | 800 units | Rs. 505 Cr |
+| 3 | 2028 | 500 kWh integrated | Rs. 123 L | 500 units | Rs. 616 Cr |
+| 4 | 2029 | Fleet XL (1000 kWh) | Rs. 226 L | 300 units | Rs. 678 Cr |
+
+*These revenue figures are top-line only; achieving them requires a full sales, manufacturing, and service organisation. They serve as a directional market-sizing exercise, not an operating plan.*
+
+---
+
+# PART 6: INVESTMENT THESIS SUMMARY
+
+## Why Now
+
+| Signal | Data |
+|--------|------|
+| Fleet growth | 4.57M EVs by 2025, sales of 2.3M/year and accelerating |
+| Policy tailwind | FAME III expected; PM e-Bus Seva; state EV policies in 14+ states |
+| Infrastructure lag | Even with 25K stations, EV:charger ratio is 3–6x the comfort target |
+| No domestic integrated product | Rs. 47–169 L per station in separate components today |
+| Declining input costs | Solar –44% since 2020; LFP battery costs declining further |
+
+## The Case in One Paragraph
+
+India's EV market has reached an inflection point — fleet size is large enough that the infrastructure gap is becoming a commercial pain point, not just a policy discussion. The most capital-efficient entry is not operating charging stations (low margin, real-estate-intensive) but **manufacturing the integrated hardware that station operators need**. No domestic vendor offers a modular battery + inverter + charger block; all components are sourced separately with 15–25% integration cost and fragmented accountability. A product that delivers a 27% total cost saving to operators, with a domestic manufacturing and service model, can capture a Rs. 250+ Cr revenue position by 2030 at a modest 5% market share.
+
+## Key Risks & Mitigants
+
+| Risk | Severity | Mitigant |
+|------|----------|----------|
+| Station utilisation lower than modelled | High | Anchor first customers in high-traffic highway/hub locations |
+| Grid tariff changes erode solar ROI | Medium | Long-term DISCOM agreements; model sensitivity to ±1 Rs/kWh |
+| Chinese integrated product imports | High | BIS certification requirements; PLI scheme for domestic mfg |
+| Battery cost decline erodes margin | Medium | Design for modularity; upgrade battery sub-system independently |
+| Capital intensity of manufacturing | Medium | Asset-light: outsource cell/panel; own BMS + inverter IP |
+
+---
+
+*Report v2.0 — Updated 2026-03-15*
+*Sources: VAHAN, FADA, Ministry of Power, BEE, EESL, CEEW, ICCT, IEEFA, TERI, MNRE, State DISCOM tariff orders (2023–2025)*
+*Scenarios marked (I) are illustrative estimates based on secondary research and expert judgement, not directly measured statistics.*
