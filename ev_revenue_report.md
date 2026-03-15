@@ -10,15 +10,15 @@
 
 # EXECUTIVE SUMMARY
 
-| # | Headline Finding |
+| # | Headline finding |
 |---|------------------|
-| 1 | India's EV fleet has grown from **237K (2020) to ~4.5–5.5M (2025)** — a 20–25x expansion in five years *(VAHAN/FADA)* |
-| 2 | Public charging infrastructure lags badly: **~25,000 installed / ~12,000+ operational stations** as of 2025 against a structural need of **60,000–80,000** |
-| 3 | The infra gap is **not uniform** — 2-wheelers (62% of fleet) mostly charge at home; the real crunch is for **3W commercial, fleet 4W, and commercial trucks** |
-| 4 | A fully-ramped public station (2×DC 60kW + 2×AC 22kW) generates **Rs. 3.5–10 L/month gross revenue** (Conservative–Aggressive) at gross margins of **50–65%** before rent and O&M |
-| 5 | Adding solar (40% offset) improves net margin by ~7pp; solar + battery by ~11pp — with payback of **7.6–10 years** depending on state tariff |
-| 6 | **No domestic integrated product** (battery + bi-directional inverter + DC charger, 100–500 kWh) exists at scale; buying components separately costs **Rs. 47–169 L** per unit |
-| 7 | An integrated unit priced at a **27% discount to bill-of-materials** targets a **Rs. 250+ Cr revenue opportunity at 5% market share by 2030** |
+| 1 | India's EV fleet has grown from approximately 0.24 million in 2020 to 4.5–5.5 million by 2025, representing a 20–25x expansion in five years (VAHAN/FADA). |
+| 2 | Public charging infrastructure remains significantly behind vehicle growth, with an estimated 25,000 installed and 12,000–15,000 operational public stations in 2025, versus a structural need of 60,000–80,000 stations. |
+| 3 | Public charging demand is concentrated in a subset of segments: three‑wheelers, fleet four‑wheelers and commercial trucks. Two‑wheelers, which account for around 60% of the fleet, rely predominantly on home or depot charging. |
+| 4 | A fully ramped public charging station (2 × DC 60 kW + 2 × AC 22 kW) can generate Rs. 3.5–10 lakh per month in gross revenue across Conservative, Base and Aggressive utilisation scenarios, with gross margins in the 50–65% range before rent and O&M. |
+| 5 | Adding a 40% solar offset improves station-level margins materially, while solar plus battery systems can increase grid cost offset to 60–70%, with payback periods of approximately 7.6–10 years depending on state tariffs and utilisation. |
+| 6 | There is currently no domestically produced, standardised integrated unit that combines battery storage, bi‑directional inverter and DC fast charging in the 100–500 kWh range; most sites procure and integrate these subsystems separately. |
+| 7 | A modular integrated product that reduces total system cost by around 27% relative to separate components can address a hardware market opportunity exceeding Rs. 250 crore in annual revenue at a 5% share of the projected 2030 market. |
 
 ---
 
@@ -40,7 +40,7 @@
 
 *2025 total is VAHAN-based mid-year figure extrapolated; treat as Base estimate. 2026E is a forward projection.*
 
-**Growth reality check:** EV sales hit **~1.9M units in 2024** and **~2.3M in 2025** *(ICCT/FADA)*. Cumulative stock above is directionally correct, though precise annualised stock depends on scrapping rates which are currently near zero for EVs.
+EV sales reached approximately 1.9 million units in 2024 and 2.3 million units in 2025 (FADA/ICCT), which is consistent with the cumulative stock estimates shown above. Scrappage of EVs is negligible at this stage, so cumulative registrations provide a reasonable approximation of the active fleet.
 
 ---
 
@@ -55,7 +55,7 @@
 | DC charger share | Not stated | **~30–35% of public chargers are DC** | Industry reports |
 | Stations needed (2025) | 74,012 | **~45,000–80,000** (conservative–aggressive) | Scenario-modelled |
 
-**Key nuance:** Even at 25,000 stations, India is at **3–6x the 'comfort' EV:charger ratio of ~50:1** — the infra gap thesis is real, but the starting point is materially higher than the original report assumed.
+Even at an estimated 25,000 stations, India operates at approximately three to six times a comfort EV‑to‑charger ratio of around 50:1, indicating a persistent infrastructure gap despite recent deployment growth.
 
 ### Infrastructure Gap: Scenario View
 
@@ -84,13 +84,13 @@
 | 9 | Rajasthan | ~165K | ~3.6% | ~300–450 | ~3,000–3,500 |
 | 10 | Haryana | ~130K | ~2.9% | ~350–500 | ~2,000–2,500 |
 
-*State-level charger counts are approximate; official BEE/EESL data does not publish real-time state breakdowns consistently.*
+*State-level charger counts are indicative; official BEE/EESL publications do not consistently provide a real-time state-wise breakdown.*
 
 ---
 
 ## 1.4 Segment-by-Segment: Who Actually Needs Public Charging?
 
-This is the most important analytical lens for the investment thesis. **Not all EVs create equal public-charging demand.** The segment hierarchy below determines where infra investment is most constrained — and therefore where revenue is most defensible.
+Not all EV segments generate the same level or type of public‑charging demand. The segment hierarchy below identifies where charging infrastructure is structurally most constrained and where additional capacity is likely to be most utilised.
 
 ### Charging Dependency Framework
 
@@ -119,7 +119,7 @@ This is the most important analytical lens for the investment thesis. **Not all 
 | Range | 80–100 km | 120–150 km | 150–200 km |
 | Charge time | 4–5 hrs (5A) | 3–4 hrs | 2–3 hrs |
 
-**Investment implication:** Public charging capex for 2W is low-priority. The real gap is **battery swap network density** for commercial fleets (Zomato/Swiggy/Amazon Last Mile), and **RWA/housing board regulations** for home charging access.
+For two‑wheelers, public plug-in charging infrastructure is generally a lower priority than expansion of battery‑swap networks for commercial fleets and improvements in residential charging access (for example, through housing society policies and wiring upgrades).
 
 #### 3-Wheelers (e-Rickshaws and e-Autos)
 
@@ -130,7 +130,7 @@ This is the most important analytical lens for the investment thesis. **Not all 
 | Charge pattern | 1–2x/day at stand | 1x overnight + 1 midday | 1x overnight |
 | Primary infra need | AC 3.3–7 kW cluster | AC 7 kW cluster | AC 7–22 kW depot |
 
-**Investment implication:** The binding constraint is **cluster AC hubs at auto stands and market clusters** — not highway DC. This is a **high-density, low-power** infra play, most relevant in UP, Bihar, West Bengal, Delhi where e-rick density is highest.
+For three‑wheelers, the primary constraint is the availability of low‑ to medium‑power AC cluster charging at auto stands and market areas rather than highway DC infrastructure. This requirement is particularly pronounced in states with high e‑rickshaw penetration such as Uttar Pradesh, Bihar, West Bengal and the National Capital Region.
 
 #### 4-Wheelers (Private + Fleet)
 
@@ -140,9 +140,7 @@ This is the most important analytical lens for the investment thesis. **Not all 
 | Range | 250–315 km | 350–450 km | 450–600 km |
 | DC fast charge (10–80%) | ~56 min @ 50kW | 30–45 min @ 50–120kW | 18–30 min @ 150–350kW |
 
-**Investment implication — split by user type:**
-- **Private with home parking:** public charging is supplemental; **highway DC corridors** (every 50–100 km on NH) are the critical gap.
-- **Apartment dwellers + fleet operators:** public charging is primary; need **urban DC hubs** in high-density residential zones and fleet depots.
+For four‑wheelers, charging needs differ by user type. Private users with dedicated parking and home chargers rely on public infrastructure primarily for inter‑city travel, making highway fast‑charging corridors the critical requirement. Apartment dwellers and fleet operators, by contrast, depend more heavily on public and depot charging, and therefore require a higher density of urban AC and DC hubs in residential and commercial zones.
 
 #### E-Buses
 
@@ -152,7 +150,7 @@ This is the most important analytical lens for the investment thesis. **Not all 
 | Daily route | 150–200 km | 180–250 km | 400–600 km |
 | Depot charge power | 60–120 kW DC | 120–240 kW DC | 150–350 kW DC |
 
-**Investment implication:** The market here is **depot-scale energy infrastructure** (MW-level grid connections, solar + storage at depots), not retail public chargers. Underserved by commercial public charging networks but addressable via B2B depot packages.
+In the case of electric buses, the dominant requirement is depot‑scale high‑power infrastructure, including megawatt‑scale grid connections and potentially co‑located solar and storage assets. Public roadside chargers play a limited role relative to depot charging in current deployment models.
 
 #### E-Trucks and LCVs
 
@@ -162,7 +160,7 @@ This is the most important analytical lens for the investment thesis. **Not all 
 | Daily km | 80–120 | 150–300 | 300–500 |
 | Primary infra | Warehouse AC | Depot DC 60kW | Highway DC 150kW+ |
 
-**Investment implication:** The commercial vehicle segment is **chronically underserved** on highway corridors and logistics hubs — and it is a high-willingness-to-pay segment because charging downtime = direct revenue loss. Priority: **150–350 kW DC at highway truck stops and logistics parks**.
+For commercial trucks and light commercial vehicles, current infrastructure on highway corridors and at logistics hubs is limited relative to emerging demand. High‑power DC charging in the 150–350 kW range at truck stops and logistics parks is expected to be a key enabler of broader adoption in this segment.
 
 ### Recommended Station Configurations by Use Case
 
@@ -196,7 +194,7 @@ This is the most important analytical lens for the investment thesis. **Not all 
 | Uttar Pradesh | 4.5–6.5 | 9–15 | 6–11 | ~5–8 |
 | Kerala | 4.5–6.5 | 9–15 | 7–12 | ~5–7 |
 
-**Why this matters for the model:** The original report's gross margins of 80–87% assumed DC sell prices of Rs. 17–20 and buy rates of Rs. 2.25–3.5 — an implied spread of Rs. 14–18/kWh. The realistic mid-case spread is **Rs. 6–9/kWh**, producing gross margins closer to **50–65%** rather than 80–87%.
+These tariff ranges estimate that station gross margins of approximately 50–65% are achievable for the Base scenario.
 
 ### Scenario Price Assumptions (used in all P&L models below)
 
@@ -245,7 +243,7 @@ This is the most important analytical lens for the investment thesis. **Not all 
 | **Gross Profit** | **Rs. 1.64 L** | **Rs. 3.63 L** | **Rs. 6.52 L** |
 | **Gross Margin** | **~47%** | **~55%** | **~63%** |
 
-> **Note:** Gross profit is before rent, O&M (~Rs. 0.5–1.0 L/month), depreciation, and working capital. The original report's Rs. 9–10 L/month at 80%+ gross margin is re-classified as **Aggressive + low-tariff state benchmark** — achievable at fully ramped highway hubs in Tamil Nadu or Goa, not a typical current-market figure.
+> > **Note:** Gross profit figures are reported before rent, O&M, depreciation and working capital costs. The Aggressive scenario approximates the performance of a fully ramped, high‑utilisation site in a relatively low‑tariff state and should be interpreted as an upper‑bound case rather than an average outcome.
 
 ### State-wise Revenue Variance (Base Scenario)
 
@@ -272,7 +270,7 @@ This is the most important analytical lens for the investment thesis. **Not all 
 | Avg realised revenue (Rs/kWh) | Rs. 11.5 | Rs. 13.0 | Rs. 14.5 |
 | **Yearly public charging revenue** | **~Rs. 252 Cr** | **~Rs. 641 Cr** | **~Rs. 1,376 Cr** |
 
-**Scope note:** These figures cover **public charging only**. Including semi-public (workplace, fleet depot), captive (private home), and private fleet charging, the **extended TAM is Rs. 2,000–6,000+ Cr** in 2025 — consistent with the original report's Rs. 3,153–6,300 Cr range when all segments are included.
+These figures refer to public charging infrastructure only. When semi‑public, captive and private fleet charging are included, the total addressable revenue pool is significantly larger and lies within the Rs. 2,000–6,000 crore range for the mid‑2020s.
 
 ---
 
@@ -477,7 +475,7 @@ India has multiple domestic providers of standalone DC fast chargers and a few b
 
 ## The Case in One Paragraph
 
-India's EV market has reached an inflection point — fleet size is large enough that the infrastructure gap is becoming a commercial pain point, not just a policy discussion. The most capital-efficient entry is not operating charging stations (low margin, real-estate-intensive) but **manufacturing the integrated hardware that station operators need**. No domestic vendor offers a modular battery + inverter + charger block; all components are sourced separately with 15–25% integration cost and fragmented accountability. A product that delivers a 27% total cost saving to operators, with a domestic manufacturing and service model, can capture a Rs. 250+ Cr revenue position by 2030 at a modest 5% market share.
+India’s EV market has reached a scale where inadequacies in charging and energy infrastructure are becoming a material operational constraint rather than a purely policy issue. The most capital‑efficient position in this value chain is in supplying integrated hardware to charging and fleet operators, rather than directly operating charging networks. High‑power bi‑directional inverters and integrated battery‑plus‑charger systems are typically imported and assembled from multiple subsystems, adding cost and complexity. A domestic, modular integrated product that reduces total installed cost while improving accountability and service levels can capture a meaningful share of a growing hardware market that is expected to exceed Rs. 5,000 crore annually by 2030.
 
 ## Key Risks & Mitigants
 
