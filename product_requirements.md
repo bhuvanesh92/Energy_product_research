@@ -385,3 +385,49 @@ Build an India‑first Home & Industrial Energy Management System (HEMS) box tha
 - Pricing model approved by product + finance; trials tested with at least 10 live customers.  
 
 ***
+
+## 8. Competitor feature comparison (for reference)
+
+### 8.1 Key competitors covered
+
+- Emporia Vue / Indem (India distributor). [indiamart](https://www.indiamart.com/proddetail/emporia-3-phase-smart-electricity-monitor-23366067688.html)
+- SONOFF POWCT and stackable power meters. [sonoff](https://sonoff.tech/products/sonoff-pow-ring-smart-power-meter-powct)
+- Picostone Basic and related home‑automation modules. [indiamart](https://www.indiamart.com/proddetail/picostone-basic-21367430448.html)
+- Schneider Electric Wiser energy‑monitoring device & eco‑system. [eshop.se](https://eshop.se.com/in/shop-by-category/easy-homes.html)
+- EnerMAN ETi‑SOL / IoT SCADA for solar plants. [enerman](https://enerman.in)
+
+### 8.2 High‑level comparison
+
+| Aspect | Emporia Vue (Indem) | SONOFF POWCT / SPM | Picostone Basic | Schneider Wiser (Energy Device) | EnerMAN ETi‑SOL / SCADA |
+|---|---|---|---|---|---|
+| Target segment | Home, small C&I [indem](https://indem.in) | Home, small commercial, small boards [shop.sonoff](https://www.shop.sonoff.in/product-category/computer-accessories/energy-saving/) | Residential smart‑home [indiamart](https://www.indiamart.com/proddetail/picostone-basic-21367430448.html) | Premium residential and small commercial [eshop.se](https://eshop.se.com/in/shop-by-category/easy-homes.html) | Utility‑scale & C&I solar plants [enerman](https://enerman.in) |
+| Phases & current | 1‑φ & 3‑φ, up to 200 A mains [indem](https://indem.in) | 1‑φ up to 100 A (POWCT); 20 A per channel (SPM‑4Relay) [sonoff](https://sonoff.tech/products/sonoff-pow-ring-smart-power-meter-powct) | 1‑φ; 4 loads (typ. 6–16 A) [indiamart](https://www.indiamart.com/proddetail/picostone-basic-21367430448.html) | 1‑φ device; ecosystem spans more [eshop.se](https://eshop.se.com/in/shop-by-category/easy-homes.html) | Multi‑φ, high‑current (MW‑scale) [enerman](https://enerman.in) |
+| Channels/granularity | 3 main + up to 16 branch CTs [indem](https://indem.in) | 1 CT per POWCT; SPM‑Main + up to 32×4‑relay modules [shop.sonoff](https://www.shop.sonoff.in/product-category/computer-accessories/energy-saving/) | 4 control channels, limited metering [indiamart](https://www.indiamart.com/proddetail/picostone-basic-21367430448.html) | 1 energy‑monitor device, plus many automation modules [eshop.se](https://eshop.se.com/in/shop-by-category/easy-homes.html) | Many meters feeding gateway/SCADA [enerman](https://enerman.in) |
+| Connectivity | Wi‑Fi, cloud [indem](https://indem.in) | Wi‑Fi (POWCT), RS‑485 + Wi‑Fi (SPM) [shop.sonoff](https://www.shop.sonoff.in/product-category/computer-accessories/energy-saving/) | Wi‑Fi [indiamart](https://www.indiamart.com/proddetail/picostone-basic-21367430448.html) | Wi‑Fi/Zigbee via Wiser hub [eshop.se](https://eshop.se.com/in/shop-by-category/easy-homes.html) | RS‑485, Ethernet, 4G, Wi‑Fi [enerman](https://enerman.in) |
+| Solar support | Bi‑directional CTs, net‑solar bundles [indem](https://indem.in) | Basic export/solar capable, but no full PV EMS [sonoff](https://sonoff.tech/products/sonoff-pow-ring-smart-power-meter-powct) | None specific [indiamart](https://www.indiamart.com/proddetail/picostone-basic-21367430448.html) | Possible as part of home automation; not a dedicated PV EMS [se](https://www.se.com/in/en/residential/save/) | Full PV monitoring, control and analytics [enerman](https://enerman.in) |
+| Industrial/EV | Light C&I only; no EV CMS [indem](https://indem.in) | Some C&I sub‑metering; no EV CMS [shop.sonoff](https://www.shop.sonoff.in/product-category/computer-accessories/energy-saving/) | None [indiamart](https://www.indiamart.com/proddetail/picostone-basic-21367430448.html) | Residential‑centric; industrial via other Schneider offerings [se](https://www.se.com/in/en/residential/save/) | C&I and utility; not home HEMS, EV not explicit [enerman](https://enerman.in) |
+| Indicative device prices (India) | ~₹19,000 per 3‑phase kit [indiamart](https://www.indiamart.com/proddetail/emporia-3-phase-smart-electricity-monitor-23366067688.html) | POWCT ≈₹4,576; SPM‑Main ≈₹3,487; SPM‑4Relay ≈₹5,450 [shop.sonoff](https://www.shop.sonoff.in/product-category/computer-accessories/energy-saving/) | ≈₹7,800 per module (range 4,999–12,999) [indiamart](https://www.indiamart.com/proddetail/picostone-basic-21367430448.html) | Single‑phase energy device ~₹23,200–₹29,000 [eshop.se](https://eshop.se.com/in/shop-by-category/easy-homes.html) | Project‑based, no list price [enerman](https://www.enerman.in/post/iot-scada-eti-sol-for-solar-pv-plants-rooftops-monitoring-control-and-analysis) |
+
+Your HEMS should **outperform Emporia and SONOFF** in integration breadth (solar + battery + EV + industrial) while remaining significantly more affordable than Wiser for mass Indian deployment. [shop.sonoff](https://www.shop.sonoff.in/product-category/computer-accessories/energy-saving/)
+
+***
+
+## 9. Cost and pricing targets (initial hypotheses)
+
+These are **market‑based targets** informed by competitor retail prices (not BOM), to be refined once BoM is defined.
+
+### 9.1 Hardware price bands
+
+- **Residential HEMS (baseline CT‑monitor + Wi‑Fi + app)**  
+  - Market reference: SONOFF single‑circuit ~₹4.5k, Emporia 3‑phase CT kit ~₹19k, Wiser energy device ~₹23–29k. [eshop.se](https://eshop.se.com/in/shop-by-category/easy-homes.html)
+  - Target retail (India):  
+    - Entry home HEMS (main CTs only): **₹8k–₹12k**.  
+    - Home HEMS with multi‑CT and better analytics: **₹12k–₹18k** (aim to sit between Emporia and Wiser). [indiamart](https://www.indiamart.com/proddetail/emporia-3-phase-smart-electricity-monitor-23366067688.html)
+
+- **Small commercial / MSME variant**  
+  - More CT channels, optional LTE, industrial‑grade enclosure.  
+  - Target retail: **₹20k–₹35k** depending on CT count and connectivity, still below typical industrial SCADA offerings. [iotdashboard](https://iotdashboard.in)
+
+- **Industrial / solar‑plant gateway variant**  
+  - Competes with ETi‑SOL‑class hardware, which is sold project‑wise without list prices. [enerman](https://www.enerman.in/post/iot-scada-eti-sol-for-solar-pv-plants-rooftops-monitoring-control-and-analysis)
+  - Target: price per site comparable to a typical industrial IoT gateway plus some CTs, set via pilots and margin expectations (likely **₹50k+** per site, depending on scale).  
