@@ -1,0 +1,152 @@
+02/22/2026
+
+Pre Meeting Prep: 
+
+
+Potential Ideas
+
+    * Smart Panel
+        * Technical Problem
+            * Still be able to build smart circuit to sense all the data consumption at sub ms level. 
+            * DC and AC input into the system supported
+            * DC or AC output 
+        * Business Model
+            * B2B has higher potential for things you can control
+            * B2C has challenging adoption rate for value proposition
+    * Charging Station
+        * Technical Problem
+            * Same energy transfer circuit with right diagnostics to report problems of energy transfer
+            * Payment Model - TBD
+            * Data API expose to Google Maps
+        * Business Model
+            * Subsidized land 
+            * B2C / B2B - 
+
+
+Higher Level Goal for Technical Product design
+
+
+Create a Power electronics system that is SW configurable to accept AC/ DC Input and produce rectified outputs to support AC or DC Load. 
+
+Create data pipelines for this system to have remote configurability, diagnosability and also for general analytics.
+
+
+
+03/01/2026
+
+
+First MR with some artifacts: 
+
+https://github.com/bhuvanesh92/Energy_product_research/pull/1
+
+
+More things to point 
+
+1. Voltage stabilizer + smart panel 
+2. Attached with solar panel integration 
+3. 1 + 2 and l2 charging 
+4. 1 + 2 with modest ess 
+5. All of the above 
+6. Scale up that system to evse - ac plus dc 
+7. Do the same 6 with solar panel and ess 
+
+The electrical architecture of ess plus solar panel plus bi di box at differing power levels managed by a combination on hw config becomes the base of the company 
+
+So this way we can slowly start from B2C-> B2B->B2B2C
+
+03/08/2026
+
+Questions about ev_revenue_report
+1. How is the optimal ratio of 50:1 EVs per charger taken? Why that number?
+2. It’s clear that the EV charging segment is underserved. But need to refine more about each segment and how much they are underserved. Should Koudi do separate research on this or is it easier to use Booze’s brainstorming sessions with chatbots? Context is already set in that
+3. What are the charging behaviours of Indian EV owners? Are 48 sessions per day max estimation and 36 per day realistic expectation actually realistic? What are the dependencies to usage patterns across different days of the year?
+
+After some research, the MOAT is probably electrical architecture plus SaaS in the energy layer. Combining the HW which can be manufactured by others in a smart way. How does SW configuration come into play?
+
+https://www.udyami.org.in/industrial-solution/industrial-solution-electronic--electrical-equipment
+
+* Industry guidance for fleets and CPOs focuses heavily on smart energy management, peak‑shaving, using storage, and shifting to low‑cost periods to cut OPEX.
+    * All this is a consequence of always changing price structures. Need to have a stack that’s nimble enough to fuse multiple data points together to keep a cost optimum
+
+Grand vision:
+AI driven smart scalable distributed electrical systems that can be flexible enough to accommodate a variety of inputs and a variety of loads.
+	Start from a home application to controlling entire country with a huge scale of load balancing
+
+Target for w11d7 - Hone in on cost targets
+
+03/15/2026
+- High level system requirements
+    - Have ability to de-pop. Keep all possibilities in the mind. Multi-input to multi-output
+    - Start with Solar + Battery + smartness
+        - Can sell this to
+            - residential projects
+            - Charge point operators (CPO)
+                - Business case should be relevant to CPO for them to break even in a few years and save costs based on smartness + speed of expansion to cater to a fast growing market
+        - This abstracts land costs, EVSE costs and other fixed initial investments
+    - Scalable power-electronics + Scalable SW
+
+03/29/2026
+- Find the following attached to solar panels.
+    - Controllers
+    - Inverter
+    - Fuse / breaker box
+        - Is these custom installations?
+    - Tripping statistics?
+        - How over-dimensioned or under-dimensioned is the system?
+    - What are the pain points today?
+    - Electricity bills
+
+
+04/12/2026
+- When in India, try to get data on business case for DC fast charging
+- Sensor architecture for smart box / sensing box.
+
+04/19/2026
+For installation of solar panels, approval is needed for both residential and commercial. But maintenance can be done by anyone
+
+Today in India, for residential applications, you can use grid as battery, meaning that you can send to grid and consume whatever you want from the grid. If you consume lesser than you produced, you will get money back. If you consume more, you have to pay the delta. There is no dynamic pricing of electricity for residential users. So an integrated unit for homes is not a good enough business case. However if you consider power cuts and can add that into the equation, then it may start becoming a business case. Need to check the use case for industries.
+
+Some needs of today:
+
+* Power factor correction - Need of the hour for solar installation
+* HEMS - possibility but business case needs to be very strong
+* DC to DC to AC device from solar to AC water pumps. Is this a sizing issue? Currently, loads are not supported if you directly use an inverter in the solar panel output
+
+
+05/23/2026
+* Data Acquisition Box - Next steps on System Design and Cost estimation
+    * Electrical Safety Standards
+    * How do we operationalize installation of this box? 
+* Power factor correction Inverter and Energy Storage - Supplier landscape and cost
+* Solar Panel - 6.6kW - 99000 Rs
+
+
+06/07/2026
+* Regulatory requirements for the box release in India - TBD
+* How do we isolate Electrical Failures from propagating to mainline. 
+* Need to discuss more about Engineering roadmap
+* Smart meter that provides access to data via APIs to prototype Data Models
+* Create specific branch for Meeting Notes currently
+* Sensing Needs for data model
+    * Instantaneous Voltage
+    * Instantaneous Current
+    * Duty cycle
+    * Ambient Temperature
+    * Time 
+
+06/14/2026
+* Sonooff product seems like a close match. Ordered for benchmarking
+* Sample Electricity bills to understand consumption numbers better in India
+* Functional Requirements Review
+    * 1-15 min data streaming to the cloud. What type of requirements does that add to the EE HW? 
+* India Trip What to do? 
+    * Discussions with potential builders if possible
+    * Look at Sonooff device and github link - https://github.com/AlexxIT/SonoffLAN , More helpful links - https://devices.esphome.io/devices/sonoff-pow-elite-20a/
+    * Pitch Deck building for the next come together
+* Logistics
+    * Koudi back on July 5
+    * Booze back on July 18
+    * Come together on July 19 for Pitch Deck Presentations
+* How do we increase the pace? 
+    * Sun Morning and Night - EU time - Option 1
+    * Spend More time in July/ Aug to break down projects better in order to allow async working 
