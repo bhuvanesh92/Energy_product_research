@@ -150,3 +150,13 @@ Some needs of today:
 * How do we increase the pace? 
     * Sun Morning and Night - EU time - Option 1
     * Spend More time in July/ Aug to break down projects better in order to allow async working 
+
+08/09/2026
+Roadmap:
+- Phase 1: DAQ + basic UI
+- Phase 2: Distribution box + Rectifier
+- Phase 3: Battery energy storage system
+    - When new loads are added, show customers what the impact is and if a modular battery part needs to be added
+- Phase 4: Extra power source like solar
+- Phase 5: Scale to home server to host LLMs
+- Focus session on tech part and business part
