@@ -160,3 +160,13 @@ Roadmap:
 - Phase 4: Extra power source like solar
 - Phase 5: Scale to home server to host LLMs
 - Focus session on tech part and business part
+
+08/30/2026
+Things that we need help from an intern:
+- Firmware development: From one sensor to the cloud
+- Data pipeline setup: Data structures, lean storage of data, data security
+- One month target: Benchmark Sonoff and have a paper architecture of how Sonoff works
+- Going forward: Spend 2 hours each meeting
+    - 1 hour on technical
+    - 1 hour pitch deck
+- Pitch deck shared
