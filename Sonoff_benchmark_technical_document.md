@@ -3309,3 +3309,1086 @@ The cloud solves the **device fleet and telemetry** problem.
 The application solves the **human interaction** problem.
 
 That separation is the key to reproducing the system cleanly, testing it systematically, and extending it into a new product architecture.
+
+---
+
+# 64. Experimental Firmware and Reverse-Engineering Plan
+
+## 64.1 Purpose and Scope
+
+The project has two related but distinct goals:
+
+1. **Near-term goal — use an existing SONOFF POW Ring as an experimental platform.**  
+   Replace or augment the stock firmware sufficiently to read metrology data, observe device behavior, and run controlled load-management algorithms.
+
+2. **Long-term goal — create an independently engineered POW Ring-class system.**  
+   Recreate the relevant architecture from first principles: current measurement, voltage measurement, metrology, ESP32 firmware, local control, telemetry, and safe control of an external contactor.
+
+The first goal is not merely a shortcut to the second. It reduces technical uncertainty before custom hardware is designed. The existing SONOFF unit provides a real enclosure, mature mains-side sensing, CT interface, metering ASIC, display, relay/control output, power supply, and ESP32-based controller. It can therefore serve as a hardware-in-the-loop prototype for algorithm development.
+
+The intended progression is:
+
+```text
+Existing SONOFF POW Ring
+        │
+        ▼
+Non-destructive investigation
+        │
+        ▼
+Firmware backup and hardware mapping
+        │
+        ▼
+Minimal replacement firmware
+        │
+        ▼
+Metrology validation
+        │
+        ▼
+Algorithm experimentation
+        │
+        ▼
+Independent POW Ring-class design
+```
+
+The objective is **not** to bypass device security, defeat access controls, or distribute modified vendor firmware. The objective is to understand the architecture, preserve the original state, develop original firmware, and use the owned hardware as a controlled research platform.
+
+---
+
+## 64.2 Two-Track Project Model
+
+The work should be organized as two explicit tracks.
+
+| Track | Objective | Primary Output | Main Risk |
+| --- | --- | --- | --- |
+| Track A — Experimental SONOFF Platform | Use the original device to test metrology handling and control algorithms | Original ESP32 firmware replaced only after backup and validation | Incorrect GPIO mapping, unsafe mains handling, loss of recoverability |
+| Track B — Independent Reimplementation | Build a functionally similar architecture from first principles | Custom hardware, firmware, telemetry, and control architecture | Electrical safety, calibration accuracy, production-level reliability |
+
+The tracks share most of the software architecture:
+
+```text
+CSE7761 driver
+      │
+      ▼
+Metrology service
+      │
+      ▼
+Measurement model
+      │
+      ├──► Local display
+      ├──► Telemetry
+      ├──► Data logging
+      └──► Control algorithm
+                  │
+                  ▼
+            Actuator manager
+                  │
+                  ▼
+          Relay / contactor output
+```
+
+The experimental device should be treated as a reference hardware platform. The independent implementation should eventually replace each vendor-specific dependency with an explicitly designed equivalent.
+
+---
+
+## 64.3 Safety Boundary
+
+The POW Ring is a mains-connected product. Low-voltage firmware work and mains-side electrical work must be treated as separate engineering domains.
+
+The ESP32 UART pins are low-voltage signals, but the PCB ground reference may not be safe to connect to a grounded computer, oscilloscope, USB hub, or bench instrument unless the power-supply isolation and board grounding architecture have been verified.
+
+The initial rule is:
+
+> **Do not attach a PC, USB-UART adapter, logic analyser, or oscilloscope ground lead to a live mains-powered board until the isolation and ground relationship are understood.**
+
+The preferred development sequence is:
+
+```text
+Initial investigation
+        │
+        ▼
+Board disconnected from mains
+        │
+        ▼
+Low-voltage-only access where possible
+        │
+        ▼
+UART identification and firmware backup
+        │
+        ▼
+Bench validation of replacement firmware
+        │
+        ▼
+Mains-connected testing only with an appropriate safety setup
+```
+
+For mains-connected experiments:
+
+- Use an enclosure and prevent accidental contact with mains-side conductors.
+- Treat all mains-side terminals, PCB regions, and connected conductors as hazardous when energized.
+- Do not use a non-isolated USB-UART adapter or grounded oscilloscope connection unless the board-side ground is known to be safely isolated.
+- Prefer appropriately isolated instrumentation where live diagnostics are unavoidable.
+- Use conservative current limits and a known resistive load for initial behavior verification.
+- Keep relay or contactor actuation disabled by default until measurement, GPIO polarity, and fail-safe behavior are verified.
+- Do not rely on firmware alone as the safety mechanism for a mains-connected load.
+
+This document remains architectural guidance, not a mains wiring or certification guide.
+
+---
+
+## 64.4 ESP32 Development Access
+
+The expected firmware-development interface is the ESP32 ROM serial bootloader, accessed through a USB-to-3.3 V TTL UART adapter.
+
+The relevant connection is:
+
+```text
+Development PC
+      │
+      │ USB
+      ▼
+USB-to-UART adapter
+      │
+      │ 3.3 V UART
+      ▼
+ESP32 ROM bootloader / application UART
+```
+
+This is distinct from the internal ESP32-to-CSE7761 UART:
+
+```text
+ESP32 UART for host development
+      ≠
+ESP32 UART used to communicate with CSE7761
+```
+
+The CSE7761 UART is part of the metrology subsystem. Connecting a USB-UART adapter to the CSE7761 interface will not provide ESP32 bootloader access.
+
+A suitable adapter must use **3.3 V logic levels**. Common adapter chip families include:
+
+```text
+FTDI
+CP2102 / CP210x
+CH340
+```
+
+The conceptual connection is:
+
+```text
+USB-UART adapter                  ESP32
+
+TX  ───────────────────────────►  RX0 / U0RXD
+RX  ◄───────────────────────────  TX0 / U0TXD
+GND ────────────────────────────  GND
+```
+
+The TX and RX lines are crossed:
+
+```text
+Adapter TX → ESP32 RX
+Adapter RX ← ESP32 TX
+Adapter GND ↔ ESP32 GND
+```
+
+Do not apply 5 V logic levels to ESP32 UART pins.
+
+Before soldering wires or probing pads, identify the exact ESP32 module or chip, board revision, UART pads or test points, reset/enable signal, and boot strap signal. The GPIO assignments documented elsewhere in this file are useful hypotheses, not a substitute for board-specific verification.
+
+---
+
+## 64.5 ESP32 Bootloader Entry
+
+Classic ESP32 devices include a ROM serial bootloader. The boot mode is selected during reset.
+
+For the original ESP32 family, holding `GPIO0` low while resetting the chip selects serial download mode:
+
+```text
+GPIO0 = LOW during reset
+        │
+        ▼
+ESP32 ROM serial bootloader
+        │
+        ▼
+esptool can communicate with the chip
+```
+
+Normal application boot is:
+
+```text
+GPIO0 = HIGH or released during reset
+        │
+        ▼
+Boot application from external SPI flash
+```
+
+The existing board mapping indicates that `GPIO0` may be connected to the physical push button. This creates a plausible manual bootloader-entry method, but it must be confirmed on the actual unit.
+
+A conservative manual procedure is:
+
+```text
+1. Hold GPIO0 low.
+2. Reset the ESP32 through EN/reset or a controlled power cycle.
+3. Keep GPIO0 low during reset release.
+4. Release GPIO0 after the ROM bootloader has started.
+5. Connect with esptool.
+```
+
+Conceptually:
+
+```text
+GPIO0 held low
+       │
+       ▼
+ESP32 reset
+       │
+       ▼
+ROM bootloader starts
+       │
+       ▼
+GPIO0 released
+       │
+       ▼
+Serial flashing session
+```
+
+If the board exposes both boot and reset signals, a USB-UART adapter with DTR and RTS can potentially automate this process. This should only be attempted after the board signals have been identified, because incorrect connections can interfere with boot strapping or reset behavior.
+
+---
+
+## 64.6 Preserve the Original State First
+
+No erase, flash, or configuration change should be performed before the original device state has been documented and backed up.
+
+The mandatory order is:
+
+```text
+IDENTIFY
+    ↓
+DOCUMENT
+    ↓
+BACK UP
+    ↓
+VERIFY BACKUP
+    ↓
+ANALYZE
+    ↓
+BUILD REPLACEMENT FIRMWARE
+    ↓
+FLASH ONLY WHEN READY
+```
+
+The prohibited development pattern is:
+
+```text
+ERASE
+   ↓
+FLASH UNKNOWN IMAGE
+   ↓
+LOSE ORIGINAL REFERENCE
+```
+
+The original flash image may contain useful information even if it cannot be directly reused:
+
+```text
+Bootloader configuration
+Partition table
+Application image layout
+NVS layout
+Wi-Fi and provisioning behavior
+GPIO initialization
+Display initialization
+Relay polarity and defaults
+CSE7761 configuration
+Calibration handling
+Fault handling
+Watchdog behavior
+Factory-test artifacts
+```
+
+A suggested evidence directory is:
+
+```text
+evidence/
+├── board_photos/
+├── board_revision.md
+├── pin_mapping.md
+├── uart_notes.md
+├── flash_backup/
+│   ├── original_flash.bin
+│   ├── original_flash.sha256
+│   ├── flash_metadata.txt
+│   └── backup_notes.md
+├── captured_uart/
+├── logic_analyzer/
+└── test_results/
+```
+
+The backup should be considered immutable. Copy it to at least two independent storage locations before experimentation begins.
+
+---
+
+## 64.7 Initial esptool Workflow
+
+The preferred host tool is `esptool`, used either directly or indirectly through ESP-IDF.
+
+The first task is to establish communication with the ESP32 ROM bootloader.
+
+Example commands:
+
+```bash
+esptool --port <PORT> chip-id
+```
+
+Examples of serial-port naming:
+
+```text
+Windows:  COM3, COM4, COM5
+macOS:    /dev/cu.usbserial-XXXX
+macOS:    /dev/cu.SLAB_USBtoUART
+Linux:    /dev/ttyUSB0
+Linux:    /dev/ttyACM0
+```
+
+After communication is established, record the available chip information:
+
+```text
+Chip model
+Chip revision
+MAC address
+Crystal frequency
+Detected flash size
+Flash mode
+Flash voltage
+```
+
+A full flash read can then be performed using the detected size or `ALL` where supported:
+
+```bash
+esptool --port <PORT> read-flash 0 ALL original_flash.bin
+```
+
+A fixed-size read can also be used after flash capacity has been established. For example, a 2 MiB flash would be read as:
+
+```bash
+esptool --port <PORT> read-flash 0 0x200000 original_flash.bin
+```
+
+Afterward, calculate and store a SHA-256 hash:
+
+```bash
+sha256sum original_flash.bin
+```
+
+On macOS:
+
+```bash
+shasum -a 256 original_flash.bin
+```
+
+The hash should be written to a file and included in the experiment log.
+
+Example:
+
+```text
+File: original_flash.bin
+SHA-256: <recorded hash>
+Device: <serial number or label>
+Board revision: <observed revision>
+Date: <date>
+Method: ESP32 ROM bootloader via 3.3 V UART
+```
+
+A successful flash read proves only that the contents were read. It does not prove that the resulting binary is directly interpretable or reusable. Secure boot, flash encryption, readout protection, or vendor-specific layouts may limit what can be recovered from it.
+
+---
+
+## 64.8 Security and Recoverability Checks
+
+Before replacing any firmware, inspect the target for security features and recovery constraints.
+
+Potential conditions include:
+
+```text
+No secure boot and no flash encryption
+      │
+      └── Conventional backup / replacement workflow may be possible
+
+Secure boot enabled
+      │
+      └── Unsigned replacement firmware may not boot
+
+Flash encryption enabled
+      │
+      └── Physical flash readout may not yield useful plaintext firmware
+
+JTAG disabled
+      │
+      └── Hardware debug access may be unavailable
+
+Custom bootloader or partition scheme
+      │
+      └── Replacement image must match the expected boot and partition layout
+```
+
+An experimental replacement firmware should never assume that the vendor partition table is compatible with a newly built ESP-IDF application.
+
+The safer alternatives are:
+
+- Preserve the existing image and its layout before making changes.
+- Start with a minimal known-good ESP-IDF image only after recoverability is understood.
+- Use a dedicated partition table for the replacement firmware.
+- Keep an explicit recovery procedure and the commands needed to restore the original image.
+- Test the recovery procedure on a non-critical unit where possible.
+
+A flash image read through the ROM bootloader may not be sufficient to reconstruct plaintext firmware if flash encryption is enabled. Similarly, secure boot can prevent arbitrary unsigned images from executing. These conditions should be treated as architectural constraints, not obstacles to be bypassed.
+
+---
+
+## 64.9 Firmware Strategy
+
+There are two possible firmware approaches.
+
+### Approach A — Patch or modify vendor firmware
+
+```text
+Original firmware
+       │
+       ▼
+Disassemble and analyze
+       │
+       ▼
+Find control logic
+       │
+       ▼
+Patch binary
+       │
+       ▼
+Reflash
+```
+
+This approach has significant disadvantages:
+
+```text
+Unknown internal architecture
+Potential secure boot
+Potential flash encryption
+Unknown integrity checks
+Vendor cloud dependencies
+Unknown OTA behavior
+Poor maintainability
+Hard-to-reproduce modifications
+```
+
+### Approach B — Build original replacement firmware
+
+```text
+Known hardware
+       │
+       ▼
+Original ESP-IDF firmware
+       │
+       ▼
+CSE7761 driver
+       │
+       ▼
+Measurement model
+       │
+       ▼
+Control algorithm
+       │
+       ▼
+Display / telemetry / actuator control
+```
+
+For this project, the preferred approach is **Approach B**.
+
+The existing SONOFF POW Ring is used as a hardware reference and test target. The replacement firmware should be original, modular, version-controlled, and designed so that its hardware-dependent portions can later be moved into an independent POW Ring-class product.
+
+---
+
+## 64.10 Recommended ESP-IDF Architecture
+
+ESP-IDF is preferred over a simplified framework because this project requires explicit control over:
+
+```text
+FreeRTOS task structure
+UART configuration
+GPIO configuration
+Watchdogs
+Timers
+NVS
+Wi-Fi provisioning
+Logging
+Partition tables
+OTA update handling
+Fault containment
+```
+
+The software boundary should be:
+
+```text
+┌───────────────────────────────────────────────┐
+│                 Application                    │
+│  Algorithm experiments / policies / commands  │
+└──────────────────────┬────────────────────────┘
+                       │
+┌──────────────────────▼────────────────────────┐
+│              Control / Actuator API            │
+│  Safe enable, inhibit, state, interlocks       │
+└──────────────────────┬────────────────────────┘
+                       │
+┌──────────────────────▼────────────────────────┐
+│              Measurement Service               │
+│  Engineering units, validity, filtering        │
+└──────────────────────┬────────────────────────┘
+                       │
+┌──────────────────────▼────────────────────────┐
+│                 CSE7761 Driver                 │
+│  UART packets, register access, checksums      │
+└──────────────────────┬────────────────────────┘
+                       │
+┌──────────────────────▼────────────────────────┐
+│                     HAL                        │
+│  UART, GPIO, timers, NVS, Wi-Fi, watchdog      │
+└───────────────────────────────────────────────┘
+```
+
+The control algorithm must not access CSE7761 UART registers directly. It should operate only on normalized, timestamped measurements and command an actuator through a controlled interface.
+
+Example:
+
+```cpp
+Measurement measurement = energy_meter.read();
+
+ControlCommand command =
+    controller.update(measurement);
+
+actuator_manager.apply(command);
+```
+
+This separation allows the control algorithm to be tested without hardware.
+
+```text
+Recorded measurements
+        │
+        ▼
+Host-side simulation
+        │
+        ▼
+Controller output
+        │
+        ▼
+Compare policy variants
+        │
+        ▼
+Deploy selected version to ESP32
+```
+
+---
+
+## 64.11 Experimental Control Design
+
+The purpose of the SONOFF device in the first phase is to validate algorithms, not to immediately automate a high-consequence load.
+
+The actuator path should be modeled explicitly:
+
+```text
+Control algorithm
+       │
+       ▼
+Control request
+       │
+       ▼
+Safety and policy checks
+       │
+       ▼
+Actuator manager
+       │
+       ▼
+GPIO output
+       │
+       ▼
+Onboard relay
+       │
+       ▼
+External contactor or controlled load
+```
+
+The actuator manager should own the following concerns:
+
+```text
+Output polarity
+Startup default state
+Minimum on-time
+Minimum off-time
+Switching-rate limits
+Manual inhibit
+Fault inhibit
+Communication-loss behavior
+Watchdog behavior
+State reporting
+```
+
+A control algorithm should request a state; it should not write a relay GPIO directly.
+
+For example:
+
+```cpp
+enum class DesiredLoadState {
+    OFF,
+    ON
+};
+
+struct ControlCommand {
+    DesiredLoadState desired_state;
+    const char *reason;
+};
+
+ControlCommand command =
+    controller.update(measurement);
+
+actuator_manager.apply(command);
+```
+
+A safe initial policy is measurement-only operation:
+
+```text
+Algorithm runs
+      │
+      ▼
+Decision is logged
+      │
+      ▼
+Relay remains physically inhibited
+```
+
+This enables evaluation of decisions before any physical switching occurs.
+
+---
+
+## 64.12 Algorithm Experimentation Modes
+
+The experimental firmware should support several operating modes.
+
+| Mode | Relay Output | Purpose |
+| --- | --- | --- |
+| Observe | Forced unchanged or disabled | Validate measurements, timing, logs, and algorithm decisions |
+| Shadow | No physical control; command is logged | Compare proposed action with actual device state |
+| Manual | Relay state changed only by explicit local/API command | Validate output polarity and contactor behavior |
+| Limited automatic | Algorithm may switch within explicit constraints | Controlled low-risk experiments |
+| Full automatic | Algorithm controls the output according to configured policy | Only after safety and reliability validation |
+
+The recommended progression is:
+
+```text
+Observe
+   ↓
+Shadow
+   ↓
+Manual
+   ↓
+Limited automatic
+   ↓
+Full automatic
+```
+
+Do not begin with unrestricted autonomous switching.
+
+Useful first algorithms include:
+
+```text
+Threshold control
+Hysteresis control
+Debounced threshold control
+Time-window control
+Minimum on/off duration control
+Moving-average control
+Peak limiting
+Energy-budget control
+Load-shedding policy
+Price-aware scheduling
+PV-surplus response
+```
+
+A basic hysteresis controller can be expressed as:
+
+```text
+If power remains above upper threshold:
+    request OFF
+
+If power remains below lower threshold:
+    request ON
+```
+
+where:
+
+```text
+lower threshold < upper threshold
+```
+
+This avoids repeated relay switching when the measured value fluctuates near one threshold.
+
+A more robust implementation adds time qualification:
+
+```text
+If power > upper threshold continuously for T_off:
+    request OFF
+
+If power < lower threshold continuously for T_on:
+    request ON
+```
+
+and actuator constraints:
+
+```text
+Do not switch ON more often than once per minimum_off_time.
+Do not switch OFF more often than once per minimum_on_time.
+Do not switch when measurement validity is false.
+Do not automatically re-enable after a fault without explicit policy.
+```
+
+---
+
+## 64.13 Measurement Model for Algorithms
+
+All control algorithms should receive a stable application-level model rather than raw register values.
+
+Example:
+
+```cpp
+struct Measurement {
+    float voltage_V;
+    float current_A;
+    float active_power_W;
+    float apparent_power_VA;
+    float power_factor;
+    float frequency_Hz;
+    float energy_kWh;
+
+    bool voltage_valid;
+    bool current_valid;
+    bool power_valid;
+    bool energy_valid;
+
+    uint64_t timestamp_ms;
+};
+```
+
+The metrology service should perform:
+
+```text
+UART transaction
+      │
+      ▼
+Checksum validation
+      │
+      ▼
+Byte reconstruction
+      │
+      ▼
+Signedness handling
+      │
+      ▼
+Calibration scaling
+      │
+      ▼
+Range validation
+      │
+      ▼
+Measurement object
+```
+
+The control layer should then enforce a fundamental rule:
+
+```text
+Invalid measurement
+       │
+       ▼
+No automatic switching decision
+       │
+       ▼
+Enter configured safe behavior
+```
+
+This avoids treating a UART timeout, corrupt packet, or metering failure as a genuine zero-power condition.
+
+---
+
+## 64.14 Minimal Firmware Milestones
+
+The firmware should be introduced in small, recoverable increments.
+
+### Milestone 0 — Hardware evidence
+
+```text
+Photograph PCB
+Identify ESP32 variant
+Identify UART access points
+Identify EN/reset and GPIO0
+Identify power and ground domains
+Record board revision
+```
+
+### Milestone 1 — ROM bootloader access
+
+```text
+Enter download mode
+Run chip identification
+Detect flash parameters
+Record serial connection settings
+```
+
+### Milestone 2 — Backup and recovery plan
+
+```text
+Read complete flash
+Hash backup
+Store metadata
+Inspect partition table
+Write restoration procedure
+```
+
+### Milestone 3 — Minimal replacement firmware
+
+```text
+Boot ESP-IDF application
+Serial logging works
+Watchdog configured
+No relay actuation
+No mains-side experiment required
+```
+
+### Milestone 4 — GPIO discovery
+
+```text
+Confirm LED behavior
+Confirm button input
+Confirm display signals
+Keep relay path disabled or inhibited
+```
+
+### Milestone 5 — CSE7761 communication
+
+```text
+Receive valid UART responses
+Validate checksums
+Read raw voltage/current/power registers
+Read calibration coefficients
+```
+
+### Milestone 6 — Measurement validation
+
+```text
+Convert to engineering units
+Compare against reference instrumentation
+Check timing and stability
+Record error across load range
+```
+
+### Milestone 7 — Shadow control algorithms
+
+```text
+Run algorithm
+Log proposed state changes
+Do not actuate load
+Evaluate false positives and switching frequency
+```
+
+### Milestone 8 — Manual and constrained switching
+
+```text
+Verify relay polarity
+Verify contactor behavior
+Use low-risk test load
+Apply minimum on/off intervals
+Confirm fault behavior
+```
+
+### Milestone 9 — Connectivity and OTA
+
+```text
+Add Wi-Fi provisioning
+Add local telemetry
+Add authenticated update path
+Preserve serial recovery path
+```
+
+---
+
+## 64.15 Validation Criteria
+
+Each phase should have explicit exit criteria.
+
+| Area | Minimum Criterion |
+| --- | --- |
+| Bootloader access | Chip identification succeeds repeatedly |
+| Backup | Flash dump completes; SHA-256 recorded; backup copied independently |
+| UART | CSE7761 responses pass checksum validation consistently |
+| Metrology | Voltage, current, and active power are plausible and match a reference within defined tolerance |
+| Measurement validity | UART timeout, corrupt packet, and out-of-range values produce explicit invalid states |
+| Relay interface | Output polarity and startup state are confirmed without an uncontrolled mains load |
+| Algorithm | Shadow-mode logs demonstrate stable decisions and acceptable switching frequency |
+| Fault behavior | Sensor failure, firmware restart, Wi-Fi loss, and controller fault lead to the defined safe state |
+| Recovery | Original image restoration procedure is documented and has been reviewed before destructive steps |
+
+For every experiment, record:
+
+```text
+Firmware Git commit
+Board identifier
+Configuration version
+Test mode
+Load type
+Reference measurement
+Observed behavior
+Expected behavior
+Pass/fail result
+Notes and anomalies
+```
+
+---
+
+## 64.16 Data Logging and Replay
+
+Algorithm development benefits substantially from separating data collection from actuation.
+
+The ESP32 should be able to publish or log a time series such as:
+
+```json
+{
+  "timestamp_ms": 0,
+  "voltage_V": 231.4,
+  "current_A": 8.72,
+  "active_power_W": 2010.0,
+  "apparent_power_VA": 2017.8,
+  "power_factor": 0.996,
+  "frequency_Hz": 50.0,
+  "energy_kWh": 12.84,
+  "measurement_valid": true,
+  "relay_actual": false,
+  "relay_requested": false,
+  "controller_reason": "below_threshold"
+}
+```
+
+This supports an efficient development loop:
+
+```text
+Physical SONOFF device
+        │
+        ▼
+Capture time-series measurements
+        │
+        ▼
+Store as CSV / JSON
+        │
+        ▼
+Replay in host-side controller tests
+        │
+        ▼
+Tune algorithm parameters
+        │
+        ▼
+Deploy new firmware
+        │
+        ▼
+Run in shadow mode
+        │
+        ▼
+Compare predicted and observed behavior
+```
+
+This is particularly important for algorithms that depend on timing, hysteresis, moving averages, peak detection, or load cycles.
+
+---
+
+## 64.17 From Experimental Device to Independent Product
+
+The experimental SONOFF device should gradually become a reference implementation rather than a permanent dependency.
+
+The migration path is:
+
+```text
+Phase 1
+Existing SONOFF hardware + original experimental firmware
+        │
+        ▼
+Phase 2
+Hardware abstraction isolates board-specific details
+        │
+        ▼
+Phase 3
+Independent ESP32 + CSE7761 evaluation platform
+        │
+        ▼
+Phase 4
+Custom sensing, power, display, and control hardware
+        │
+        ▼
+Phase 5
+POW Ring-class independent product architecture
+```
+
+The reusable parts should include:
+
+```text
+CSE7761 UART protocol implementation
+Calibration handling
+Measurement model
+Fault handling
+Control algorithms
+Actuator safety state machine
+Telemetry schema
+Data logging
+Host-side simulation tests
+OTA architecture
+```
+
+The board-specific parts should remain isolated:
+
+```text
+GPIO assignments
+Display wiring
+LED wiring
+Button wiring
+Relay polarity
+Power-supply behavior
+Contactor interface
+Board revision quirks
+```
+
+The target architecture is therefore:
+
+```text
+┌──────────────────────────────────────────────┐
+│               Reusable Product Software       │
+│                                              │
+│  Metrology / control / telemetry / OTA       │
+└─────────────────────┬────────────────────────┘
+                      │
+              Hardware abstraction
+                      │
+         ┌────────────┴────────────┐
+         ▼                         ▼
+Experimental SONOFF board   Independent custom board
+```
+
+This ensures that experimentation on the SONOFF platform produces durable engineering assets rather than a one-off firmware modification.
+
+---
+
+## 64.18 Practical Decision
+
+The recommended immediate strategy is:
+
+```text
+1. Obtain safe, verified ESP32 serial access.
+2. Identify the chip and create an immutable full-flash backup.
+3. Document the board-specific pin mapping and safety assumptions.
+4. Build a minimal ESP-IDF firmware with serial logging only.
+5. Reconstruct CSE7761 communication and validate metrology.
+6. Run control algorithms first in observe and shadow modes.
+7. Introduce constrained physical switching only after actuator behavior and fault handling are verified.
+8. Keep the firmware architecture portable so it can become the software basis of an independent POW Ring-class implementation.
+```
+
+The SONOFF POW Ring is therefore not the final product. It is the first hardware-in-the-loop platform for validating the metrology pipeline, control strategy, observability model, failure handling, and energy-management algorithms that will later be transferred into an independently engineered system.
