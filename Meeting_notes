@@ -171,6 +171,14 @@ Things that we need help from an intern:
     - 1 hour pitch deck
 - Pitch deck shared
 
+09/06/2026
+By next week aim to setup the dev environment
+- USB C to serial device ordered
+- Soldering needs to be done to connect laptop to ESP32
+Hone pitch deck
+- Add charging and home data server ideas
+- Utilization of cooling infrastructure
+
 09/20/2026
 - Recap:
     - Step 1: Monitor home energy consumption / production (if solar or other power source is available) data
@@ -194,10 +202,3 @@ Things that we need help from an intern:
         - One power electronics box with one SOC and ability to de-pop
         - Can we embed draw io into gitlab pipeline?
     - Get quotes from enphase in India and get a benchmark of cost target
-09/06/2026
-By next week aim to setup the dev environment
-- USB C to serial device ordered
-- Soldering needs to be done to connect laptop to ESP32
-Hone pitch deck
-- Add charging and home data server ideas
-- Utilization of cooling infrastructure
