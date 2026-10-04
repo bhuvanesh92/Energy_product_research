@@ -170,3 +170,27 @@ Things that we need help from an intern:
     - 1 hour on technical
     - 1 hour pitch deck
 - Pitch deck shared
+
+09/20/2026
+- Recap:
+    - Step 1: Monitor home energy consumption / production (if solar or other power source is available) data
+    - Step 2: Use that data to prove the need for smart home energy management
+    - Step 3: Extend it to an ecosystem where you can start controlling loads
+    - Step 4: Prove that you are solving a customer pain points
+        - Helping energy independence / power supply robustness
+        - Helping cost savings
+        - Sustainability angle for government and policy side of things??
+    - Step 5: See how to integrate with EVSE charge point operator / builders
+        - EVSE for robustness of charging station to create moat for the charging point operator
+        - Builders who want to create a good customer experience for posh communities who dont want power losses and predictive maintenance
+    - Seed fund approach: Acquire land, get an off the shelf EVSE, use it for POC and experiments.
+        - Promote this as an intermediate step towards the final goal
+
+10/04/2026
+- Enphase, Base Power, Exponent Energy benchmarked ideologically.
+- Next work:
+    - Create system design with multiple alternatives:
+        - Distributed power electronics
+        - One power electronics box with one SOC and ability to de-pop
+        - Can we embed draw io into gitlab pipeline?
+    - Get quotes from enphase in India and get a benchmark of cost target
